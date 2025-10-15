@@ -61,17 +61,29 @@ public class HeroController : MonoBehaviour
     [SerializeField]private NailSlash slashComponent; //����ʹ�����ֹ�����NailSlash
     [SerializeField]private PlayMakerFSM slashFsm;//����ʹ�����ֹ�����PlayMakerFSM
 
-    public NailSlash normalSlash;
-    public NailSlash altetnateSlash;
-    public NailSlash upSlash;
-    public NailSlash downSlash;
-    public NailSlash wallSlash;
+public NailSlash normalSlash;
+public NailSlash altetnateSlash;
+public NailSlash upSlash;
+public NailSlash downSlash;
+public NailSlash wallSlash;
 
-    public PlayMakerFSM normalSlashFsm; 
-    public PlayMakerFSM altetnateSlashFsm;
-    public PlayMakerFSM upSlashFsm;
-    public PlayMakerFSM downSlashFsm;
-    public PlayMakerFSM wallSlashFsm;
+    // ParrySlash variants for empowered thrust direction
+    public NailSlash parrySlash; // 默认左右方向
+    public PlayMakerFSM parrySlashFsm;
+    public NailSlash upParrySlash; // 上方向
+    public PlayMakerFSM upParrySlashFsm;
+    public NailSlash downParrySlash; // 下方向
+    public PlayMakerFSM downParrySlashFsm;
+    public NailSlash slantUpParrySlash; // 斜上方向
+    public PlayMakerFSM slantUpParrySlashFsm;
+    public NailSlash slantDownParrySlash; // 斜下方向
+    public PlayMakerFSM slantDownParrySlashFsm;
+
+public PlayMakerFSM normalSlashFsm;
+public PlayMakerFSM altetnateSlashFsm;
+public PlayMakerFSM upSlashFsm;
+public PlayMakerFSM downSlashFsm;
+public PlayMakerFSM wallSlashFsm;
 
     private bool attackQueuing; //�Ƿ�ʼ������������
     private int attackQueueSteps; //������������
@@ -237,6 +249,32 @@ public class HeroController : MonoBehaviour
     public float BOUNCE_VELOCITY; //��ͨ�����ٶ�
     public float SHROOM_BOUNCE_VELOCITY; //Ģ�������ٶ�
     private float bounceTimer; //������ʱ��
+    // Parry/DownSlash as block — custom timers and settings
+    [Header("DownSlash Parry Settings")]
+    public float DOWN_PARRY_BLOCK_DURATION = 0.25f; // ��劈(格挡)的基础无敌持续时间，独立于攻击时长
+    public float PARRY_SUCCESS_EXTRA_INVULN = 0.5f;  // 格挡成功后额外无敌时间
+    public float PARRY_BOUNCE_MULTIPLIER = 1.8f;     // 格挡成功后提升弹跳距离的倍率（增强版）
+    public float PARRY_COOLDOWN = 2f;                // 格挡正常冷却时间（秒）
+    private float downParryBlockTimer;               // 当前格挡(无敌)计时器
+    private float parryExtraInvulnTimer;             // 成功格挡的额外无敌计时器
+    private bool parryBounceBoostActive;             // 成功格挡后提升弹跳标记
+    private bool parryInvulnerabilityActive;         // 标记由下劈格挡引起的无敌是否正在进行
+    private float parryCooldownTimer;                // 格挡冷却计时器（<=0表示可用）
+
+    [Header("Empowered Attack (Parry Reward)")]
+    public float EMPOWERED_THRUST_RANGE = 12f;       // 强化攻击的自动锁定范围
+    public float EMPOWERED_THRUST_TIME = 0.22f;      // 突刺持续时间（秒）
+    public float EMPOWERED_THRUST_SPEED_MULT = 1.35f;// 相对 Dash 速度的倍率
+    private bool parryStoredEmpowerReady;            // 成功格挡后储存一次强化攻击
+    private bool empoweredThrustActive;              // 是否正在执行突刺
+    private float empoweredThrustTimer;              // 突刺计时器
+    private Vector2 empoweredThrustDir;              // 突刺方向（单位向量）
+    private bool empoweredThrustApplyInvul;          // 是否由突刺设置了无敌（用于恢复）
+    private bool prevInvulnerableDuringThrust;       // 突刺开始前的 cState.invulnerable 状态
+    private bool prevIsInvincibleDuringThrust;       // 突刺开始前的 playerData.isInvincible 状态
+
+    // 标记当前这次攻击是否由“攻击键”发起（用于限制强化攻击仅由攻击键触发）
+    private bool attackInitiatedByAttackButton = false;
 
     private float hazardLandingTimer;
     private float HAZARD_DEATH_CHECK_TIME = 3f;
@@ -615,12 +653,53 @@ public class HeroController : MonoBehaviour
             dashCooldownTimer -= Time.deltaTime;
 	}
 
+        // Parry cooldown timer
+        if (parryCooldownTimer > 0f)
+        {
+            parryCooldownTimer -= Time.deltaTime;
+            if (parryCooldownTimer < 0f) parryCooldownTimer = 0f;
+        }
+
 	preventCastByDialogueEndTimer -= Time.deltaTime;
 
 	if (parryInvulnTimer > 0f)
 	{
             parryInvulnTimer -= Time.deltaTime;
 	}
+
+        // DownSlash Parry timers (block window and post-success invulnerability)
+        if (downParryBlockTimer > 0f)
+        {
+            downParryBlockTimer -= Time.deltaTime;
+        }
+        if (parryExtraInvulnTimer > 0f)
+        {
+            parryExtraInvulnTimer -= Time.deltaTime;
+        }
+        if (parryInvulnerabilityActive)
+        {
+            if (downParryBlockTimer <= 0f && parryExtraInvulnTimer <= 0f)
+            {
+                parryInvulnerabilityActive = false;
+                // End parry-based invulnerability if no other invulnerability sources
+                cState.invulnerable = false;
+                playerData.isInvincible = false;
+                if (invPulse != null) invPulse.StopInvulnerablePulse();
+            }
+        }
+
+        // 强化突刺移动逻辑（每帧维持速度，计时结束后恢复）
+        if (empoweredThrustActive)
+        {
+            empoweredThrustTimer -= Time.deltaTime;
+            float baseSpeed = DASH_SPEED > 0f ? DASH_SPEED : RUN_SPEED;
+            float thrustSpeed = baseSpeed * EMPOWERED_THRUST_SPEED_MULT;
+            rb2d.velocity = empoweredThrustDir * thrustSpeed;
+            if (empoweredThrustTimer <= 0f)
+            {
+                EndEmpoweredThrust();
+            }
+        }
 	if (heroctrl_healed)
 	{
 	    proxyFSM.SendEvent("HeroCtrl-Healed");
@@ -698,74 +777,82 @@ public class HeroController : MonoBehaviour
             }
             if (!cState.backDashing && !cState.dashing)
             {
-                Move(move_input);
-                if ((!cState.attacking || attack_time >= ATTACK_RECOVERY_TIME) && !cState.wallSliding && !wallLocked)
+                // 强化突刺期间，禁止常规移动/翻转/水平后坐力，以免覆盖突刺速度
+                if (!empoweredThrustActive)
                 {
-                    if (move_input > 0f && !cState.facingRight)
+                    Move(move_input);
+                    if ((!cState.attacking || attack_time >= ATTACK_RECOVERY_TIME) && !cState.wallSliding && !wallLocked)
                     {
-                        FlipSprite();
-                        CancelAttack();
+                        if (move_input > 0f && !cState.facingRight)
+                        {
+                            FlipSprite();
+                            CancelAttack();
+                        }
+                        else if (move_input < 0f && cState.facingRight)
+                        {
+                            FlipSprite();
+                            CancelAttack();
+                        }
                     }
-                    else if (move_input < 0f && cState.facingRight)
+                    if(cState.recoilingLeft)
                     {
-                        FlipSprite();
-                        CancelAttack();
+                        float num;
+                        if (recoilLarge)
+                        {
+                            num = RECOIL_HOR_VELOCITY_LONG;
+                        }
+                        else
+                        {
+                            num = RECOIL_HOR_VELOCITY;
+                        }
+                        if(rb2d.velocity.x > -num)
+                        {
+                            rb2d.velocity = new Vector2(-num, rb2d.velocity.y);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x - num, rb2d.velocity.y);
+                        }
                     }
-                }
-                if(cState.recoilingLeft)
-		{
-                    float num;
-                    if (recoilLarge)
+                    if (cState.recoilingRight)
                     {
-                        num = RECOIL_HOR_VELOCITY_LONG;
-                    }
-                    else
-                    {
-                        num = RECOIL_HOR_VELOCITY;
-                    }
-                    if(rb2d.velocity.x > -num)
-		    {
-                        rb2d.velocity = new Vector2(-num, rb2d.velocity.y);
-		    }
-		    else
-		    {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x - num, rb2d.velocity.y);
-		    }
-		}
-                if (cState.recoilingRight)
-                {
-                    float num2;
-                    if(recoilLarge)
-		    {
-                        num2 = RECOIL_HOR_VELOCITY_LONG;
-		    }
-                    else
-		    {
-                        num2 = RECOIL_HOR_VELOCITY;
-                    }
-                    if (rb2d.velocity.x < num2)
-                    {
-                        rb2d.velocity = new Vector2(num2, rb2d.velocity.y);
-                    }
-                    else
-                    {
-                        rb2d.velocity = new Vector2(rb2d.velocity.x + num2, rb2d.velocity.y);
+                        float num2;
+                        if(recoilLarge)
+                        {
+                            num2 = RECOIL_HOR_VELOCITY_LONG;
+                        }
+                        else
+                        {
+                            num2 = RECOIL_HOR_VELOCITY;
+                        }
+                        if (rb2d.velocity.x < num2)
+                        {
+                            rb2d.velocity = new Vector2(num2, rb2d.velocity.y);
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(rb2d.velocity.x + num2, rb2d.velocity.y);
+                        }
                     }
                 }
             }
-            if (cState.jumping) //���cState.jumping��Jump
+            // 强化突刺期间禁止跳跃
+            if (cState.jumping && !empoweredThrustActive) //���cState.jumping��Jump
             {
                 Jump();
             }
 
-            if (cState.dashing)//���cState.dashing��Dash
+            // 强化突刺期间禁止冲刺
+            if (cState.dashing && !empoweredThrustActive)//���cState.dashing��Dash
             {
                 Dash();
             }
 
-            if (cState.bouncing)
+            // 强化突刺期间忽略弹跳Y速度覆盖
+            if (cState.bouncing && !empoweredThrustActive)
             {
-                rb2d.velocity = new Vector2(rb2d.velocity.x, BOUNCE_VELOCITY);
+                float bounceY = BOUNCE_VELOCITY * (parryBounceBoostActive ? PARRY_BOUNCE_MULTIPLIER : 1f);
+                rb2d.velocity = new Vector2(rb2d.velocity.x, bounceY);
             }
             bool shroomBouncing = cState.shroomBouncing;
             if (wallLocked)
@@ -819,10 +906,10 @@ public class HeroController : MonoBehaviour
             }
         }
 	//�����ٶ�
-	if (rb2d.velocity.y < -MAX_FALL_VELOCITY && !controlReqlinquished )
-	{
-            rb2d.velocity = new Vector2(rb2d.velocity.x, -MAX_FALL_VELOCITY);
-	}
+    if (rb2d.velocity.y < -MAX_FALL_VELOCITY && !controlReqlinquished && !empoweredThrustActive)
+    {
+        rb2d.velocity = new Vector2(rb2d.velocity.x, -MAX_FALL_VELOCITY);
+    }
 	if (jumpQueuing)
 	{
             jumpQueueSteps++;
@@ -836,12 +923,12 @@ public class HeroController : MonoBehaviour
 	{
             attackQueueSteps++;
 	}
-	if (cState.wallSliding)
-	{
-            if(rb2d.velocity.y > WALLSLIDE_SPEED)
-	    {
-                rb2d.velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y - WALLSLIDE_DECEL);
-                if(rb2d.velocity.y < WALLSLIDE_SPEED)
+    if (cState.wallSliding && !empoweredThrustActive)
+    {
+        if(rb2d.velocity.y > WALLSLIDE_SPEED)
+        {
+            rb2d.velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y - WALLSLIDE_DECEL);
+            if(rb2d.velocity.y < WALLSLIDE_SPEED)
 		{
                     rb2d.velocity = new Vector3(rb2d.velocity.x, WALLSLIDE_SPEED);
                 }
@@ -853,16 +940,24 @@ public class HeroController : MonoBehaviour
                 {
                     rb2d.velocity = new Vector3(rb2d.velocity.x, WALLSLIDE_SPEED);
                 }
-            }
-	}
-        if (landingBufferSteps > 0)
-        {
-            landingBufferSteps--;
         }
-        if (jumpReleaseQueueSteps > 0)
-	{
-            jumpReleaseQueueSteps--;
-	}
+    }
+    if (landingBufferSteps > 0)
+    {
+        landingBufferSteps--;
+    }
+    if (jumpReleaseQueueSteps > 0)
+    {
+        jumpReleaseQueueSteps--;
+    }
+
+        // 在FixedUpdate尾部二次施加突刺速度，防止中途被其它逻辑覆盖
+        if (empoweredThrustActive)
+        {
+            float baseSpeedFix = DASH_SPEED > 0f ? DASH_SPEED : RUN_SPEED;
+            float thrustSpeedFix = baseSpeedFix * EMPOWERED_THRUST_SPEED_MULT;
+            rb2d.velocity = empoweredThrustDir * thrustSpeedFix;
+        }
 
         cState.wasOnGround = cState.onGround;
     }
@@ -934,13 +1029,35 @@ public class HeroController : MonoBehaviour
                 cState.upAttacking = true;
 
             }
-            else if (attackDir == AttackDirection.downward)
+        else if (attackDir == AttackDirection.downward)
+        {
+            slashComponent = downSlash;
+            slashFsm = downSlashFsm;
+            cState.downAttacking = true;
+            // DownSlash as Parry: only start invulnerability window if cooldown is ready
+            if (parryCooldownTimer <= 0f)
             {
-                slashComponent = downSlash;
-                slashFsm = downSlashFsm;
-                cState.downAttacking = true;
-
+                downParryBlockTimer = DOWN_PARRY_BLOCK_DURATION;
+                cState.invulnerable = true;
+                playerData.isInvincible = true;
+                parryInvulnerabilityActive = true;
+                if (invPulse != null) invPulse.StartInvulnerablePulse();
+                // start normal cooldown immediately on parry window begin
+                StartParryCooldown();
             }
+
+        }
+
+        // 储存了强化攻击时，仅当本次攻击是由“攻击键”发起时才触发八方向突进，并强制使用 Parryslash
+        if (parryStoredEmpowerReady && attackInitiatedByAttackButton)
+        {
+            Vector2 dir = ComputeInputDirection();
+            StartEmpoweredThrust(dir);
+            parryStoredEmpowerReady = false; // 消耗一次强化攻击
+
+            // 按突进方向选择对应的 ParrySlash 资源，并设置斩击角度
+            SelectParrySlashForDirection(dir);
+        }
         }
 	if (cState.wallSliding)
 	{
@@ -969,8 +1086,22 @@ public class HeroController : MonoBehaviour
         {
             slashFsm.FsmVariables.GetFsmFloat("direction").Value = 270f;
         }
+
+        // 如果本次攻击触发了强化突进，则用“实际突进向量”的八方向角度覆盖斩击方向（避免后续输入变化带来偏差）
+        if (empoweredThrustActive && slashFsm != null)
+        {
+            float angleOverride = ComputeEightDirAngleFromVector(empoweredThrustDir);
+            var dirVar = slashFsm.FsmVariables.GetFsmFloat("direction");
+            if (dirVar != null)
+            {
+                dirVar.Value = angleOverride;
+            }
+        }
         altAttackTime = Time.timeSinceLevelLoad;
         slashComponent.StartSlash();
+
+        // 重置来源标记，防止后续非攻击键路径误触发强化
+        attackInitiatedByAttackButton = false;
 
     }
 
@@ -979,6 +1110,8 @@ public class HeroController : MonoBehaviour
 
         cState.recoiling = false;
         attack_cooldown = ATTACK_COOLDOWN_TIME;
+        // 标记：本次攻击由“攻击键”发起
+        attackInitiatedByAttackButton = true;
         if(vertical_input > Mathf.Epsilon)
 	{
             Attack(AttackDirection.upward);
@@ -1536,6 +1669,8 @@ public class HeroController : MonoBehaviour
         AffectedByGravity(true);//���������ܵ�������Ӱ��
         animCtrl.FinishedDash(); //�ò���Dash To Idle����Ƭ����
         proxyFSM.SendEvent("HeroCtrl-DashEnd");
+        // Refresh parry cooldown after dash ends
+        RefreshParryCooldown();
         if (cState.touchingWall && !cState.onGround && (playerData.hasWalljump & (touchingWallL || touchingWallR)))
 	{
             wallslideDustPrefab.enableEmission = true;
@@ -1940,23 +2075,260 @@ public class HeroController : MonoBehaviour
         airDashed = false;
         cState.bouncing = false;
         cState.shroomBouncing = true;
-        rb2d.velocity = new Vector2(rb2d.velocity.x, SHROOM_BOUNCE_VELOCITY);
+        float shroomBounceY = SHROOM_BOUNCE_VELOCITY * (parryBounceBoostActive ? PARRY_BOUNCE_MULTIPLIER : 1f);
+        rb2d.velocity = new Vector2(rb2d.velocity.x, shroomBounceY);
     }
     private void CancelBounce()
     {
         cState.bouncing = false;
         cState.shroomBouncing = false;
         bounceTimer = 0f;
+        parryBounceBoostActive = false;
     }
 
     public void NailParry()
     {
-        //TODO:
+        // Only apply parry success effects if parry window is active (not on cooldown or missed window)
+        if (!parryInvulnerabilityActive)
+        {
+            return;
+        }
+        // Successful DownSlash parry — trigger freeze, camera shake, and extend invulnerability
+        StartCoroutine(gm.FreezeMoment(0.01f, 0.1f, 0.05f, 0f));
+        if (GameCameras.instance != null && GameCameras.instance.cameraShakeFSM != null)
+        {
+            GameCameras.instance.cameraShakeFSM.SendEvent("AverageShake");
+        }
+        parryExtraInvulnTimer = PARRY_SUCCESS_EXTRA_INVULN;
+        parryBounceBoostActive = true;
+        cState.invulnerable = true;
+        playerData.isInvincible = true;
+        parryInvulnerabilityActive = true;
+        // Refresh parry cooldown immediately upon successful parry
+        RefreshParryCooldown();
+        // Store one empowered attack to be released on next normal attack
+        parryStoredEmpowerReady = true;
     }
 
     public void NailParryRecover()
     {
-        //TODO:
+        // Optional manual recover hook (not currently used); kept for FSM compatibility
+        // This can be invoked to immediately end parry invulnerability and visuals.
+        downParryBlockTimer = 0f;
+        parryExtraInvulnTimer = 0f;
+        parryInvulnerabilityActive = false;
+        cState.invulnerable = false;
+        playerData.isInvincible = false;
+        if (invPulse != null) invPulse.StopInvulnerablePulse();
+    }
+
+    // Parry cooldown helpers
+    private void RefreshParryCooldown()
+    {
+        parryCooldownTimer = 0f;
+    }
+
+    private void StartParryCooldown()
+    {
+        parryCooldownTimer = PARRY_COOLDOWN;
+    }
+
+    // Empowered thrust helpers
+    private Vector2 ComputeInputDirection()
+    {
+        // 将WASD输入转换为八方向单位向量
+        float threshold = 0.5f;
+        int x = 0;
+        int y = 0;
+        if (move_input > threshold) x = 1; else if (move_input < -threshold) x = -1;
+        if (vertical_input > threshold) y = 1; else if (vertical_input < -threshold) y = -1;
+
+        if (x == 0 && y == 0)
+        {
+            // 无输入时按朝向前进
+            return cState.facingRight ? Vector2.right : Vector2.left;
+        }
+        return new Vector2(x, y).normalized;
+    }
+
+    private float ComputeEightDirAngleFromInput()
+    {
+        float threshold = 0.5f;
+        int x = 0;
+        int y = 0;
+        if (move_input > threshold) x = 1; else if (move_input < -threshold) x = -1;
+        if (vertical_input > threshold) y = 1; else if (vertical_input < -threshold) y = -1;
+
+        if (x == 0 && y == 0) return cState.facingRight ? 0f : 180f;
+        if (x == 1 && y == 0) return 0f;
+        if (x == -1 && y == 0) return 180f;
+        if (x == 0 && y == 1) return 90f;
+        if (x == 0 && y == -1) return 270f;
+        if (x == 1 && y == 1) return 45f;
+        if (x == -1 && y == 1) return 135f;
+        if (x == -1 && y == -1) return 225f;
+        if (x == 1 && y == -1) return 315f;
+        return cState.facingRight ? 0f : 180f;
+    }
+
+    private float ComputeEightDirAngleFromVector(Vector2 dir)
+    {
+        float threshold = 0.5f;
+        int x = 0;
+        int y = 0;
+        if (dir.x > threshold) x = 1; else if (dir.x < -threshold) x = -1;
+        if (dir.y > threshold) y = 1; else if (dir.y < -threshold) y = -1;
+
+        if (x == 0 && y == 0) return cState.facingRight ? 0f : 180f;
+        if (x == 1 && y == 0) return 0f;
+        if (x == -1 && y == 0) return 180f;
+        if (x == 0 && y == 1) return 90f;
+        if (x == 0 && y == -1) return 270f;
+        if (x == 1 && y == 1) return 45f;
+        if (x == -1 && y == 1) return 135f;
+        if (x == -1 && y == -1) return 225f;
+        if (x == 1 && y == -1) return 315f;
+        return cState.facingRight ? 0f : 180f;
+    }
+
+    // 依据八方向输入选择对应的 ParrySlash 资源并设置 FSM 角度
+    private void SelectParrySlashForDirection(Vector2 dir)
+    {
+        // 将方向归一化到离散的八方向
+        int x = 0;
+        int y = 0;
+        float threshold = 0.5f;
+        if (dir.x > threshold) x = 1; else if (dir.x < -threshold) x = -1;
+        if (dir.y > threshold) y = 1; else if (dir.y < -threshold) y = -1;
+
+        if (x == 0 && y == 0)
+        {
+            // 无输入时按面朝方向作为水平
+            x = cState.facingRight ? 1 : -1;
+            y = 0;
+        }
+
+        // 默认清理状态，避免干扰其它逻辑
+        cState.upAttacking = false;
+        cState.downAttacking = false;
+
+        float angle = 0f;
+        if (y == 0 && x != 0)
+        {
+            // 水平：ParrySlash
+            slashComponent = parrySlash != null ? parrySlash : normalSlash;
+            slashFsm = parrySlashFsm != null ? parrySlashFsm : normalSlashFsm;
+            angle = (x > 0) ? 0f : 180f;
+        }
+        else if (y == 1 && x == 0)
+        {
+            // 上：UpParrySlash
+            slashComponent = upParrySlash != null ? upParrySlash : upSlash;
+            slashFsm = upParrySlashFsm != null ? upParrySlashFsm : upSlashFsm;
+            angle = 90f;
+        }
+        else if (y == -1 && x == 0)
+        {
+            // 下：DownParrySlash
+            slashComponent = downParrySlash != null ? downParrySlash : downSlash;
+            slashFsm = downParrySlashFsm != null ? downParrySlashFsm : downSlashFsm;
+            angle = 270f;
+        }
+        else if (y == 1 && x != 0)
+        {
+            // 斜上：SlantUpParrySlash
+            slashComponent = slantUpParrySlash != null ? slantUpParrySlash : upSlash;
+            slashFsm = slantUpParrySlashFsm != null ? slantUpParrySlashFsm : upSlashFsm;
+            angle = (x > 0) ? 45f : 135f;
+        }
+        else if (y == -1 && x != 0)
+        {
+            // 斜下：SlantDownParrySlash
+            slashComponent = slantDownParrySlash != null ? slantDownParrySlash : downSlash;
+            slashFsm = slantDownParrySlashFsm != null ? slantDownParrySlashFsm : downSlashFsm;
+            angle = (x > 0) ? 315f : 225f;
+        }
+
+        // 设置FSM的方向角度变量（确保资源有direction变量）
+        if (slashFsm != null)
+        {
+            var dirVar = slashFsm.FsmVariables.GetFsmFloat("direction");
+            if (dirVar != null)
+            {
+                dirVar.Value = angle;
+            }
+        }
+    }
+    private void TryStartEmpoweredThrust()
+    {
+        // 删除自动锁定，按当前WASD输入计算八方向突进
+        Vector2 dir = ComputeInputDirection();
+        StartEmpoweredThrust(dir);
+    }
+
+    private void StartEmpoweredThrust(Vector2 dir)
+    {
+        empoweredThrustDir = dir.normalized;
+        empoweredThrustTimer = EMPOWERED_THRUST_TIME;
+        empoweredThrustActive = true;
+        AffectedByGravity(false);
+
+        // 根据突进方向调整朝向（仅X方向影响翻转）
+        if (empoweredThrustDir.x > 0f) FaceRight();
+        else if (empoweredThrustDir.x < 0f) FaceLeft();
+
+        // 突进开始时设置无敌（并记录原状态，结束时恢复）
+        prevInvulnerableDuringThrust = cState.invulnerable;
+        prevIsInvincibleDuringThrust = playerData.isInvincible;
+        cState.invulnerable = true;
+        playerData.isInvincible = true;
+        empoweredThrustApplyInvul = true;
+        if (invPulse != null) invPulse.StartInvulnerablePulse();
+    }
+
+    private void EndEmpoweredThrust()
+    {
+        empoweredThrustActive = false;
+        empoweredThrustTimer = 0f;
+        AffectedByGravity(true);
+
+        // 仅在是突刺设置的无敌时才恢复；保留其它来源的无敌（如格挡或NO_DAMAGE模式）
+        if (empoweredThrustApplyInvul)
+        {
+            empoweredThrustApplyInvul = false;
+            bool parryStillActive = parryInvulnerabilityActive || downParryBlockTimer > 0f || parryExtraInvulnTimer > 0f;
+            cState.invulnerable = parryStillActive || prevInvulnerableDuringThrust;
+            if (damageMode != DamageMode.NO_DAMAGE)
+            {
+                playerData.isInvincible = prevIsInvincibleDuringThrust;
+            }
+            // 如果当前已经没有任何无敌来源，则关闭无敌脉冲效果
+            if (!cState.invulnerable && invPulse != null)
+            {
+                invPulse.StopInvulnerablePulse();
+            }
+        }
+    }
+
+    private Transform FindNearestEnemy(float radius)
+    {
+        HealthManager[] enemies = GameObject.FindObjectsOfType<HealthManager>();
+        Transform nearest = null;
+        float nearestSqr = radius * radius;
+        Vector3 myPos = transform.position;
+        foreach (var hm in enemies)
+        {
+            if (hm == null) continue;
+            if (!hm.gameObject.activeInHierarchy) continue;
+            if (hm.isDead) continue;
+            float sqr = (hm.transform.position - myPos).sqrMagnitude;
+            if (sqr <= nearestSqr)
+            {
+                nearestSqr = sqr;
+                nearest = hm.transform;
+            }
+        }
+        return nearest;
     }
 
     public bool CanInteract()
@@ -2028,6 +2400,10 @@ public class HeroController : MonoBehaviour
                 if (!takeNoDamage)
                 {
                     playerData.TakeHealth(damageAmount);
+                    if (damageAmount > 0)
+                    {
+                        RefreshParryCooldown();
+                    }
                 }
                 //TODO:joniBeam
                 if (damageAmount > 0 && OnTakenDamage != null)
@@ -2071,6 +2447,10 @@ public class HeroController : MonoBehaviour
 		    if (!takeNoDamage)
 		    {
                         playerData.TakeHealth(damageAmount);
+                        if (damageAmount > 0)
+                        {
+                            RefreshParryCooldown();
+                        }
 		    }
                     proxyFSM.SendEvent("HeroCtrl-HeroDamaged");
                     if(playerData.health == 0)
@@ -2085,6 +2465,10 @@ public class HeroController : MonoBehaviour
                 else if (hazardType == 3)
                 {             
                     playerData.TakeHealth(damageAmount);
+                    if (damageAmount > 0)
+                    {
+                        RefreshParryCooldown();
+                    }
                     proxyFSM.SendEvent("HeroCtrl-HeroDamaged");
                     if (playerData.health == 0)
                     {
@@ -2847,6 +3231,8 @@ public class HeroController : MonoBehaviour
                             {
                                 CancelHeroJump();
                             }
+                            // 标记：本次攻击来自“跳跃键”（而非攻击键）——不触发强化攻击
+                            attackInitiatedByAttackButton = false;
                             Attack(AttackDirection.downward);
                             StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
                         }
@@ -2957,7 +3343,7 @@ public class HeroController : MonoBehaviour
 	{
             CancelJump();
             
-            if(rb2d.velocity.y > 0f)
+            if(rb2d.velocity.y > 0f && !empoweredThrustActive)
 	    {
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
 	    }
@@ -2966,22 +3352,28 @@ public class HeroController : MonoBehaviour
 
     private void JumpReleased()
     {
-        if(rb2d.velocity.y > 0f &&jumped_steps >= JUMP_STEPS_MIN && !cState.shroomBouncing)
-	{
-	    if (jumpReleaseQueueingEnabled)
-	    {
+        if(rb2d.velocity.y > 0f && jumped_steps >= JUMP_STEPS_MIN && !cState.shroomBouncing)
+    {
+        	if (jumpReleaseQueueingEnabled)
+        	{
                 if(jumpReleaseQueuing && jumpReleaseQueueSteps <= 0)
-		{
-                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0f); //ȡ����Ծ��������y���ٶ�Ϊ0
+            {
+                    if (!empoweredThrustActive)
+                    {
+                        rb2d.velocity = new Vector2(rb2d.velocity.x, 0f); //ȡ����Ծ��������y���ٶ�Ϊ0
+                    }
                     CancelJump();
-		}
-	    }
-	    else
-	    {
-                rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
+            }
+        	}
+        	else
+        	{
+                if (!empoweredThrustActive)
+                {
+                    rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
+                }
                 CancelJump();
-	    }
-	}
+        	}
+    }
         jumpQueuing = false;
 
 
@@ -3040,6 +3432,8 @@ public class HeroController : MonoBehaviour
         SetState(ActorStates.grounded);
 	cState.onGround = true;
         airDashed = false;
+        // Refresh parry cooldown on landing
+        RefreshParryCooldown();
     }
 
     public bool CanInspect()

@@ -19,6 +19,7 @@ public class NailSlash : MonoBehaviour
     private bool animCompleted;
     private int stepCounter;
     private int polyCounter;
+    private bool parryTriggered;
 
     private void Awake()
     {
@@ -80,12 +81,13 @@ public class NailSlash : MonoBehaviour
 	anim.PlayFromFrame(0);
 	stepCounter = 0;
 	polyCounter = 0;
-	poly.enabled = false;
-	clashTinkpoly.enabled = false;
-	animCompleted = false;
-	anim.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(Disable);
-	slashing = true;
-	mesh.enabled = true;
+        poly.enabled = false;
+        clashTinkpoly.enabled = false;
+        animCompleted = false;
+        parryTriggered = false;
+        anim.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(Disable);
+        slashing = true;
+        mesh.enabled = true;
     }
 
     private void Disable(tk2dSpriteAnimator sprite, tk2dSpriteAnimationClip clip)
@@ -95,8 +97,8 @@ public class NailSlash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherCollider)
     {
-	if(otherCollider != null)
-	{
+        if(otherCollider != null)
+        {
 	    if(slashAngle == 0f)
 	    {
 		int layer = otherCollider.gameObject.layer;
@@ -164,26 +166,29 @@ public class NailSlash : MonoBehaviour
 		    return;
 		}
 	    }
-	    else if(slashAngle == 270f)
-	    {
-		PhysLayers layer4 = (PhysLayers)otherCollider.gameObject.layer;
-		if((layer4 == PhysLayers.ENEMIES || layer4 == PhysLayers.INTERACTIVE_OBJECT || layer4 == PhysLayers.HERO_ATTACK) && (otherCollider.gameObject.GetComponent<NonBouncer>() == null || !otherCollider.gameObject.GetComponent<NonBouncer>().active))
-		{
-		    if (otherCollider.gameObject.GetComponent<BigBouncer>() != null)
-		    {
-			heroCtrl.BounceHigh();
-			return;
-		    }
-		    if (otherCollider.gameObject.GetComponent<BounceShroom>() != null)
-		    {
-			heroCtrl.ShroomBounce();
-			Bounce(otherCollider, true);
-			return;
-		    }
-		    heroCtrl.Bounce();
-		}
-	    }
-	}
+            else if(slashAngle == 270f)
+            {
+                PhysLayers layer4 = (PhysLayers)otherCollider.gameObject.layer;
+                if((layer4 == PhysLayers.ENEMIES || layer4 == PhysLayers.INTERACTIVE_OBJECT || layer4 == PhysLayers.HERO_ATTACK) && (otherCollider.gameObject.GetComponent<NonBouncer>() == null || !otherCollider.gameObject.GetComponent<NonBouncer>().active))
+                {
+                    if (otherCollider.gameObject.GetComponent<BigBouncer>() != null)
+                    {
+                        heroCtrl.BounceHigh();
+                        if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                        return;
+                    }
+                    if (otherCollider.gameObject.GetComponent<BounceShroom>() != null)
+                    {
+                        heroCtrl.ShroomBounce();
+                        Bounce(otherCollider, true);
+                        if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                        return;
+                    }
+                    heroCtrl.Bounce();
+                    if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                }
+            }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D otherCollision)

@@ -42,9 +42,9 @@ public class HeroBox : MonoBehaviour
     }
 
     /// <summary>
-    /// Í¨¹ýÁ½ÖÖ·½·¨¼ì²âÊÜµ½ÉËº¦µÄ·½·¨
-    /// Ò»ÖÖÊÇÍ¨¹ýotherCollider.gameObjectÖÐÊÇ·ñÓÐÒ»¸öÃû×Ö½Ð"damages_hero"µÄplaymakerFSM
-    /// ÁíÒ»ÖÖÊÇÍ¨¹ýotherCollider.gameObjectÊÇ·ñÓÐ¸ö½ÐDamageHeroµÄ½Å±¾
+    /// Í¨ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½Ëºï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+    /// Ò»ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½otherCollider.gameObjectï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½"damages_hero"ï¿½ï¿½playmakerFSM
+    /// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½otherCollider.gameObjectï¿½Ç·ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½DamageHeroï¿½Ä½Å±ï¿½
     /// </summary>
     /// <param name="otherCollider"></param>
     private void CheckForDamage(Collider2D otherCollider)
@@ -85,7 +85,7 @@ public class HeroBox : MonoBehaviour
     }
 
     /// <summary>
-    /// Ó¦ÓÃ»º³åºóÊÜ»÷£¬¾ÍÊÇÖ´ÐÐHeroControllerµÄTakeDamage·½·¨
+    /// Ó¦ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½HeroControllerï¿½ï¿½TakeDamageï¿½ï¿½ï¿½ï¿½
     /// </summary>
     private void ApplyBufferedHit()
     {
