@@ -29,8 +29,8 @@ public class InputHandler : MonoBehaviour
     public BindingSourceType lastActiveController;
     public InputDeviceStyle lastInputDeviceStyle;
 
-    public delegate void CursorVisibilityChange(bool isVisible); //Ö¸ÕëÏÔÊ¾±ä»¯Ê±·¢ÉúµÄÎ¯ÍÐ
-    public event CursorVisibilityChange OnCursorVisibilityChange;//Ö¸ÕëÏÔÊ¾±ä»¯Ê±·¢ÉúµÄÊÂ¼þ
+    public delegate void CursorVisibilityChange(bool isVisible); //Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ä»¯Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¯ï¿½ï¿½
+    public event CursorVisibilityChange OnCursorVisibilityChange;//Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ä»¯Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½
 
     public bool readyToSkipCutscene;
 
@@ -137,7 +137,7 @@ public class InputHandler : MonoBehaviour
 	}
 	switch (skipMode)
 	{
-	    case SkipPromptMode.SKIP_PROMPT: //È·ÈÏÌø¹ý¹ý³¡
+	    case SkipPromptMode.SKIP_PROMPT: //È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		if (!readyToSkipCutscene)
 		{
 		    //TODO:
@@ -157,13 +157,13 @@ public class InputHandler : MonoBehaviour
 		skippingCutscene = true;
 		gm.SkipCutscene();
 		return;
-	    case SkipPromptMode.SKIP_INSTANT://Á¢¿ÌÌø¹ý¹ý³¡
+	    case SkipPromptMode.SKIP_INSTANT://ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		skippingCutscene = true;
 		gm.SkipCutscene();
 		return;
-	    case SkipPromptMode.NOT_SKIPPABLE: //²»×¼Ìø¹ý¹ý³¡
+	    case SkipPromptMode.NOT_SKIPPABLE: //ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return;
-	    case SkipPromptMode.NOT_SKIPPABLE_DUE_TO_LOADING: //ÔÚ¹ý³¡ÊÓÆµ¼ÓÔØµÄÊ±ºò²»×¼Ìø¹ý¹ý³¡
+	    case SkipPromptMode.NOT_SKIPPABLE_DUE_TO_LOADING: //ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Øµï¿½Ê±ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		gm.ui.ShowCutscenePrompt(CinematicSkipPopup.Texts.Skip);
 		CancelInvoke("StopCutsceneInput");
 		Invoke("StopCutsceneInput", 5f * Time.timeScale);
@@ -187,9 +187,9 @@ public class InputHandler : MonoBehaviour
 	AddKeyBinding(inputActions.down, "S");
 	AddKeyBinding(inputActions.left, "A");
 	AddKeyBinding(inputActions.right, "D");
-	AddKeyBinding(inputActions.attack, "Z");
+	AddKeyBinding(inputActions.attack, "J");
 	AddKeyBinding(inputActions.jump, "Space");
-	AddKeyBinding(inputActions.dash, "D");
+	AddKeyBinding(inputActions.dash, "LeftShift");
 	AddKeyBinding(inputActions.cast, "F");
 	AddKeyBinding(inputActions.quickCast, "Q");
 	AddKeyBinding(inputActions.openInventory, "I");
@@ -224,7 +224,7 @@ public class InputHandler : MonoBehaviour
 	});
 	inputActions.attack.AddDefaultBinding(new Key[]
 	{
-	    Key.Z
+	    Key.J
 	});
 	inputActions.jump.AddDefaultBinding(new Key[]
 	{
@@ -232,7 +232,7 @@ public class InputHandler : MonoBehaviour
 	});
 	inputActions.dash.AddDefaultBinding(new Key[]
 	{
-	    Key.D
+	    Key.LeftShift
 	});
 	inputActions.cast.AddDefaultBinding(new Key[]
 	{

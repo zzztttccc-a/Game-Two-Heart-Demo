@@ -3,7 +3,29 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Heart Piece
+  - Geo
+  - GeoCounter
+  - CameraTarget
+  - CameraParent
+  - Hud Camera
+  - Boss
+  - Shade Marker
+  - RespawnPoint
+  - Spell Vulnerable
+  - Boss Corpse
+  - SceneManager
+  - Hero Spell
+  - Nail Attack
+  - HeroBox
+  - Vignette
+  - UIManager
+  - Stag Grate
+  - StagMapMarker
+  - TileMap
+  - Battle Scene
+  - HeroWalkable
   layers:
   - Default
   - TransparentFX
@@ -13,31 +35,49 @@ TagManager:
   - UI
   - 
   - 
+  - Terrain
+  - Player
+  - Transition Gate
+  - Enemies
+  - Projectiles
+  - Hero Detector
+  - Terrain Detector
+  - Enemy Detector
+  - Item
+  - Hero Attack
+  - Particle
+  - Interactive Object
+  - Hero Box
+  - Grass
+  - Enemy Attack
+  - Damage All
+  - Bouncer
+  - Soft Terrain
+  - Corpse
+  - UGUI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Map Pin
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1636116491
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effect
+    uniqueID: 3629547199
+    locked: 0
+  - name: Foreground
+    uniqueID: 4082846785
+    locked: 0
+  - name: Player
+    uniqueID: 3030916819
+    locked: 0
+  - name: Enemy
+    uniqueID: 1742236583
+    locked: 0
+  - name: UI
+    uniqueID: 2867415349
     locked: 0

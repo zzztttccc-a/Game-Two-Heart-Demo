@@ -991,12 +991,14 @@ public class HeroController : MonoBehaviour
             StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
             return;
         }
-        if(hero_state != ActorStates.idle && hero_state != ActorStates.running)
-	{
-            Attack(AttackDirection.downward);
-            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
-            return;
-        }
+        // 原来的“按下方向 + 攻击触发下劈”逻辑在此处：
+        // if(hero_state != ActorStates.idle && hero_state != ActorStates.running)
+        // {
+        //     Attack(AttackDirection.downward);
+        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+        //     return;
+        // }
+        // 已按需求注释掉，改为由“空中再次按跳跃键”触发下劈
         Attack(AttackDirection.normal);
         StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
     }
@@ -2835,9 +2837,31 @@ public class HeroController : MonoBehaviour
 		}
 		else
 		{
-                    jumpQueueSteps = 0;
-                    jumpQueuing = true;
-
+                    // 当在空中再次按下跳跃键时，触发下劈（包括起跳上升和下落阶段）
+                    if (!cState.onGround && !cState.wallSliding)
+                    {
+                        if (CanAttack())
+                        {
+                            // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
+                            if (cState.jumping && rb2d.velocity.y > 0f)
+                            {
+                                CancelHeroJump();
+                            }
+                            Attack(AttackDirection.downward);
+                            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+                        }
+                        else
+                        {
+                            // 当前不能攻击（例如冷却中），保留原有的跳跃排队逻辑
+                            jumpQueueSteps = 0;
+                            jumpQueuing = true;
+                        }
+                    }
+                    else
+                    {
+                        jumpQueueSteps = 0;
+                        jumpQueuing = true;
+                    }
 		}
 	    }
 	    if (inputHandler.inputActions.dash.WasPressed)

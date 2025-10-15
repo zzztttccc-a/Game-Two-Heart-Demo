@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de5210ce93b60c74b910290c522cd727, type: 3}
-  m_Name: EditorStartupPrefs
+  m_Name: 
   m_EditorClassIdentifier: 
   welcomeScreenVersion: '1.9.5 '
   playmakerVersion: 
   showWelcomeScreen: 1
   showUpgradeGuide: 0
-  lastAutoUpdateSignature: "2021.3.2f1c1__G:/AAA\u4E8C\u5FC3\u7D20\u6750/\u53C2\u8003\u5305/Hollow-Knight-Demo-main/Assets__0.0.0.0"
+  lastAutoUpdateSignature: 2021.3.2f1c1__G:/Game1-Two heart/Game Two Heart-Demo/Assets__0.0.0.0
   useLegacyNetworking: 0
