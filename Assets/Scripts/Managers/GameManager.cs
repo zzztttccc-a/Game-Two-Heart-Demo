@@ -8,7 +8,7 @@ using UnityEngine.Audio;
 
 public class GameManager : MonoBehaviour
 {
-    public int profileID; //Õâ¸öÓÃÀ´¼ÇÂ¼ÕâÊÇµÚ¼¸¸ösaveslotµÄ,µ«ÐèÒª×¢ÒâµÄÊÇ£¬µÚ2,3,4¸öslot¶ÔÓ¦µÄÊÇÏàÍ¬µÄÊý×Ö£¬¶øµÚÒ»¸öslotÊÇ³ýÁË2,3,4Êý×ÖÒÔÍâµÄÊý×Ö¡£
+    public int profileID; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ÇµÚ¼ï¿½ï¿½ï¿½saveslotï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Òª×¢ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½ï¿½2,3,4ï¿½ï¿½slotï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½slotï¿½Ç³ï¿½ï¿½ï¿½2,3,4ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½
     public GameState gameState;
     public bool isPaused;
 
@@ -45,8 +45,8 @@ public class GameManager : MonoBehaviour
     private bool hazardRespawningHero;
 
     public bool startedOnThisScene = true;
-    public float sceneWidth;//³¡¾°¿í¶È
-    public float sceneHeight;//³¡¾°¸ß¶È
+    public float sceneWidth;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float sceneHeight;//ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½
     public tk2dTileMap tilemap{ get; private set; }
     private static readonly string[] SubSceneNameSuffixes = new string[]
 	{
@@ -379,7 +379,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡³¡¾°µÄ»ù´¡Ãû×Ö
+    /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="fullSceneName"></param>
     /// <returns></returns>
@@ -397,7 +397,7 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ÖØÐÂË¢ÐÂ³¡¾°µÄtilemapµÄÐÅÏ¢
+    /// ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Â³ï¿½ï¿½ï¿½ï¿½ï¿½tilemapï¿½ï¿½ï¿½ï¿½Ï¢
     /// </summary>
     /// <param name="targetScene"></param>
     public void RefreshTilemapInfo(string targetScene)
@@ -513,7 +513,7 @@ public class GameManager : MonoBehaviour
 	{
 	    ReadyForRespawn(false);
 	}
-	//TODO:¸Ö»êÄ£Ê½
+	//TODO:ï¿½Ö»ï¿½Ä£Ê½
 
     }
 
@@ -1442,13 +1442,13 @@ public class GameManager : MonoBehaviour
 
     public enum SceneLoadVisualizations
     {
-	Default, //Ä¬ÈÏ
-	Custom = -1, //×Ô¶¨Òå
-	Dream = 1, //ÃÎ¾³
-	Colosseum, //¶·ÊÞ³¡
-	GrimmDream, //¸ñÁÖÃÎ¾³
-	ContinueFromSave, //´Ó±£´æµÄÊý¾ÝÖÐ¼ÌÐø
-	GodsAndGlory //Éñ¾Ó
+	Default, //Ä¬ï¿½ï¿½
+	Custom = -1, //ï¿½Ô¶ï¿½ï¿½ï¿½
+	Dream = 1, //ï¿½Î¾ï¿½
+	Colosseum, //ï¿½ï¿½ï¿½Þ³ï¿½
+	GrimmDream, //ï¿½ï¿½ï¿½ï¿½ï¿½Î¾ï¿½
+	ContinueFromSave, //ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½
+	GodsAndGlory //ï¿½ï¿½ï¿½
     }
 
     public class SceneLoadInfo

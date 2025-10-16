@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using GlobalEnums;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class PlayerData
@@ -96,32 +97,36 @@ public class PlayerData
     public int shadeHealth;
     public int shadeMP;
     public int shadeFireballLevel;
-    public int shadeQuakeLevel;
-    public int shadeScreamLevel;
+    [FormerlySerializedAs("shadeQuakeLevel")]
+    public int shadeStasisLevel;
+    [FormerlySerializedAs("shadeScreamLevel")]
+    public int shadeEyeLevel;
     public int shadeSpecialType;
 
     public int currentArea;
     public int environmentType;
     public int environmentTypeDefault;
 
-    public bool seenFocusTablet; //ÊÇ·ñ¿´µ½ÁËÌáÊ¾Focus»ØÑªµÄÊ¯±®
-    public bool promptFocus; //ÊÇ·ñÊÇµÚÒ»´Î°´Focus»ØÑª°´¼üÖ®Ç°
-    public int maxMP; //×î´óMPÈİÁ¿
-    public int MPCharge; //MPÏûºÄÁ¿
-    public int MPReserve; //±£´æµÄMP
-    public int MPReserveMax; //±£´æµÄ×î´óMP
-    public bool soulLimited; //ÊÇ·ñÁé»êÈİÁ¿±»ÏŞÖÆÁË(ÒâË¼ÊÇÍæ¼ÒËÀÁËºóÈİÁ¿»á±äÉÙÒ»¸ö)
-    public int focusMP_amount; //¾Û¼¯·¨ÊõËùĞèÒªµÄMP
+    public bool seenFocusTablet; //ï¿½Ç·ñ¿´µï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Focusï¿½ï¿½Ñªï¿½ï¿½Ê¯ï¿½ï¿½
+    public bool promptFocus; //ï¿½Ç·ï¿½ï¿½Çµï¿½Ò»ï¿½Î°ï¿½Focusï¿½ï¿½Ñªï¿½ï¿½ï¿½ï¿½Ö®Ç°
+    public int maxMP; //ï¿½ï¿½ï¿½MPï¿½ï¿½ï¿½ï¿½
+    public int MPCharge; //MPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int MPReserve; //ï¿½ï¿½ï¿½ï¿½ï¿½MP
+    public int MPReserveMax; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MP
+    public bool soulLimited; //ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½)
+    public int focusMP_amount; //ï¿½Û¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½MP
 
     public bool hasDash;
     public bool canDash;
     public bool hasBackDash;
     public bool canBackDash;
 
-    public bool hasSpell; //ÊÇ·ñÓĞ·¨Êõ
-    public int fireballLevel;//»ğÇò·¨ÊõµÈ¼¶£¬0±íÊ¾Ã»ÓĞ
-    public int quakeLevel;//µØÕğ·¨ÊõµÈ¼¶£¬0±íÊ¾Ã»ÓĞ
-    public int screamLevel;//¿ñĞ¥·¨ÊõµÈ¼¶£¬0±íÊ¾Ã»ÓĞ
+    public bool hasSpell; //ï¿½Ç·ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½
+    public int fireballLevel;//æ³•çƒç­‰çº§ï¼Œ0è¡¨ç¤ºæ²¡æœ‰
+    [FormerlySerializedAs("quakeLevel")]
+    public int stasisLevel;//é™æ­¢æœ¯ç­‰çº§ï¼Œ0è¡¨ç¤ºæ²¡æœ‰
+    [FormerlySerializedAs("screamLevel")]
+    public int eyeLevel;//Eyeæ³•æœ¯ç­‰çº§ï¼Œ0è¡¨ç¤ºæ²¡æœ‰
 
     public bool hasWalljump;
     public bool canWallJump;
@@ -141,22 +146,22 @@ public class PlayerData
     public int charmsOwned;
     public bool overcharmed;
 
-    public bool gotCharm_1; //²É¼¯³æÈº
+    public bool gotCharm_1; //ï¿½É¼ï¿½ï¿½ï¿½Èº
     public bool equippedCharm_1;
 
-    public bool gotCharm_6; //¸´³ğÖ®»ê
+    public bool gotCharm_6; //ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
     public bool equippedCharm_6;
 
-    public bool gotCharm_7; //¿ìËÙ¾Û¼¯
+    public bool gotCharm_7; //ï¿½ï¿½ï¿½Ù¾Û¼ï¿½
     public bool equippedCharm_7;
 
-    public bool gotCharm_10; //Ó¢ÓÂÕßÑ«ÕÂ
+    public bool gotCharm_10; //Ó¢ï¿½ï¿½ï¿½ï¿½Ñ«ï¿½ï¿½
     public bool equippedCharm_10;
 
-    public bool gotCharm_11; //Îü³æÖ®³²
+    public bool gotCharm_11; //ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
     public bool equippedCharm_11;
 
-    public bool gotCharm_15; //³ÁÖØÖ®»÷
+    public bool gotCharm_15; //ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
     public bool equippedCharm_15;
 
     public bool gotCharm_17; 
@@ -165,37 +170,37 @@ public class PlayerData
     public bool gotCharm_18;
     public bool equippedCharm_18;
 
-    public bool gotCharm_19; //ÈøÂúÖ®Ê¯
+    public bool gotCharm_19; //ï¿½ï¿½ï¿½ï¿½Ö®Ê¯
     public bool equippedCharm_19;
 
-    public bool gotCharm_23; //Ò×ËéÉúÃü
+    public bool gotCharm_23; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public bool equippedCharm_23;
-    public bool brokenCharm_23; //Ò×ËéÉúÃüÆÆËé
+    public bool brokenCharm_23; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int charmCost_23;
 
-    public bool gotCharm_24; //Ò×ËéÌ°À·
+    public bool gotCharm_24; //ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½
     public bool equippedCharm_24;
-    public bool brokenCharm_24; //Ò×ËéÌ°À·ÆÆËé
+    public bool brokenCharm_24; //ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int charmCost_24;
 
-    public bool gotCharm_25; //Ò×ËéÁ¦Á¿
+    public bool gotCharm_25; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public bool equippedCharm_25;
-    public bool brokenCharm_25; //Ò×ËéÁ¦Á¿ÆÆËé
+    public bool brokenCharm_25; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public int charmCost_25;
 
-    public bool gotCharm_27; //ÇÇÄáµÄ×£¸£
+    public bool gotCharm_27; //ï¿½ï¿½ï¿½ï¿½ï¿½×£ï¿½ï¿½
     public bool equippedCharm_27;
 
-    public bool gotCharm_28; //ÎÚ¶÷Ö®ĞÎ
+    public bool gotCharm_28; //ï¿½Ú¶ï¿½Ö®ï¿½ï¿½
     public bool equippedCharm_28;
 
-    public bool gotCharm_29; //·ä³²Ö®Ñª
+    public bool gotCharm_29; //ï¿½ä³²Ö®Ñª
     public bool equippedCharm_29;
 
-    public bool gotCharm_31; //³å´Ì´óÊ¦
+    public bool gotCharm_31; //ï¿½ï¿½Ì´ï¿½Ê¦
     public bool equippedCharm_31;
 
-    public bool gotCharm_34; //Éî¶È¾Û¼¯
+    public bool gotCharm_34; //ï¿½ï¿½È¾Û¼ï¿½
     public bool equippedCharm_34;
 
     public bool fragileHealth_unbreakable;
@@ -237,11 +242,15 @@ public class PlayerData
     public bool falseKnightWallRepaired;
 
     public int shaman;
-    public bool shamanScreamConvo;
-    public bool shamanQuakeConvo;
+    [FormerlySerializedAs("shamanScreamConvo")]
+    public bool shamanEyeConvo;
+    [FormerlySerializedAs("shamanQuakeConvo")]
+    public bool shamanStasisConvo;
     public bool shamanFireball2Convo;
-    public bool shamanScream2Convo;
-    public bool shamanQuake2Convo;
+    [FormerlySerializedAs("shamanScream2Convo")]
+    public bool shamanEye2Convo;
+    [FormerlySerializedAs("shamanQuake2Convo")]
+    public bool shamanStasis2Convo;
     public bool shamanPillar;
 
     public bool falseKnightDefeated;
@@ -286,7 +295,7 @@ public class PlayerData
     public int journalEntriesCompleted;
     public int journalNotesCompleted;
     public int journalEntriesTotal;
-    public bool hasHuntersMark; //ÁÔÈËÓ¡¼Ç
+    public bool hasHuntersMark; //ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½
 
     public bool metCloth;
 
@@ -357,12 +366,12 @@ public class PlayerData
 
 	seenFocusTablet = false;
 	promptFocus = false;
-	maxMP = 99;
-	MPCharge = 0;
-	MPReserve = 0;
-	MPReserveMax = 0;
-	soulLimited = false;
-	focusMP_amount = 33;
+    maxMP = 2000;
+    MPCharge = 2000;
+    MPReserve = 0;
+    MPReserveMax = 0;
+    soulLimited = false;
+    focusMP_amount = 33;
 
 	atBench = false;
 	charmBenchMsg = false;
@@ -378,9 +387,9 @@ public class PlayerData
 	shadePositionY = -999f;
 	shadeHealth = 0;
 	shadeMP = 0;
-	shadeFireballLevel = 2;
-	shadeQuakeLevel = 2;
-	shadeScreamLevel = 2;
+    shadeFireballLevel = 2;
+    shadeStasisLevel = 2;
+    shadeEyeLevel = 2;
 	shadeSpecialType = 0;
 
 	hasDash = false;
@@ -388,10 +397,10 @@ public class PlayerData
 	hasBackDash = false;
 	canBackDash = false;
 
-	hasSpell = false;
-	fireballLevel = 0;
-	quakeLevel = 0;
-	screamLevel = 0;
+    hasSpell = true;
+    fireballLevel = 1;
+    stasisLevel = 1;
+    eyeLevel = 1;
 
 	hasWalljump = false;
 
@@ -504,11 +513,11 @@ public class PlayerData
 	giantFlyDefeated = false;
 
 	shaman = 0;
-	shamanFireball2Convo = false;
-	shamanQuakeConvo = false;
-	shamanQuake2Convo = false;
-	shamanScreamConvo = false;
-	shamanScream2Convo = false;
+    shamanFireball2Convo = false;
+    shamanStasisConvo = false;
+    shamanStasis2Convo = false;
+    shamanEyeConvo = false;
+    shamanEye2Convo = false;
 
 	falseKnightFirstPlop = false;
 	falseKnightDefeated = false;
@@ -657,7 +666,7 @@ public class PlayerData
     }
 
     /// <summary>
-    /// ¼ÓÈëMPµ½´æ´¢Á¿ÖĞ
+    /// ï¿½ï¿½ï¿½ï¿½MPï¿½ï¿½ï¿½æ´¢ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="amount"></param>
     /// <returns></returns>
@@ -694,7 +703,7 @@ public class PlayerData
     }
 
     /// <summary>
-    /// ´ø×ßMP
+    /// ï¿½ï¿½ï¿½ï¿½MP
     /// </summary>
     /// <param name="amount"></param>
     public void TakeMP(int amount)
@@ -715,7 +724,7 @@ public class PlayerData
     }
 
     /// <summary>
-    /// ´ø×ßÏÖÓĞµÄMP
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½MP
     /// </summary>
     /// <param name="amount"></param>
     public void TakeReserveMP(int amount)
@@ -728,7 +737,7 @@ public class PlayerData
     }
 
     /// <summary>
-    /// Çå³ıÏÖÓĞµÄMP
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½MP
     /// </summary>
     public void ClearMP()
     {
@@ -779,6 +788,23 @@ public class PlayerData
 	journalEntriesTotal = 146;
     }
 
+    // æ˜ å°„æ—§å­—æ®µååˆ°æ–°çš„åç§°ï¼ˆStasisã€Eyeï¼‰ï¼Œé¿å… PlayMaker æˆ–å…¶ä»–å­—ç¬¦ä¸²è®¿é—®çš„ç ´åã€‚
+    private static string MapLegacyFieldName(string name)
+    {
+        switch (name)
+        {
+            case "quakeLevel": return "stasisLevel";
+            case "shadeQuakeLevel": return "shadeStasisLevel";
+            case "shamanQuakeConvo": return "shamanStasisConvo";
+            case "shamanQuake2Convo": return "shamanStasis2Convo";
+            case "screamLevel": return "eyeLevel";
+            case "shadeScreamLevel": return "shadeEyeLevel";
+            case "shamanScreamConvo": return "shamanEyeConvo";
+            case "shamanScream2Convo": return "shamanEye2Convo";
+            default: return name;
+        }
+    }
+
     public int GetInt(string intName)
     {
 	if (string.IsNullOrEmpty(intName))
@@ -786,7 +812,8 @@ public class PlayerData
 	    Debug.LogError("PlayerData: Int with an EMPTY name requested.");
 	    return -9999;
 	}
-	FieldInfo fieldInfo = GetType().GetField(intName);
+    intName = MapLegacyFieldName(intName);
+    FieldInfo fieldInfo = GetType().GetField(intName);
 	if(fieldInfo != null)
 	{
 	    return (int)fieldInfo.GetValue(instance);
@@ -797,7 +824,8 @@ public class PlayerData
 
     public void IncrementInt(string intName)
     {
-	FieldInfo field = GetType().GetField(intName);
+    intName = MapLegacyFieldName(intName);
+    FieldInfo field = GetType().GetField(intName);
 	if (field != null)
 	{
 	    int num = (int)field.GetValue(instance);
@@ -809,7 +837,8 @@ public class PlayerData
 
     public void SetInt(string intName, int value)
     {
-	FieldInfo field = GetType().GetField(intName);
+    intName = MapLegacyFieldName(intName);
+    FieldInfo field = GetType().GetField(intName);
 	if (field != null)
 	{
 	    field.SetValue(instance, value);
@@ -825,7 +854,8 @@ public class PlayerData
 	    Debug.LogError("PlayerData: String with an EMPTY name requested.");
 	    return " ";
 	}
-	FieldInfo field = GetType().GetField(stringName);
+    stringName = MapLegacyFieldName(stringName);
+    FieldInfo field = GetType().GetField(stringName);
 	if (field != null)
 	{
 	    return (string)field.GetValue(instance);
@@ -836,7 +866,8 @@ public class PlayerData
 
     public void SetString(string stringName, string value)
     {
-	FieldInfo field = GetType().GetField(stringName);
+    stringName = MapLegacyFieldName(stringName);
+    FieldInfo field = GetType().GetField(stringName);
 	if (field != null)
 	{
 	    field.SetValue(instance, value);
@@ -851,7 +882,8 @@ public class PlayerData
 	{
 	    return false;
 	}
-	FieldInfo field = GetType().GetField(boolName);
+    boolName = MapLegacyFieldName(boolName);
+    FieldInfo field = GetType().GetField(boolName);
 	if (field != null)
 	{
 	    return (bool)field.GetValue(instance);
@@ -862,7 +894,8 @@ public class PlayerData
 
     public void SetBool(string boolName, bool value)
     {
-	FieldInfo field = GetType().GetField(boolName);
+    boolName = MapLegacyFieldName(boolName);
+    FieldInfo field = GetType().GetField(boolName);
 	if (field != null)
 	{
 	    field.SetValue(instance, value);
@@ -873,7 +906,8 @@ public class PlayerData
 
     public void SetFloat(string floatName, float value)
     {
-	FieldInfo field = GetType().GetField(floatName);
+    floatName = MapLegacyFieldName(floatName);
+    FieldInfo field = GetType().GetField(floatName);
 	if (field != null)
 	{
 	    field.SetValue(instance, value);

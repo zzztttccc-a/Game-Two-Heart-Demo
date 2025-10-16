@@ -99,7 +99,7 @@ public sealed class ObjectPool : MonoBehaviour
     }
 
     /// <summary>
-    /// 创建一个游戏对象的对象池，包括设置它的初始大小initialPoolSize，parent，
+    /// 锟斤拷锟斤拷一锟斤拷锟斤拷戏锟斤拷锟斤拷亩锟斤拷锟截ｏ拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟侥筹拷始锟斤拷小initialPoolSize锟斤拷parent锟斤拷
     /// </summary>
     /// <param name="prefab"></param>
     /// <param name="initialPoolSize"></param>

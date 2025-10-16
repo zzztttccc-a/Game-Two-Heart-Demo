@@ -10872,11 +10872,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5631576927028484552, guid: eb782561a5616914d9dad4af19074700, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.69052
+      value: 52.721016
       objectReference: {fileID: 0}
     - target: {fileID: 5631576927028484552, guid: eb782561a5616914d9dad4af19074700, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.744878
+      value: 9.687034
       objectReference: {fileID: 0}
     - target: {fileID: 5631576927028484552, guid: eb782561a5616914d9dad4af19074700, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10916,7 +10916,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5631576927028484553, guid: eb782561a5616914d9dad4af19074700, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5631576927028484555, guid: eb782561a5616914d9dad4af19074700, type: 3}
       propertyPath: fsm.states.Array.data[0].position.y

@@ -20,7 +20,7 @@ public class HealthManager : MonoBehaviour, IHitResponder
     [SerializeField] private GameObject sendKilledToObject;
 
     [Header("Asset")]
-    [SerializeField] private AudioSource audioPlayerPrefab; //ÉùÒô²¥·ÅÆ÷Ô¤ÖÆÌå
+    [SerializeField] private AudioSource audioPlayerPrefab; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private GameObject corpseSplatPrefab;
     [SerializeField] private AudioEvent regularInvincibleAudio;
     [SerializeField] private GameObject blockHitPrefab;
@@ -28,9 +28,9 @@ public class HealthManager : MonoBehaviour, IHitResponder
     [SerializeField] private AudioClip alternateInvincibleSound;
 
     [Header("Body")]
-    [SerializeField] public int hp; //ÑªÁ¿
-    [SerializeField] public int enemyType; //µĞÈËÀàĞÍ
-    [SerializeField] private Vector3 effectOrigin; //ÉúĞ§Æ«ÒÆÁ¿
+    [SerializeField] public int hp; //Ñªï¿½ï¿½
+    [SerializeField] public int enemyType; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private Vector3 effectOrigin; //ï¿½ï¿½Ğ§Æ«ï¿½ï¿½ï¿½ï¿½
 
     [Header("Invincible")]
     [SerializeField] private bool invincible;
@@ -87,8 +87,8 @@ public class HealthManager : MonoBehaviour, IHitResponder
 
     public bool isDead;
 
-    private int directionOfLastAttack; //×îºóÒ»´ÎÊÜµ½¹¥»÷µÄ·½Ïò
-    private float evasionByHitRemaining; //±»¹¥»÷ºóµÄÊ£ÓàÎŞµĞÊ±¼ä
+    private int directionOfLastAttack; //ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+    private float evasionByHitRemaining; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½Şµï¿½Ê±ï¿½ï¿½
     private const string CheckPersistenceKey = "CheckPersistence";
 
     public delegate void DeathEvent();
@@ -277,7 +277,19 @@ public class HealthManager : MonoBehaviour, IHitResponder
 	{
 	    hitEffectReceiver.RecieveHitEffect(hitInstance.GetActualDirection(transform));
 	}
-	int num = Mathf.RoundToInt(hitInstance.DamageDealt * hitInstance.Multiplier);
+    // è®¡ç®—æœ€ç»ˆä¼¤å®³å€ç‡ï¼Œè‹¥ç›®æ ‡å¤„äºå®šèº«å¹¶ä¸”æ˜¯ç©å®¶æ”»å‡»çš„é¦–æ¬¡å‘½ä¸­ï¼Œåˆ™é¢å¤–æå‡ 1.5 å€å¹¶åœ¨å‘½ä¸­ç¬é—´è§¦å‘çŸ­æš‚æ—¶ç¼“
+    float finalMultiplier = hitInstance.Multiplier;
+    if (hitInstance.AttackType == AttackTypes.Nail || hitInstance.AttackType == AttackTypes.Spell || hitInstance.AttackType == AttackTypes.NailBeam)
+    {
+        var stasisTarget = GetComponent<StasisTarget>();
+        if (stasisTarget != null && stasisTarget.TryConsumeFirstHitBonus())
+        {
+            finalMultiplier *= 1.5f;
+            // å‘½ä¸­ç¬é—´è¿›å…¥ 0.1 ç§’çš„ 0.5 å€æ—¶ç¼“ï¼ˆå¹³æ»‘ä¸‹é™ 0.01sï¼Œä¸Šå‡ 0.05sï¼‰
+            StartCoroutine(GameManager.instance.FreezeMoment(0.01f, 0.1f, 0.05f, 0.5f));
+        }
+    }
+    int num = Mathf.RoundToInt(hitInstance.DamageDealt * finalMultiplier);
 
 	hp = Mathf.Max(hp - num, -50);
 	if(hp > 0)
