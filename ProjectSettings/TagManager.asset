@@ -26,6 +26,8 @@ TagManager:
   - TileMap
   - Battle Scene
   - HeroWalkable
+  - invisible
+  - show
   layers:
   - Default
   - TransparentFX
