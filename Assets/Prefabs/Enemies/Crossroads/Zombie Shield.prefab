@@ -71,6 +71,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f836397f851ab4aae8af847a42c6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectEnemies: 0
+  targetFsmName: ZombieSheildControl
+  enemyVariableName: Enemy
+  assignEnemyOnEnter: 1
+  clearEnemyOnExit: 0
+  findHealthManagerUpwards: 1
 --- !u!1 &8716767554075266132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4954,6 +4960,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f836397f851ab4aae8af847a42c6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectEnemies: 0
+  targetFsmName: ZombieSheildControl
+  enemyVariableName: Enemy
+  assignEnemyOnEnter: 1
+  clearEnemyOnExit: 0
+  findHealthManagerUpwards: 1
 --- !u!1 &8716767554099383163
 GameObject:
   m_ObjectHideFlags: 0
@@ -9675,8 +9687,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 421
-        y: 445
+        x: 580.34375
+        y: 453.78906
         width: 130
         height: 112
       isBreakpoint: 0
@@ -10467,8 +10479,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 425
-        y: 621
+        x: 543.6797
+        y: 628.6953
         width: 127
         height: 112
       isBreakpoint: 0
@@ -14067,6 +14079,7 @@ MonoBehaviour:
   alertRanges:
   - {fileID: 8716767554052946921}
   - {fileID: 8716767554094453706}
+  detectEnemies: 0
 --- !u!114 &8716767554213526676
 MonoBehaviour:
   m_ObjectHideFlags: 0

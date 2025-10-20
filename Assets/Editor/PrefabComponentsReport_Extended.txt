@@ -1,0 +1,1790 @@
+﻿=== Prefab Components Report (Selected - Extended) ===
+Generated: 2025/10/19 17:45:43
+
+Prefab: Assets/Prefabs/_Generic/Hero/Clone/SummonedCloneV2.prefab
+Root: SummonedCloneV2
+- SummonedCloneV2 :: Transform
+- SummonedCloneV2 :: MeshRenderer
+    MeshRenderer: materials=[atlas0 material]
+- SummonedCloneV2 :: MeshFilter
+- SummonedCloneV2 :: tk2dSprite
+    tk2dSprite: spriteId=, collection=<none>, color=RGBA(1.000, 1.000, 1.000, 1.000)
+- SummonedCloneV2 :: tk2dSpriteAnimator
+- SummonedCloneV2 :: Rigidbody2D(bodyType=Dynamic, gravityScale=1)
+    Rigidbody2D: mass=1, bodyType=Dynamic, gravityScale=1, drag=0, angularDrag=0.05, constraints=FreezeRotation, collisionDetectionMode=Continuous
+- SummonedCloneV2 :: AudioSource(clip=<none>, playOnAwake=True)
+- SummonedCloneV2 :: BoxCollider2D(isTrigger=False)
+    Collider: Box(size=(1.06, 2.46), offset=(-0.09, -2.27), isTrigger=False)
+- SummonedCloneV2 :: HealthManager(hp=35, invuln=)
+    HealthManager: hp=35, invincible=False
+- SummonedCloneV2 :: EnemyHitEffectsBlackKnight
+- SummonedCloneV2 :: Recoil
+- SummonedCloneV2 :: EnemyDeathEffects
+- SummonedCloneV2 :: SpriteFlash
+- SummonedCloneV2 :: PlayMakerFSM(name='Mantis', startState='Pause')
+    FSM: name='Mantis', start='Pause', states=25, events=16
+    States: Init, Rest, Lords Defeated?, Pause, Up Antic, Friendly Idle, Bow, Idle, Anim, Up Slash, Up Recover, Cooldown, Return?, Return L, Return R, Turn?, Turn, Feint?, Feint, Attack Antic, Set Speed, Attack 1, Stop At Edge, Attack Swipe, Attack Recover
+    Events: CANCEL, CHECK, FALSE, L, MANTIS DEFEAT, R, TOOK DAMAGE, TRUE, FINISHED, ABOVE, BACK, BOW, EDGE, END, FEINT, FRONT
+    Vars: _allVariables=26, floatVariables=11, intVariables=0, boolVariables=8, stringVariables=0, vector2Variables=2, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=5, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=26
+    State[1]: 'Init' actions=10, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetPosition
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[3]: SetFloatValue
+        everyFrame = False
+        floatValue = -2
+        floatVariable = 0
+      Action[4]: SetFloatValue
+        everyFrame = False
+        floatValue = 30
+        floatVariable = 0
+      Action[5]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[6]: GetScale
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        xScale = 0
+        yScale = 0
+        zScale = 0
+      Action[7]: FloatCompare
+        equal = <null>
+        everyFrame = False
+        float1 = 0
+        float2 = 0
+        greaterThan = <null>
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 0
+      Action[8]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[9]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[10]: SetBoolValue
+        boolValue = True
+        boolVariable = False
+        everyFrame = False
+      Transition[1]: FINISHED->Lords Defeated?
+    State[2]: 'Rest' actions=10, transitions=1
+      Action[1]: SetDamageHeroAmount
+        damageDealt = 1
+        target = None
+      Action[2]: SetFloatValue
+        everyFrame = False
+        floatValue = -2
+        floatVariable = 0
+      Action[3]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = False
+      Action[4]: SetFloatValue
+        everyFrame = False
+        floatValue = 30
+        floatVariable = 0
+      Action[5]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[6]: GetScale
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        xScale = 0
+        yScale = 0
+        zScale = 0
+      Action[7]: FloatCompare
+        equal = <null>
+        everyFrame = False
+        float1 = 0
+        float2 = 0
+        greaterThan = <null>
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 0
+      Action[8]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[9]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[10]: SetBoolValue
+        boolValue = True
+        boolVariable = False
+        everyFrame = False
+      Transition[1]: FINISHED->Idle
+    State[3]: 'Lords Defeated?' actions=1, transitions=2
+      Action[1]: PlayerDataBoolTest
+        boolCheck = False
+        boolName = defeatedMantisLords
+        gameObject = None
+        isFalse = HutongGames.PlayMaker.FsmEvent
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Transition[1]: TRUE->Friendly Idle
+      Transition[2]: FALSE->Idle
+    State[4]: 'Pause' actions=1, transitions=1
+      Action[1]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.2
+        timer = 0
+      Transition[1]: FINISHED->Init
+    State[5]: 'Up Antic' actions=2, transitions=1
+      Action[1]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Up Attack Antic
+        gameObject = None
+      Action[2]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Transition[1]: FINISHED->Up Slash
+    State[6]: 'Friendly Idle' actions=5, transitions=2
+      Action[1]: SetDamageHeroAmount
+        damageDealt = 0
+        target = None
+      Action[2]: BoolTest
+        boolVariable = False
+        everyFrame = True
+        isFalse = <null>
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Action[3]: ActivateGameObject
+        activate = False
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Head Box
+        recursive = False
+        resetOnExit = False
+      Action[4]: GetDistance
+        everyFrame = True
+        gameObject = None
+        storeResult = 0
+        target = <null>
+      Action[5]: FloatCompare
+        equal = <null>
+        everyFrame = True
+        float1 = 0
+        float2 = 10
+        greaterThan = <null>
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 0
+      Transition[1]: BOW->Bow
+      Transition[2]: TOOK DAMAGE->Rest
+    State[7]: 'Bow' actions=5, transitions=2
+      Action[1]: BoolTest
+        boolVariable = False
+        everyFrame = True
+        isFalse = HutongGames.PlayMaker.FsmEvent
+        isTrue = <null>
+      Action[2]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Bow
+        gameObject = None
+      Action[3]: FaceObject
+        _sprite = <null>
+        everyFrame = True
+        newAnimationClip = Turn To Bow
+        objectA = <null>
+        objectB = <null>
+        playNewAnimation = True
+        resetFrame = True
+        spriteFacesRight = True
+        vector = <null>
+        xScale = 0
+      Action[4]: GetDistance
+        everyFrame = True
+        gameObject = None
+        storeResult = 0
+        target = <null>
+      Action[5]: FloatCompare
+        equal = <null>
+        everyFrame = True
+        float1 = 0
+        float2 = 12
+        greaterThan = HutongGames.PlayMaker.FsmEvent
+        lessThan = <null>
+        tolerance = 0
+      Transition[1]: END->Anim
+      Transition[2]: TOOK DAMAGE->Rest
+    State[8]: 'Idle' actions=6, transitions=5
+      Action[1]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Idle
+        gameObject = None
+      Action[2]: BoolTest
+        boolVariable = False
+        everyFrame = True
+        isFalse = <null>
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Action[3]: BoolTest
+        boolVariable = False
+        everyFrame = True
+        isFalse = <null>
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Action[4]: BoolTest
+        boolVariable = False
+        everyFrame = True
+        isFalse = <null>
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Action[5]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 6
+        timer = 0
+      Action[6]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Transition[1]: BACK->Turn
+      Transition[2]: FRONT->Feint?
+      Transition[3]: ABOVE->Up Antic
+      Transition[4]: CHECK->Return?
+      Transition[5]: TOOK DAMAGE->Turn?
+    State[9]: 'Anim' actions=1, transitions=1
+      Action[1]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Bow End
+        gameObject = None
+      Transition[1]: FINISHED->Friendly Idle
+    State[10]: 'Up Slash' actions=3, transitions=1
+      Action[1]: AudioPlayerOneShotSingle
+        audio = <null>
+        audioClip = mantis_sword
+        audioPlayer = Audio Player Actor
+        delay = 0
+        pitchMax = 1
+        pitchMin = 1
+        spawnPoint = <null>
+        storePlayer = <null>
+        timer = 0
+        volume = 1
+      Action[2]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Up Attack Slash
+        gameObject = None
+      Action[3]: ActivateGameObject
+        activate = True
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Slash Up
+        recursive = False
+        resetOnExit = False
+      Transition[1]: FINISHED->Up Recover
+    State[11]: 'Up Recover' actions=2, transitions=1
+      Action[1]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Up Attack Recover
+        gameObject = None
+      Action[2]: ActivateGameObject
+        activate = False
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Slash Up
+        recursive = False
+        resetOnExit = False
+      Transition[1]: FINISHED->Cooldown
+    State[12]: 'Cooldown' actions=3, transitions=1
+      Action[1]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Idle
+        gameObject = None
+      Action[2]: ActivateGameObject
+        activate = True
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Head Box
+        recursive = False
+        resetOnExit = False
+      Action[3]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.5
+        timer = 0
+      Transition[1]: FINISHED->Idle
+    State[13]: 'Return?' actions=3, transitions=3
+      Action[1]: GetPosition
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[2]: FloatCompare
+        equal = <null>
+        everyFrame = False
+        float1 = 0
+        float2 = 0
+        greaterThan = HutongGames.PlayMaker.FsmEvent
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 0.25
+      Action[3]: FloatCompare
+        equal = HutongGames.PlayMaker.FsmEvent
+        everyFrame = False
+        float1 = 0
+        float2 = 0
+        greaterThan = HutongGames.PlayMaker.FsmEvent
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 1
+      Transition[1]: CANCEL->Idle
+      Transition[2]: L->Return L
+      Transition[3]: R->Return R
+    State[14]: 'Return L' actions=5, transitions=4
+      Action[1]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Walk
+        gameObject = None
+      Action[2]: SetScale
+        everyFrame = False
+        gameObject = None
+        lateUpdate = False
+        vector = (0.00, 0.00, 0.00)
+        x = -1
+        y = 0
+        z = 0
+      Action[3]: SetVelocity2d
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (-6.00, 0.00)
+        x = -6
+        y = 0
+      Action[4]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[5]: FloatCompare
+        equal = HutongGames.PlayMaker.FsmEvent
+        everyFrame = True
+        float1 = 0
+        float2 = 0
+        greaterThan = <null>
+        lessThan = HutongGames.PlayMaker.FsmEvent
+        tolerance = 0
+      Transition[1]: END->Rest
+      Transition[2]: FRONT->Feint?
+      Transition[3]: BACK->Turn
+      Transition[4]: ABOVE->Up Antic
+    State[15]: 'Return R' actions=5, transitions=4
+      Action[1]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Walk
+        gameObject = None
+      Action[2]: SetScale
+        everyFrame = False
+        gameObject = None
+        lateUpdate = False
+        vector = (0.00, 0.00, 0.00)
+        x = 1
+        y = 0
+        z = 0
+      Action[3]: SetVelocity2d
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (6.00, 0.00)
+        x = 6
+        y = 0
+      Action[4]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[5]: FloatCompare
+        equal = HutongGames.PlayMaker.FsmEvent
+        everyFrame = True
+        float1 = 0
+        float2 = 0
+        greaterThan = HutongGames.PlayMaker.FsmEvent
+        lessThan = <null>
+        tolerance = 0
+      Transition[1]: END->Rest
+      Transition[2]: FRONT->Feint?
+      Transition[3]: BACK->Turn
+      Transition[4]: ABOVE->Up Antic
+    State[16]: 'Turn?' actions=5, transitions=2
+      Action[1]: GetScale
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        xScale = 0
+        yScale = 0
+        zScale = 0
+      Action[2]: FloatTestToBool
+        equalBool = False
+        everyFrame = False
+        float1 = 0
+        float2 = 0
+        greaterThanBool = False
+        lessThanBool = False
+        tolerance = 0
+      Action[3]: CheckTargetDirection
+        aboveBool = False
+        aboveEvent = <null>
+        belowBool = False
+        belowEvent = <null>
+        everyFrame = False
+        gameObject = None
+        leftBool = False
+        leftEvent = <null>
+        rightBool = False
+        rightEvent = <null>
+        self = <null>
+        target = <null>
+        x = <null>
+        y = <null>
+      Action[4]: BoolTestMulti
+        boolStates = Array(len=2, sample=[True, False])
+        boolVariables = Array(len=2, sample=[False, False])
+        everyFrame = False
+        falseEvent = <null>
+        storeResult = False
+        trueEvent = HutongGames.PlayMaker.FsmEvent
+      Action[5]: BoolTestMulti
+        boolStates = Array(len=2, sample=[False, True])
+        boolVariables = Array(len=2, sample=[False, False])
+        everyFrame = False
+        falseEvent = HutongGames.PlayMaker.FsmEvent
+        storeResult = False
+        trueEvent = HutongGames.PlayMaker.FsmEvent
+      Transition[1]: BACK->Turn
+      Transition[2]: FINISHED->Attack Antic
+    State[17]: 'Turn' actions=4, transitions=1
+      Action[1]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[2]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[3]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Turn
+        gameObject = None
+      Action[4]: FlipScale
+        everyFrame = False
+        flipHorizontally = True
+        flipVertically = False
+        gameObject = None
+        lateUpdate = False
+      Transition[1]: FINISHED->Feint?
+    State[18]: 'Feint?' actions=1, transitions=2
+      Action[1]: SendRandomEvent
+        delay = 0
+        delayedEvent = <null>
+        events = Array(len=2, sample=[HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent])
+        weights = Array(len=2, sample=[0.65, 0.35])
+      Transition[1]: FINISHED->Attack Antic
+      Transition[2]: FEINT->Feint
+    State[19]: 'Feint' actions=12, transitions=2
+      Action[1]: AudioPlayerOneShotSingle
+        audio = <null>
+        audioClip = mantis_steps_back
+        audioPlayer = Audio Player Actor
+        delay = 0
+        pitchMax = 1
+        pitchMin = 1
+        spawnPoint = <null>
+        storePlayer = <null>
+        timer = 0
+        volume = 1
+      Action[2]: SetFloatValue
+        everyFrame = False
+        floatValue = 0
+        floatVariable = 0
+      Action[3]: SetFloatValue
+        everyFrame = False
+        floatValue = 0
+        floatVariable = 0
+      Action[4]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -0.3
+      Action[5]: FloatMultiply
+        everyFrame = False
+        floatVariable = 0
+        multiplyBy = -1
+      Action[6]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[7]: Tk2dPlayAnimation
+        _sprite = <null>
+        animLibName = 
+        clipName = Walk B
+        gameObject = None
+      Action[8]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.3
+        timer = 0
+      Action[9]: SetVector2XY
+        everyFrame = False
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = -1
+      Action[10]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, -1.00)
+        distance = 3
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = Self
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[11]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[12]: BoolTest
+        boolVariable = False
+        everyFrame = False
+        isFalse = <null>
+        isTrue = HutongGames.PlayMaker.FsmEvent
+      Transition[1]: FINISHED->Attack Antic
+      Transition[2]: TOOK DAMAGE->Attack Antic
+    State[20]: 'Attack Antic' actions=5, transitions=1
+      Action[1]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Attack Antic
+        gameObject = None
+      Action[2]: SetBoolValue
+        boolValue = True
+        boolVariable = False
+        everyFrame = False
+      Action[3]: ActivateGameObject
+        activate = False
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Head Box
+        recursive = False
+        resetOnExit = False
+      Action[4]: ActivateGameObject
+        activate = True
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Head Box F
+        recursive = False
+        resetOnExit = False
+      Action[5]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Transition[1]: FINISHED->Set Speed
+    State[21]: 'Set Speed' actions=1, transitions=1
+      Action[1]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Transition[1]: FINISHED->Attack 1
+    State[22]: 'Attack 1' actions=7, transitions=2
+      Action[1]: AudioPlayerOneShotSingle
+        audio = <null>
+        audioClip = mantis_sword
+        audioPlayer = Audio Player Actor
+        delay = 0
+        pitchMax = 1
+        pitchMin = 1
+        spawnPoint = <null>
+        storePlayer = <null>
+        timer = 0
+        volume = 1
+      Action[2]: ActivateGameObject
+        activate = False
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Head Box F
+        recursive = False
+        resetOnExit = False
+      Action[3]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Attack 1
+        gameObject = None
+      Action[4]: SetVector2XY
+        everyFrame = False
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = -1
+      Action[5]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, -1.00)
+        distance = 3
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = Self
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[6]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[7]: BoolAllTrue
+        boolVariables = Array(len=2, sample=[False, False])
+        everyFrame = False
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeResult = False
+      Transition[1]: FINISHED->Attack Swipe
+      Transition[2]: EDGE->Stop At Edge
+    State[23]: 'Stop At Edge' actions=3, transitions=0
+      Action[1]: SetVelocity2d
+        everyFrame = False
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[2]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = False
+      Action[3]: GotoPreviousState
+    State[24]: 'Attack Swipe' actions=5, transitions=2
+      Action[1]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Attack 2
+        gameObject = None
+      Action[2]: ActivateGameObject
+        activate = True
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Slash Forward
+        recursive = False
+        resetOnExit = False
+      Action[3]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, -1.00)
+        distance = 3
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = Self
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[4]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[5]: BoolAllTrue
+        boolVariables = Array(len=2, sample=[False, False])
+        everyFrame = False
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeResult = False
+      Transition[1]: FINISHED->Attack Recover
+      Transition[2]: EDGE->Stop At Edge
+    State[25]: 'Attack Recover' actions=3, transitions=1
+      Action[1]: Tk2dPlayAnimationWithEvents
+        _sprite = <null>
+        animationCompleteEvent = HutongGames.PlayMaker.FsmEvent
+        animationTriggerEvent = <null>
+        clipName = Attack Recover
+        gameObject = None
+      Action[2]: ActivateGameObject
+        activate = False
+        activatedGameObject = <null>
+        everyFrame = False
+        gameObject = Slash Forward
+        recursive = False
+        resetOnExit = False
+      Action[3]: SetVelocity2d
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00)
+        x = 0
+        y = 0
+      Transition[1]: FINISHED->Cooldown
+- SummonedCloneV2 :: DamageEnemies
+- SummonedCloneV2 :: SummonedCloneSetup
+- SummonedCloneV2/Front Range :: Transform
+- SummonedCloneV2/Front Range :: BoxCollider2D(isTrigger=True)
+    Collider: Box(size=(8.95, 4.15), offset=(3.98, -1.52), isTrigger=True)
+- SummonedCloneV2/Front Range :: PlayMakerFSM(name='FSM', startState='Initialise')
+    FSM: name='FSM', start='Initialise', states=3, events=3
+    States: Initialise, Inacitve, Raycast
+    Events: FINISHED, RAYCAST START, RAYCAST STOP
+    Vars: _allVariables=19, floatVariables=7, intVariables=0, boolVariables=3, stringVariables=2, vector2Variables=3, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=4, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=19
+    State[1]: 'Initialise' actions=3, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetHero
+        storeResult = <null>
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Inacitve
+    State[2]: 'Inacitve' actions=3, transitions=1
+      Action[1]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerStay2D
+      Action[2]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Action[3]: SetFsmBool
+        everyFrame = False
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Front Range
+      Transition[1]: RAYCAST START->Raycast
+    State[3]: 'Raycast' actions=16, transitions=1
+      Action[1]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[2]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[3]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[4]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[5]: FloatSubtract
+        everyFrame = True
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[6]: FloatSubtract
+        everyFrame = False
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[7]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[8]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[9]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[10]: DistanceBetweenPoints2D
+        distanceResult = 0
+        everyFrame = True
+        point1 = (0.00, 0.00)
+        point2 = (0.00, 0.00)
+      Action[11]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, 0.00)
+        distance = 0
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = World
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[12]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = True
+      Action[13]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[14]: SetFsmBool
+        everyFrame = True
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Front Range
+      Action[15]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerExit2D
+      Action[16]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 1
+        timer = 0
+      Transition[1]: RAYCAST STOP->Inacitve
+- SummonedCloneV2/Back Range :: Transform
+- SummonedCloneV2/Back Range :: BoxCollider2D(isTrigger=True)
+    Collider: Box(size=(7.53, 7.44), offset=(-4.32, 0.13), isTrigger=True)
+- SummonedCloneV2/Back Range :: PlayMakerFSM(name='FSM', startState='Initialise')
+    FSM: name='FSM', start='Initialise', states=3, events=3
+    States: Initialise, Inacitve, Raycast
+    Events: FINISHED, RAYCAST START, RAYCAST STOP
+    Vars: _allVariables=19, floatVariables=7, intVariables=0, boolVariables=3, stringVariables=2, vector2Variables=3, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=4, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=19
+    State[1]: 'Initialise' actions=3, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetHero
+        storeResult = <null>
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Inacitve
+    State[2]: 'Inacitve' actions=3, transitions=1
+      Action[1]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerStay2D
+      Action[2]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Action[3]: SetFsmBool
+        everyFrame = False
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Back Range
+      Transition[1]: RAYCAST START->Raycast
+    State[3]: 'Raycast' actions=16, transitions=1
+      Action[1]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[2]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[3]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[4]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[5]: FloatSubtract
+        everyFrame = True
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[6]: FloatSubtract
+        everyFrame = False
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[7]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[8]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[9]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[10]: DistanceBetweenPoints2D
+        distanceResult = 0
+        everyFrame = True
+        point1 = (0.00, 0.00)
+        point2 = (0.00, 0.00)
+      Action[11]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, 0.00)
+        distance = 0
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = World
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[12]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = True
+      Action[13]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[14]: SetFsmBool
+        everyFrame = True
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Back Range
+      Action[15]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerExit2D
+      Action[16]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 1
+        timer = 0
+      Transition[1]: RAYCAST STOP->Inacitve
+- SummonedCloneV2/Above Range :: Transform
+- SummonedCloneV2/Above Range :: BoxCollider2D(isTrigger=True)
+    Collider: Box(size=(2.93, 5.03), offset=(1.36, 2.50), isTrigger=True)
+- SummonedCloneV2/Above Range :: PlayMakerFSM(name='FSM', startState='Initialise')
+    FSM: name='FSM', start='Initialise', states=3, events=3
+    States: Initialise, Inacitve, Raycast
+    Events: FINISHED, RAYCAST START, RAYCAST STOP
+    Vars: _allVariables=19, floatVariables=7, intVariables=0, boolVariables=3, stringVariables=2, vector2Variables=3, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=4, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=19
+    State[1]: 'Initialise' actions=3, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetHero
+        storeResult = <null>
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Inacitve
+    State[2]: 'Inacitve' actions=3, transitions=1
+      Action[1]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerStay2D
+      Action[2]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Action[3]: SetFsmBool
+        everyFrame = False
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Above Range
+      Transition[1]: RAYCAST START->Raycast
+    State[3]: 'Raycast' actions=16, transitions=1
+      Action[1]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[2]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[3]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[4]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[5]: FloatSubtract
+        everyFrame = True
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[6]: FloatSubtract
+        everyFrame = False
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[7]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[8]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[9]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[10]: DistanceBetweenPoints2D
+        distanceResult = 0
+        everyFrame = True
+        point1 = (0.00, 0.00)
+        point2 = (0.00, 0.00)
+      Action[11]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, 0.00)
+        distance = 0
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = World
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[12]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = True
+      Action[13]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[14]: SetFsmBool
+        everyFrame = True
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Above Range
+      Action[15]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerExit2D
+      Action[16]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 1
+        timer = 0
+      Transition[1]: RAYCAST STOP->Inacitve
+- SummonedCloneV2/Slash Up :: Transform
+- SummonedCloneV2/Slash Up :: PolygonCollider2D(isTrigger=True)
+    Collider: Polygon(paths=1, totalPoints=6, isTrigger=True)
+- SummonedCloneV2/Slash Up :: PlayMakerFSM(name='nail_clash_tink', startState='Initiate')
+    FSM: name='nail_clash_tink', start='Initiate', states=10, events=24
+    States: Initiate, Detecting, Blocked Hit, No Box Right, No Box Left, No Box Up, No Box Down, Pause Frame, NailParryCover, Pause
+    Events: ACID, ARMOURED, BUBBLE, DOWN, FALSE, GENERIC, INFECTED, LARGE INFECTED, LEFT, NAIL, NO BOX, NO EFFECT, PLAY ANIM, RETURN, RIGHT, SHADE, SMALL INFECTED, SPELL, SPELL RECOIL, TAKE DAMAGE, TRUE, UP, ZERO HP, FINISHED
+    Vars: _allVariables=7, floatVariables=2, intVariables=0, boolVariables=0, stringVariables=0, vector2Variables=0, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=5, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=7
+    State[1]: 'Initiate' actions=2, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Detecting
+    State[2]: 'Detecting' actions=1, transitions=1
+      Action[1]: Trigger2dEventLayer
+        _proxy = <null>
+        collideLayer = 16
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Transition[1]: TAKE DAMAGE->Blocked Hit
+    State[3]: 'Blocked Hit' actions=7, transitions=4
+      Action[1]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[2]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Action[4]: GetFsmFloat
+        everyFrame = False
+        fsm = <null>
+        fsmName = damages_enemy
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        storeValue = 0
+        variableName = direction
+      Action[5]: SendEventByName
+        delay = 0
+        delayedEvent = <null>
+        eventTarget = HutongGames.PlayMaker.FsmEventTarget
+        everyFrame = False
+        sendEvent = EnemyKillShake
+      Action[6]: AudioPlayerOneShot
+        audio = <null>
+        audioClips = Array(len=1, sample=[hero_parry])
+        audioPlayer = Audio Player Actor
+        delay = 0
+        pitchMax = 1.15
+        pitchMin = 0.85
+        spawnPoint = <null>
+        storePlayer = <null>
+        timer = 0
+        volume = 1
+        weights = Array(len=1, sample=[1])
+      Action[7]: FloatSwitch
+        everyFrame = False
+        floatVariable = 0
+        lessThan = Array(len=4, sample=[45, 135, 225, 360])
+        sendEvent = Array(len=4, sample=[HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent])
+      Transition[1]: RIGHT->No Box Right
+      Transition[2]: LEFT->No Box Left
+      Transition[3]: UP->No Box Up
+      Transition[4]: DOWN->No Box Down
+    State[4]: 'No Box Right' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilLeft
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (1.50, 0.00, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[5]: 'No Box Left' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilRight
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (-1.50, 0.00, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[6]: 'No Box Up' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilDown
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (0.00, 1.50, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[7]: 'No Box Down' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = Bounce
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (0.00, -1.50, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[8]: 'Pause Frame' actions=2, transitions=1
+      Action[1]: NextFrameEvent
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+      Action[2]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.1
+        timer = 0
+      Transition[1]: FINISHED->NailParryCover
+    State[9]: 'NailParryCover' actions=3, transitions=1
+      Action[1]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[2]: NextFrameEvent
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+      Action[3]: SendEventByName
+        delay = 0
+        delayedEvent = <null>
+        eventTarget = HutongGames.PlayMaker.FsmEventTarget
+        everyFrame = False
+        sendEvent = PARRIED
+      Transition[1]: FINISHED->Pause
+    State[10]: 'Pause' actions=1, transitions=1
+      Action[1]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.15
+        timer = 0
+      Transition[1]: FINISHED->Detecting
+- SummonedCloneV2/Slash Up :: DamageEnemies
+- SummonedCloneV2/Slash Forward :: Transform
+- SummonedCloneV2/Slash Forward :: PolygonCollider2D(isTrigger=True)
+    Collider: Polygon(paths=1, totalPoints=8, isTrigger=True)
+- SummonedCloneV2/Slash Forward :: PlayMakerFSM(name='FSM', startState='Initiate')
+    FSM: name='FSM', start='Initiate', states=10, events=24
+    States: Initiate, Detecting, Blocked Hit, No Box Right, No Box Left, No Box Up, No Box Down, Pause Frame, NailParryCover, Pause
+    Events: ACID, ARMOURED, BUBBLE, DOWN, FALSE, GENERIC, INFECTED, LARGE INFECTED, LEFT, NAIL, NO BOX, NO EFFECT, PLAY ANIM, RETURN, RIGHT, SHADE, SMALL INFECTED, SPELL, SPELL RECOIL, TAKE DAMAGE, TRUE, UP, ZERO HP, FINISHED
+    Vars: _allVariables=7, floatVariables=2, intVariables=0, boolVariables=0, stringVariables=0, vector2Variables=0, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=5, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=7
+    State[1]: 'Initiate' actions=2, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Detecting
+    State[2]: 'Detecting' actions=1, transitions=1
+      Action[1]: Trigger2dEventLayer
+        _proxy = <null>
+        collideLayer = 16
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Transition[1]: TAKE DAMAGE->Blocked Hit
+    State[3]: 'Blocked Hit' actions=7, transitions=4
+      Action[1]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[2]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Action[4]: GetFsmFloat
+        everyFrame = False
+        fsm = <null>
+        fsmName = damages_enemy
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        storeValue = 0
+        variableName = direction
+      Action[5]: SendEventByName
+        delay = 0
+        delayedEvent = <null>
+        eventTarget = HutongGames.PlayMaker.FsmEventTarget
+        everyFrame = False
+        sendEvent = EnemyKillShake
+      Action[6]: AudioPlayerOneShot
+        audio = <null>
+        audioClips = Array(len=1, sample=[hero_parry])
+        audioPlayer = Audio Player Actor
+        delay = 0
+        pitchMax = 1.15
+        pitchMin = 0.85
+        spawnPoint = <null>
+        storePlayer = <null>
+        timer = 0
+        volume = 1
+        weights = Array(len=1, sample=[1])
+      Action[7]: FloatSwitch
+        everyFrame = False
+        floatVariable = 0
+        lessThan = Array(len=4, sample=[45, 135, 225, 360])
+        sendEvent = Array(len=4, sample=[HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent, HutongGames.PlayMaker.FsmEvent])
+      Transition[1]: RIGHT->No Box Right
+      Transition[2]: LEFT->No Box Left
+      Transition[3]: UP->No Box Up
+      Transition[4]: DOWN->No Box Down
+    State[4]: 'No Box Right' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilLeft
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (1.50, 0.00, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[5]: 'No Box Left' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilRight
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (-1.50, 0.00, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[6]: 'No Box Up' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = RecoilDown
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (0.00, 1.50, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[7]: 'No Box Down' actions=2, transitions=1
+      Action[1]: CallMethodProper
+        behaviour = HeroController
+        cachedBehaviour = <null>
+        cachedMethodInfo = <null>
+        cachedParameterInfo = <null>
+        cachedType = <null>
+        component = <null>
+        errorString = <null>
+        gameObject = None
+        methodName = Bounce
+        parameters = Array(len=0)
+        parametersArray = <null>
+        storeResult = None
+      Action[2]: SpawnObjectFromGlobalPool
+        gameObject = Nail Clash Effect
+        position = (0.00, -1.50, 0.00)
+        rotation = (0.00, 0.00, 0.00)
+        spawnPoint = <null>
+        storeObject = <null>
+      Transition[1]: FINISHED->Pause Frame
+    State[8]: 'Pause Frame' actions=2, transitions=1
+      Action[1]: NextFrameEvent
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+      Action[2]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.1
+        timer = 0
+      Transition[1]: FINISHED->NailParryCover
+    State[9]: 'NailParryCover' actions=3, transitions=1
+      Action[1]: SendMessage
+        delivery = SendMessage
+        functionCall = HutongGames.PlayMaker.FunctionCall
+        gameObject = None
+        options = DontRequireReceiver
+      Action[2]: NextFrameEvent
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+      Action[3]: SendEventByName
+        delay = 0
+        delayedEvent = <null>
+        eventTarget = HutongGames.PlayMaker.FsmEventTarget
+        everyFrame = False
+        sendEvent = PARRIED
+      Transition[1]: FINISHED->Pause
+    State[10]: 'Pause' actions=1, transitions=1
+      Action[1]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 0.15
+        timer = 0
+      Transition[1]: FINISHED->Detecting
+- SummonedCloneV2/Slash Forward :: DamageEnemies
+- SummonedCloneV2/Head Box :: Transform
+- SummonedCloneV2/Head Box :: BoxCollider2D(isTrigger=False)
+    Collider: Box(size=(0.35, 2.40), offset=(0.27, 0.16), isTrigger=False)
+- SummonedCloneV2/Head Box :: DamageHero(damage=1, hazardType=1, shadowDashHazard=False, resetOnEnable=False)
+    DamageHero: hazardType=1
+- SummonedCloneV2/Bow Range :: Transform
+- SummonedCloneV2/Bow Range :: CircleCollider2D(isTrigger=True)
+    Collider: Circle(radius=9.84, offset=(0.00, 0.00), isTrigger=True)
+- SummonedCloneV2/Bow Range :: PlayMakerFSM(name='FSM', startState='Initialise')
+    FSM: name='FSM', start='Initialise', states=3, events=3
+    States: Initialise, Inacitve, Raycast
+    Events: FINISHED, RAYCAST START, RAYCAST STOP
+    Vars: _allVariables=19, floatVariables=7, intVariables=0, boolVariables=3, stringVariables=2, vector2Variables=3, vector3Variables=0, colorVariables=0, rectVariables=0, quaternionVariables=0, gameObjectVariables=4, objectVariables=0, materialVariables=0, textureVariables=0, arrayVariables=0, enumVariables=0, categories=1, variableCategoryIDs=19
+    State[1]: 'Initialise' actions=3, transitions=1
+      Action[1]: GetOwner
+        storeGameObject = <null>
+      Action[2]: GetHero
+        storeResult = <null>
+      Action[3]: GetParent
+        gameObject = None
+        storeResult = <null>
+      Transition[1]: FINISHED->Inacitve
+    State[2]: 'Inacitve' actions=3, transitions=1
+      Action[1]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerStay2D
+      Action[2]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerEnter2D
+      Action[3]: SetFsmBool
+        everyFrame = False
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Bow Range
+      Transition[1]: RAYCAST START->Raycast
+    State[3]: 'Raycast' actions=16, transitions=1
+      Action[1]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[2]: GetPosition
+        everyFrame = True
+        gameObject = None
+        space = World
+        vector = (0.00, 0.00, 0.00)
+        x = 0
+        y = 0
+        z = 0
+      Action[3]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[4]: SetFloatValue
+        everyFrame = True
+        floatValue = 0
+        floatVariable = 0
+      Action[5]: FloatSubtract
+        everyFrame = True
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[6]: FloatSubtract
+        everyFrame = False
+        floatVariable = 0
+        perSecond = False
+        subtract = 0
+      Action[7]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[8]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[9]: SetVector2XY
+        everyFrame = True
+        vector2Value = (0.00, 0.00)
+        vector2Variable = (0.00, 0.00)
+        x = 0
+        y = 0
+      Action[10]: DistanceBetweenPoints2D
+        distanceResult = 0
+        everyFrame = True
+        point1 = (0.00, 0.00)
+        point2 = (0.00, 0.00)
+      Action[11]: RayCast2d
+        _trans = <null>
+        debug = True
+        debugColor = RGBA(1.000, 0.922, 0.016, 1.000)
+        direction = (0.00, 0.00)
+        distance = 0
+        fromGameObject = None
+        fromPosition = (0.00, 0.00)
+        hitEvent = <null>
+        invertMask = False
+        layerMask = Array(len=1, sample=[8])
+        maxDepth = 0
+        minDepth = 0
+        repeat = 0
+        repeatInterval = 1
+        space = World
+        storeDidHit = False
+        storeHitDistance = 0
+        storeHitNormal = (0.00, 0.00)
+        storeHitObject = <null>
+        storeHitPoint = (0.00, 0.00)
+      Action[12]: SetBoolValue
+        boolValue = False
+        boolVariable = False
+        everyFrame = True
+      Action[13]: BoolFlipEveryFrame
+        boolVariable = False
+        everyFrame = True
+      Action[14]: SetFsmBool
+        everyFrame = True
+        fsm = <null>
+        fsmName = Mantis
+        fsmNameLastFrame = <null>
+        gameObject = None
+        goLastFrame = <null>
+        setValue = False
+        variableName = Bow Range
+      Action[15]: Trigger2dEvent
+        _proxy = <null>
+        collideLayer = 
+        collideTag = 
+        sendEvent = HutongGames.PlayMaker.FsmEvent
+        storeCollider = <null>
+        trigger = OnTriggerExit2D
+      Action[16]: Wait
+        finishEvent = HutongGames.PlayMaker.FsmEvent
+        realTime = False
+        startTime = 0
+        time = 1
+        timer = 0
+      Transition[1]: RAYCAST STOP->Inacitve
+- SummonedCloneV2/Head Box F :: Transform
+- SummonedCloneV2/Head Box F :: BoxCollider2D(isTrigger=False)
+    Collider: Box(size=(0.35, 2.40), offset=(0.27, 0.16), isTrigger=False)
+

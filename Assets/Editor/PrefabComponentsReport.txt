@@ -1,0 +1,44 @@
+﻿=== Prefab Components Report (Selected) ===
+Generated: 2025/10/19 14:51:16
+
+Prefab: Assets/Prefabs/_Generic/Hero/Clone/SummonedClone.prefab
+Root: SummonedClone
+- SummonedClone :: Transform
+- SummonedClone :: MeshRenderer
+- SummonedClone :: MeshFilter
+- SummonedClone :: tk2dSprite
+- SummonedClone :: tk2dSpriteAnimator
+- SummonedClone :: Rigidbody2D(bodyType=Dynamic, gravityScale=1)
+- SummonedClone :: AudioSource(clip=zombie_five_footstep, playOnAwake=False)
+- SummonedClone :: BoxCollider2D(isTrigger=False)
+- SummonedClone :: PlayMakerFSM(name='ZombieSheildControl', startState='Initialise')
+- SummonedClone :: LineOfSightDetector
+- SummonedClone :: Walker
+- SummonedClone :: HealthManager(hp=35, invuln=)
+- SummonedClone :: EnemyHitEffectsBlackKnight
+- SummonedClone :: EnemyDeathEffects
+- SummonedClone :: SpriteFlash
+- SummonedClone :: Recoil
+- SummonedClone :: DamageHero(damage=1, hazardType=1, shadowDashHazard=False, resetOnEnable=False)
+- SummonedClone :: SummonedCloneSetup
+- SummonedClone :: DamageEnemies
+- SummonedClone/Attack Range :: Transform
+- SummonedClone/Attack Range :: BoxCollider2D(isTrigger=True)
+- SummonedClone/Attack Range :: AlertRange(Collider2D(type=BoxCollider2D, isTrigger=True))
+- SummonedClone/Alert Range New :: Transform
+- SummonedClone/Alert Range New :: BoxCollider2D(isTrigger=True)
+- SummonedClone/Alert Range New :: AlertRange(Collider2D(type=BoxCollider2D, isTrigger=True))
+- SummonedClone/Slash :: Transform
+- SummonedClone/Slash :: PolygonCollider2D(isTrigger=True)
+- SummonedClone/Slash :: DamageHero(damage=1, hazardType=1, shadowDashHazard=False, resetOnEnable=False)
+- SummonedClone/Slash :: PlayMakerFSM(name='nail_clash_tink', startState='Initiate')
+- SummonedClone/Slash :: DamageEnemies
+- SummonedClone/Slash 2 :: Transform
+- SummonedClone/Slash 2 :: PolygonCollider2D(isTrigger=True)
+- SummonedClone/Slash 2 :: DamageHero(damage=1, hazardType=1, shadowDashHazard=False, resetOnEnable=False)
+- SummonedClone/Slash 2 :: PlayMakerFSM(name='nail_clash_tink', startState='Initiate')
+- SummonedClone/Slash 2 :: DamageEnemies
+- SummonedClone/Dust Kick :: Transform
+- SummonedClone/Dust Kick :: ParticleSystem
+- SummonedClone/Dust Kick :: ParticleSystemRenderer
+

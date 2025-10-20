@@ -6,11 +6,11 @@ using UnityEngine;
 public class Walker : MonoBehaviour
 {
     [Header("Structure")]
-    //¼ì²âÍæ¼ÒµÄ½Å±¾Ò»¸ö²»ÄÜÉÙ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ½Å±ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private LineOfSightDetector lineOfSightDetector;
     [SerializeField] private AlertRange alertRange; 
 
-    //Ã¿Ò»¸öµÐÈËµÄËÄ¼þ¹«Ê½»¯¹ÒÔØrb2d,col2d,animator,audiosource,ÔÙ¼ÓÒ»¸öÉãÏñÍ·ºÍheroÎ»ÖÃ
+    //Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rb2d,col2d,animator,audiosource,ï¿½Ù¼ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½heroÎ»ï¿½ï¿½
     private Rigidbody2D body;
     private Collider2D bodyCollider;
     private tk2dSpriteAnimator animator;
@@ -19,40 +19,40 @@ public class Walker : MonoBehaviour
     private HeroController hero;
 
     private const float CameraDistanceForActivation = 60f;
-    private const float WaitHeroXThreshold = 1f; //¾àÀëÍæ¼ÒX·½ÏòÉÏµÄ¼«ÏÞ¾àÀëÖµ
+    private const float WaitHeroXThreshold = 1f; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ÏµÄ¼ï¿½ï¿½Þ¾ï¿½ï¿½ï¿½Öµ
 
     [Header("Configuration")]
-    [SerializeField] private bool ambush; //ÊÇ·ñÂñ·ü
-    [SerializeField] private string idleClip; //idleµÄ¶¯»­Æ¬¶ÎÃû×Ö
-    [SerializeField] private string turnClip; //turnµÄ¶¯»­Æ¬¶ÎÃû×Ö
-    [SerializeField] private string walkClip; //walkµÄ¶¯»­Æ¬¶ÎÃû×Ö
-    [SerializeField] private float edgeXAdjuster; //¼ì²âÇ½ÑØxÉÏµÄÔö¼ÓÖµ
-    [SerializeField] private bool preventScaleChange; //ÊÇ·ñ·ÀÖ¹xÖáµÄlocalscale·¢Éú±ä»¯
-    [SerializeField] private bool preventTurn; //ÊÇ·ñ×èÖ¹×ªÏò
-    [SerializeField] private float pauseTimeMin; //Í£Ö¹²»¶¯µÄÊ±¼ä
+    [SerializeField] private bool ambush; //ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private string idleClip; //idleï¿½Ä¶ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private string turnClip; //turnï¿½Ä¶ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private string walkClip; //walkï¿½Ä¶ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float edgeXAdjuster; //ï¿½ï¿½ï¿½Ç½ï¿½ï¿½xï¿½Ïµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+    [SerializeField] private bool preventScaleChange; //ï¿½Ç·ï¿½ï¿½Ö¹xï¿½ï¿½ï¿½localscaleï¿½ï¿½ï¿½ï¿½ï¿½ä»¯
+    [SerializeField] private bool preventTurn; //ï¿½Ç·ï¿½ï¿½ï¿½Ö¹×ªï¿½ï¿½
+    [SerializeField] private float pauseTimeMin; //Í£Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     [SerializeField] private float pauseTimeMax;
-    [SerializeField] private float pauseWaitMin; //×ßÂ·µÄÊ±¼ä
+    [SerializeField] private float pauseWaitMin; //ï¿½ï¿½Â·ï¿½ï¿½Ê±ï¿½ï¿½
     [SerializeField] private float pauseWaitMax;
-    [SerializeField] private bool pauses;  //ÊÇ·ñÐèÒª¾²Ö¹×´Ì¬
-    [SerializeField] private float rightScale; //¿ªÊ¼Ê±µÄxÖá·½Ïò
-    [SerializeField] public bool startInactive; //¿ªÊ¼Ê±²»»îÔ¾
-    [SerializeField] private int turnAfterIdlePercentage; //Idle×´Ì¬¹ýºó½øÈë×ªÉíTurn×´Ì¬µÄ¸ÅÂÊ
+    [SerializeField] private bool pauses;  //ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½ï¿½Ö¹×´Ì¬
+    [SerializeField] private float rightScale; //ï¿½ï¿½Ê¼Ê±ï¿½ï¿½xï¿½á·½ï¿½ï¿½
+    [SerializeField] public bool startInactive; //ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ï¿½Ô¾
+    [SerializeField] private int turnAfterIdlePercentage; //Idle×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Turn×´Ì¬ï¿½Ä¸ï¿½ï¿½ï¿½
 
-    [SerializeField] private float turnPause; //ÉèÖÃ×ªÉíµÄÀäÈ´Ê±¼ä
-    [SerializeField] private bool waitForHeroX; //ÊÇ·ñµÈ´ýÍæ¼ÒX·½Ïòµ½Î»
-    [SerializeField] private float waitHeroX; //µÈ´ýÍæ¼ÒX·½Ïò¾àÀë
-    [SerializeField] public float walkSpeedL; //Ïò×ó×ßÂ·µÄËÙ¶È
-    [SerializeField] public float walkSpeedR;//ÏòÓÒ×ßÂ·µÄËÙ¶È
-    [SerializeField] public bool ignoreHoles; //ÊÇ·ñºöÂÔ¶´
-    [SerializeField] private bool preventTurningToFaceHero; //·ÀÖ¹×ªÏòÍæ¼ÒµÄÎ»ÖÃ
+    [SerializeField] private float turnPause; //ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ï¿½
+    [SerializeField] private bool waitForHeroX; //ï¿½Ç·ï¿½È´ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½Î»
+    [SerializeField] private float waitHeroX; //ï¿½È´ï¿½ï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] public float walkSpeedL; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ù¶ï¿½
+    [SerializeField] public float walkSpeedR;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ù¶ï¿½
+    [SerializeField] public bool ignoreHoles; //ï¿½Ç·ï¿½ï¿½ï¿½Ô¶ï¿½
+    [SerializeField] private bool preventTurningToFaceHero; //ï¿½ï¿½Ö¹×ªï¿½ï¿½ï¿½ï¿½Òµï¿½Î»ï¿½ï¿½
 
     [SerializeField] private Walker.States state;
     [SerializeField] private Walker.StopReasons stopReason;
-    private bool didFulfilCameraDistanceCondition; //ÔÝÊ±Ã»ÓÐÓÃµ½
-    private bool didFulfilHeroXCondition; //ÔÝÊ±Ã»ÓÐÓÃµ½
-    private int currentFacing;//DebugµÄÊ±ºò¿ÉÒÔÔÚÇ°Ãæ¼Ó¸ö[SerializeField]
+    private bool didFulfilCameraDistanceCondition; //ï¿½ï¿½Ê±Ã»ï¿½ï¿½ï¿½Ãµï¿½
+    private bool didFulfilHeroXCondition; //ï¿½ï¿½Ê±Ã»ï¿½ï¿½ï¿½Ãµï¿½
+    private int currentFacing;//Debugï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Ó¸ï¿½[SerializeField]
     private int turningFacing;
-    //Èý¸ö¼ÆÊ±Æ÷ÇÒ¹ËÃûË¼Òå
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½
     private float walkTimeRemaining;
     private float pauseTimeRemaining;
     private float turnCooldownRemaining;
@@ -71,7 +71,7 @@ public class Walker : MonoBehaviour
 	hero = HeroController.instance;
 	if(currentFacing == 0)
 	{
-	    currentFacing = ((transform.localScale.x * rightScale >= 0f) ? 1 : -1); //×ó±ßÊÇ-1£¬ÓÒ±ßÊÇ1
+	    currentFacing = ((transform.localScale.x * rightScale >= 0f) ? 1 : -1); //ï¿½ï¿½ï¿½ï¿½ï¿½-1ï¿½ï¿½ï¿½Ò±ï¿½ï¿½ï¿½1
 	}
 	if(state == States.NotReady)
 	{
@@ -81,7 +81,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÎÒÃÇ´´½¨ÁíÒ»¸ö×´Ì¬»ú£¬·ÖÎªËÄÖÖ×´Ì¬£¬Ã¿Ò»ÖÖ¶¼ÓÐUpdateºÍStopµÄ·½·¨¡£
+    /// ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ã¿Ò»ï¿½Ö¶ï¿½ï¿½ï¿½Updateï¿½ï¿½Stopï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     protected void Update()
     {
@@ -106,7 +106,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ´ÓWaiting×´Ì¬½øÈë¿ªÊ¼ÒÆ¶¯×´Ì¬(²»Ò»¶¨ÊÇWalkÒ²¿ÉÄÜÊÇTurn)
+    /// ï¿½ï¿½Waiting×´Ì¬ï¿½ï¿½ï¿½ë¿ªÊ¼ï¿½Æ¶ï¿½×´Ì¬(ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½WalkÒ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Turn)
     /// </summary>
     public void StartMoving()
     {
@@ -128,7 +128,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔÚÐèÒªÊ±È¡Ïû×ªÏò
+    /// ï¿½ï¿½ï¿½ï¿½ÒªÊ±È¡ï¿½ï¿½×ªï¿½ï¿½
     /// </summary>
     public void CancelTurn()
     {
@@ -161,7 +161,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ±»½Å±¾StopWalker.csµ÷ÓÃ£¬¸ü¸ÄreasonÎªcontrolled
+    /// ï¿½ï¿½ï¿½Å±ï¿½StopWalker.csï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½reasonÎªcontrolled
     /// </summary>
     /// <param name="reason"></param>
     public void Stop(StopReasons reason)
@@ -170,7 +170,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ¸ü¸ÄturningFacingºÍcurrentFacing£¬ÊôÓÚTurn×´Ì¬µÄÐÐÎª
+    /// ï¿½ï¿½ï¿½ï¿½turningFacingï¿½ï¿½currentFacingï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Turn×´Ì¬ï¿½ï¿½ï¿½ï¿½Îª
     /// </summary>
     /// <param name="facing"></param>
     public void ChangeFacing(int facing)
@@ -185,7 +185,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼½øÈëµÈ´ý×´Ì¬
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½È´ï¿½×´Ì¬
     /// </summary>
     private void BeginWaitingForConditions()
     {
@@ -196,7 +196,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔÚUpdateÒÔ¼°BeginWaitingForConditionsÁ½´óº¯ÊýÖÐµ÷ÓÃ£¬¸üÐÂµÈ´ý×´Ì¬ÏÂµÄÐÐÎª
+    /// ï¿½ï¿½Updateï¿½Ô¼ï¿½BeginWaitingForConditionsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ÂµÈ´ï¿½×´Ì¬ï¿½Âµï¿½ï¿½ï¿½Îª
     /// </summary>
     private void UpdateWaitingForConditions()
     {
@@ -217,7 +217,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼½øÈëÍ£Ö¹×´Ì¬
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Í£Ö¹×´Ì¬
     /// </summary>
     /// <param name="reason"></param>
     private void BeginStopped(StopReasons reason)
@@ -235,7 +235,7 @@ public class Walker : MonoBehaviour
 	    {
 		animator.Play(clipByName);
 	    }
-	    body.velocity = Vector2.Scale(body.velocity, new Vector2(0f, 1f)); //Ïàµ±ÓÚ°Ñx·½ÏòÉÏµÄËÙ¶ÈÉèÖÃÎª0
+	    body.velocity = Vector2.Scale(body.velocity, new Vector2(0f, 1f)); //ï¿½àµ±ï¿½Ú°ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½Îª0
 	    if (pauses)
 	    {
 		pauseTimeRemaining = UnityEngine.Random.Range(pauseTimeMin, pauseTimeMax);
@@ -246,7 +246,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔÚUpdateÖÐ±»µ÷ÓÃ£¬Ö´ÐÐÍ£Ö¹Stop×´Ì¬µÄÐÐÎª
+    /// ï¿½ï¿½Updateï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ã£ï¿½Ö´ï¿½ï¿½Í£Ö¹Stop×´Ì¬ï¿½ï¿½ï¿½ï¿½Îª
     /// </summary>
     private void UpdateStopping()
     {
@@ -261,7 +261,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÖÕÖ¹Í£Ö¹×´Ì¬
+    /// ï¿½ï¿½Ö¹Í£Ö¹×´Ì¬
     /// </summary>
     private void EndStopping()
     {
@@ -275,11 +275,11 @@ public class Walker : MonoBehaviour
 	    BeginTurning(-currentFacing);
 	    return;
 	}
-	BeginWalking(currentFacing); //ÕâÀïÓ¦¸ÃÊÇ¿ªÊ¼ÐÐ×ßWalk¶ø²»ÊÇ¿ªÊ¼×ªÏòTurn
+	BeginWalking(currentFacing); //ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ç¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Walkï¿½ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½Ê¼×ªï¿½ï¿½Turn
     }
 
     /// <summary>
-    /// Òª²»×ßÂ·Òª²»×ªÉí
+    /// Òªï¿½ï¿½ï¿½ï¿½Â·Òªï¿½ï¿½×ªï¿½ï¿½
     /// </summary>
     /// <param name="facing"></param>
     private void BeginWalkingOrTurning(int facing)
@@ -293,7 +293,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ¿ªÊ¼½øÈëWalking×´Ì¬
+    /// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Walking×´Ì¬
     /// </summary>
     /// <param name="facing"></param>
     private void BeginWalking(int facing)
@@ -313,7 +313,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ÔÚUpdateÖÐ±»µ÷ÓÃ£¬¶¯Ì¬Ö´ÐÐWalking×´Ì¬£¬¸ù¾ÝÇé¿ö¾ö¶¨ÊÇ·ñÒª½øÈëTurning×´Ì¬»òÕßStopped×´Ì¬
+    /// ï¿½ï¿½Updateï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Ì¬Ö´ï¿½ï¿½Walking×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Òªï¿½ï¿½ï¿½ï¿½Turning×´Ì¬ï¿½ï¿½ï¿½ï¿½Stopped×´Ì¬
     /// </summary>
     private void UpdateWalking()
     {
@@ -368,7 +368,7 @@ public class Walker : MonoBehaviour
     }
     
    /// <summary>
-   /// ÔÚUpdateÖÐ±»µ÷ÓÃ£¬Ö´ÐÐTurning×ªÉí×´Ì¬¡£
+   /// ï¿½ï¿½Updateï¿½Ð±ï¿½ï¿½ï¿½ï¿½Ã£ï¿½Ö´ï¿½ï¿½Turning×ªï¿½ï¿½×´Ì¬ï¿½ï¿½
    /// </summary>
     private void UpdateTurning()
     {
@@ -380,8 +380,8 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ±»UpdateTurning()µ÷ÓÃ£¬µ±¶¯»­²¥·ÅÍê³ÉºóÇÐ»»µ½Walking×´Ì¬¡£
-    /// ±»BeginTurning()µ÷ÓÃ£¬µ±preventTurnÎªtrueÊ±¾Í²»ÔÙÏòÏÂÖ´ÐÐÁË¡£
+    /// ï¿½ï¿½UpdateTurning()ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½Ð»ï¿½ï¿½ï¿½Walking×´Ì¬ï¿½ï¿½
+    /// ï¿½ï¿½BeginTurning()ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½preventTurnÎªtrueÊ±ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½Ë¡ï¿½
     /// </summary>
     private void EndTurning()
     {
@@ -390,7 +390,7 @@ public class Walker : MonoBehaviour
     }
 
     /// <summary>
-    /// ¾ÍÇå¿ÕturnCooldownRemaining
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½turnCooldownRemaining
     /// </summary>
     public void ClearTurnCoolDown()
     {
