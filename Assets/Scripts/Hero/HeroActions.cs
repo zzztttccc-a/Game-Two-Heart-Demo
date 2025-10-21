@@ -16,32 +16,40 @@ public class HeroActions : PlayerActionSet
     public PlayerAction cast;
     public PlayerAction focus;
     public PlayerAction quickCast;
+    public PlayerAction quickCast1;
+    public PlayerAction quickCast2;
+    public PlayerAction quickCast3;
     public PlayerAction openInventory;
+    public PlayerAction selectCloneNext;
 
     public PlayerAction pause;
     public HeroActions()
     {
-	menuSubmit = CreatePlayerAction("Submit");
-	menuCancel = CreatePlayerAction("Cancel");
-	left = CreatePlayerAction("Left");
-	left.StateThreshold = 0.3f;
-	right = CreatePlayerAction("Right");
-	right.StateThreshold = 0.3f;
-	up = CreatePlayerAction("Up");
-	up.StateThreshold = 0.3f;
-	down = CreatePlayerAction("Down");
-	down.StateThreshold = 0.3f;
-	moveVector = CreateTwoAxisPlayerAction(left, right, down, up);
-	moveVector.LowerDeadZone = 0.15f;
-	moveVector.UpperDeadZone = 0.95f;
-	attack = CreatePlayerAction("Attack");
-	jump = CreatePlayerAction("Jump");
-	dash = CreatePlayerAction("Dash");
-	cast = CreatePlayerAction("Cast");
-	focus = CreatePlayerAction("Focus");
-	quickCast = CreatePlayerAction("QuickCast");
-	openInventory = CreatePlayerAction("Inventory");
+        menuSubmit = CreatePlayerAction("Submit");
+        menuCancel = CreatePlayerAction("Cancel");
+        left = CreatePlayerAction("Left");
+        left.StateThreshold = 0.3f;
+        right = CreatePlayerAction("Right");
+        right.StateThreshold = 0.3f;
+        up = CreatePlayerAction("Up");
+        up.StateThreshold = 0.3f;
+        down = CreatePlayerAction("Down");
+        down.StateThreshold = 0.3f;
+        moveVector = CreateTwoAxisPlayerAction(left, right, down, up);
+        moveVector.LowerDeadZone = 0.15f;
+        moveVector.UpperDeadZone = 0.95f;
+        attack = CreatePlayerAction("Attack");
+        jump = CreatePlayerAction("Jump");
+        dash = CreatePlayerAction("Dash");
+        cast = CreatePlayerAction("Cast");
+        focus = CreatePlayerAction("Focus");
+        quickCast = CreatePlayerAction("QuickCast");
+        quickCast1 = CreatePlayerAction("QuickCast1");
+        quickCast2 = CreatePlayerAction("QuickCast2");
+        quickCast3 = CreatePlayerAction("QuickCast3");
+        openInventory = CreatePlayerAction("Inventory");
+        selectCloneNext = CreatePlayerAction("SelectCloneNext");
 
-	pause = CreatePlayerAction("Pause");
+        pause = CreatePlayerAction("Pause");
     }
 }

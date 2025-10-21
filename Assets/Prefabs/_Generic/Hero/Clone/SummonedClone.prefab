@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2626729224166328350}
   - component: {fileID: 3049165706654076123}
   - component: {fileID: 1349219677595638996}
-  m_Layer: 15
+  m_Layer: 13
   m_Name: Alert Range with hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   targetFsmName: ZombieSheildControl
   enemyVariableName: Enemy
   assignEnemyOnEnter: 1
-  clearEnemyOnExit: 1
+  clearEnemyOnExit: 0
   findHealthManagerUpwards: 1
 --- !u!1 &8716767554052946922
 GameObject:
@@ -149,12 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f836397f851ab4aae8af847a42c6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectPlayers: 1
+  detectPlayers: 0
   detectEnemies: 1
   targetFsmName: ZombieSheildControl
   enemyVariableName: Enemy
   assignEnemyOnEnter: 1
-  clearEnemyOnExit: 1
+  clearEnemyOnExit: 0
   findHealthManagerUpwards: 1
 --- !u!1 &8716767554075266132
 GameObject:
@@ -4995,7 +4995,7 @@ Transform:
   m_GameObject: {fileID: 8716767554094453684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6, z: 0}
-  m_LocalScale: {x: 30.374662, y: 1.51, z: 1}
+  m_LocalScale: {x: 33.29631, y: 1.51, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8716767554213526687}
@@ -5039,7 +5039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f836397f851ab4aae8af847a42c6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectPlayers: 1
+  detectPlayers: 0
   detectEnemies: 1
   targetFsmName: ZombieSheildControl
   enemyVariableName: Enemy
@@ -14442,15 +14442,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alertRanges:
-  - {fileID: 8716767554052946921}
   - {fileID: 8716767554094453706}
+  - {fileID: 8716767554052946921}
   - {fileID: 1349219677595638996}
   detectPlayers: 1
   detectEnemies: 1
   logVisibleTargetName: 0
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   enemySearchRadius: 100
 --- !u!114 &8716767554213526676
 MonoBehaviour:
@@ -14484,8 +14484,8 @@ MonoBehaviour:
   turnPause: 1
   waitForHeroX: 0
   waitHeroX: 1
-  walkSpeedL: -2
-  walkSpeedR: 2
+  walkSpeedL: -4
+  walkSpeedR: 4
   ignoreHoles: 0
   preventTurningToFaceHero: 0
   state: 0
@@ -14687,8 +14687,8 @@ MonoBehaviour:
   edgeXAdjuster: 0.2
   preventScaleChange: 0
   preventTurn: 0
-  pauseTimeMin: 1
-  pauseTimeMax: 2
+  pauseTimeMin: 0
+  pauseTimeMax: 0
   pauseWaitMin: 3
   pauseWaitMax: 5
   pauses: 0
@@ -14703,24 +14703,25 @@ MonoBehaviour:
   ignoreHoles: 0
   preventTurningToFaceHero: 1
   chaseEnemies: 1
-  chaseSpeedMultiplier: 1.5
+  chaseSpeedMultiplier: 5
   requireEnemyInRange: 1
   followPlayerWhenNoEnemy: 1
   followOffsetMin: 1.5
   followOffsetMax: 3.5
   followSpeedMultiplier: 3
   followRetargetThreshold: 0.2
-  followStopDistance: 4
-  followRetargetCooldown: 2.5
-  debugFollow: 1
+  followStopDistance: 3
+  followRetargetCooldown: 2
+  debugFollow: 0
   alwaysFaceHero: 1
   followStopIdleMin: 1.5
   followStopIdleMax: 3
-  followResumeDistance: 1
+  followResumeDistance: 4.03
   teleportNearHeroWhenOutOfPlayerRange: 1
   teleportCooldown: 1.5
-  idleStayPercentage: 85
+  idleStayPercentage: 166
   preferIdleAfterTurn: 1
+  homeArriveThreshold: 0.3
   state: 0
   stopReason: 0
 --- !u!1 &8716767554852694275

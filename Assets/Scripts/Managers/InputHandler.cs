@@ -191,8 +191,11 @@ public class InputHandler : MonoBehaviour
 	AddKeyBinding(inputActions.jump, "Space");
 	AddKeyBinding(inputActions.dash, "LeftShift");
 	AddKeyBinding(inputActions.cast, "F");
-	AddKeyBinding(inputActions.quickCast, "Q");
+    AddKeyBinding(inputActions.quickCast1, "K");
+    AddKeyBinding(inputActions.quickCast2, "L");
+    AddKeyBinding(inputActions.quickCast3, "Q");
 	AddKeyBinding(inputActions.openInventory, "I");
+    AddKeyBinding(inputActions.selectCloneNext, "Tab");
     }
 
     private void SetupNonMappableBindings()
@@ -238,14 +241,26 @@ public class InputHandler : MonoBehaviour
 	{
 	    Key.F
 	});
-	inputActions.quickCast.AddDefaultBinding(new Key[]
-	{
-	    Key.Q
-	});
+    inputActions.quickCast1.AddDefaultBinding(new Key[]
+    {
+        Key.K
+    });
+    inputActions.quickCast2.AddDefaultBinding(new Key[]
+    {
+        Key.L
+    });
+    inputActions.quickCast3.AddDefaultBinding(new Key[]
+    {
+        Key.Q
+    });
 	inputActions.openInventory.AddDefaultBinding(new Key[]
 	{
 	    Key.I
 	});
+    inputActions.selectCloneNext.AddDefaultBinding(new Key[]
+    {
+        Key.Tab
+    });
 	inputActions.pause.AddDefaultBinding(new Key[]
 	{
 	    Key.Escape

@@ -365,11 +365,11 @@ MonoBehaviour:
         - 
         - 
         - 
+        - Set Scale
         - 
         - 
-        - 
-        actionEnabled: 01010101010101010101
-        actionIsOpen: 01010101010101010101
+        actionEnabled: 01010101010101000101
+        actionIsOpen: 01010101010101000101
         actionStartIndex: 000000000700000010000000160000001d00000021000000290000002e0000003500000039000000
         actionHashCodes: afff1105979e410460532301afff1105b4e6100460137100bf83c900afff11050d91020187604502
         unityObjectParams: []
@@ -2424,7 +2424,7 @@ MonoBehaviour:
         tooltip: 
         showInInspector: 0
         networkSync: 0
-        value: 40
+        value: 15
       - useVariable: 1
         name: Fluke Angle Min
         tooltip: 

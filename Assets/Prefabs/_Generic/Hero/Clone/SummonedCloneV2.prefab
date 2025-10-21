@@ -6347,7 +6347,6 @@ GameObject:
   - component: {fileID: 4098634460626941897}
   - component: {fileID: 7982703635411740238}
   - component: {fileID: 9188787056586901316}
-  - component: {fileID: -7923633371870818562}
   m_Layer: 17
   m_Name: SummonedCloneV2
   m_TagString: Untagged
@@ -11857,31 +11856,6 @@ MonoBehaviour:
   receiveEnemiesDamage: 1
   autoHurtboxSize: {x: 1, y: 1.2}
   autoHurtboxOffset: {x: 0, y: 0.2}
---- !u!114 &-7923633371870818562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4098634460626941896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29aefd5e722c92c42877299888ac9b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerGO: {fileID: 0}
-  enemyScanRadius: 14
-  supportCombatRadius: 12
-  maxTeleportDistance: 25
-  teleportOffset: {x: 0.5, y: 0}
-  chaseSpeed: 6
-  attackRange: 2.5
-  useAlertRange: 1
-  allowSupport: 1
-  allowGuard: 1
-  allowTeleport: 1
-  attackEnableTime: 0.25
-  attackCooldown: 0.5
 --- !u!1 &8370830879591609078
 GameObject:
   m_ObjectHideFlags: 0

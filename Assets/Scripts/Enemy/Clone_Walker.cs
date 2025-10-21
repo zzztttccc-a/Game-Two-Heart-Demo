@@ -83,6 +83,11 @@ public class Clone_Walker : MonoBehaviour
     private bool isFollowingPlayer;
     private float playerFollowTargetX;
     private int playerFollowSide;  // -1 or 1
+    // Home return when followPlayerWhenNoEnemy=false
+    [SerializeField] private float homeArriveThreshold = 0.3f;
+    private Vector3 homePosition;
+    private bool hasHomePosition;
+    private bool isReturningHome;
 
     [SerializeField] private States state;
     [SerializeField] private StopReasons stopReason;
@@ -118,6 +123,13 @@ public class Clone_Walker : MonoBehaviour
 	    turnCooldownRemaining = -Mathf.Epsilon;
 	    BeginWaitingForConditions();
 	}
+    // Record home when follow disabled
+    if (!followPlayerWhenNoEnemy)
+    {
+        homePosition = transform.position;
+        hasHomePosition = true;
+        DebugFollowLog($"[Home] Record start pos: {homePosition.x:F2},{homePosition.y:F2}");
+    }
     }
 
     /// <summary>
@@ -395,6 +407,7 @@ public class Clone_Walker : MonoBehaviour
             if (EnemyDetected(out enemy))
             {
                 isChasingEnemy = true;
+                isReturningHome = false;
                 ClearTurnCoolDown();
                 int targetFacing = enemy.position.x > transform.position.x ? 1 : -1;
                 if (currentFacing != targetFacing && !preventTurn)
@@ -414,6 +427,22 @@ public class Clone_Walker : MonoBehaviour
                 isFollowingPlayer = true;
                 ClearTurnCoolDown();
                 int targetFacing = (followX > transform.GetPositionX()) ? 1 : -1;
+                if (currentFacing != targetFacing && !preventTurn)
+                {
+                    BeginTurning(targetFacing);
+                }
+                else
+                {
+                    BeginWalking(targetFacing);
+                }
+                return;
+            }
+            // 新增：当关闭“跟随玩家”时，返回记录位置
+            float homeX;
+            if (!followPlayerWhenNoEnemy && TryUpdateHomeReturnTarget(out homeX))
+            {
+                ClearTurnCoolDown();
+                int targetFacing = (homeX > transform.GetPositionX()) ? 1 : -1;
                 if (currentFacing != targetFacing && !preventTurn)
                 {
                     BeginTurning(targetFacing);
@@ -464,6 +493,7 @@ public class Clone_Walker : MonoBehaviour
             if (EnemyDetected(out enemy))
             {
                 isChasingEnemy = true;
+                isReturningHome = false;
                 ClearTurnCoolDown();
                 int targetFacing = enemy.position.x > transform.position.x ? 1 : -1;
                 if (currentFacing != targetFacing && !preventTurn)
@@ -493,7 +523,22 @@ public class Clone_Walker : MonoBehaviour
                 }
                 return;
             }
-            
+            // 新增：当关闭“跟随玩家”时，返回记录位置
+            float homeX;
+            if (!followPlayerWhenNoEnemy && TryUpdateHomeReturnTarget(out homeX))
+            {
+                ClearTurnCoolDown();
+                int targetFacing = (homeX > transform.GetPositionX()) ? 1 : -1;
+                if (currentFacing != targetFacing && !preventTurn)
+                {
+                    BeginTurning(targetFacing);
+                }
+                else
+                {
+                    BeginWalking(targetFacing);
+                }
+                return;
+            }
             pauseTimeRemaining -= Time.deltaTime;
             if(pauseTimeRemaining <= 0f)
             {
@@ -527,6 +572,25 @@ public class Clone_Walker : MonoBehaviour
                     }
                 }
             }
+            // 当关闭“跟随玩家”时，优先返回记录位置
+            if (!followPlayerWhenNoEnemy)
+            {
+                float homeX;
+                if (TryUpdateHomeReturnTarget(out homeX))
+                {
+                    ClearTurnCoolDown();
+                    int targetFacing = (homeX > transform.GetPositionX()) ? 1 : -1;
+                    if (currentFacing != targetFacing && !preventTurn)
+                    {
+                        BeginTurning(targetFacing);
+                    }
+                    else
+                    {
+                        BeginWalking(targetFacing);
+                    }
+                    return;
+                }
+            }
             // 倒计时结束仍靠近玩家则继续 Idle，避免随机转身
             pauseTimeRemaining -= Time.deltaTime;
             if (pauseTimeRemaining <= 0f)
@@ -555,6 +619,7 @@ public class Clone_Walker : MonoBehaviour
         if (EnemyDetected(out enemy))
         {
             isChasingEnemy = true;
+            isReturningHome = false;
             ClearTurnCoolDown();
             int targetFacing = enemy.position.x > transform.position.x ? 1 : -1;
             if (currentFacing != targetFacing && !preventTurn)
@@ -581,6 +646,12 @@ public class Clone_Walker : MonoBehaviour
             {
                 BeginWalking(targetFacing);
             }
+            return;
+        }
+        // 当没有敌人且关闭“跟随玩家”时，直接传送到记录的Home位置
+        if (!followPlayerWhenNoEnemy && TryTeleportToHome())
+        {
+            BeginStopped(StopReasons.Bored);
             return;
         }
         // 如果既无敌人也不需跟随，则继续 Idle 一段时间（不进行巡逻）
@@ -636,12 +707,22 @@ public class Clone_Walker : MonoBehaviour
 	bool enemyDetected = EnemyDetected(out enemy);
 	isChasingEnemy = enemyDetected;
 	
-	// 优先级2：若没有敌人，则尝试进入玩家跟随
-	float followX = 0f;
-	bool shouldFollow = !isChasingEnemy && TryUpdatePlayerFollowTarget(out followX);
-	isFollowingPlayer = shouldFollow;
-	
-	DebugFollowLog($"[UpdateWalking] isChasingEnemy={isChasingEnemy}, shouldFollow={shouldFollow}, followX={followX:F2}, facing={(currentFacing > 0 ? "R" : "L")}, preventTurningToFaceHero={preventTurningToFaceHero}");
+	// 优先级2：若没有敌人，则尝试进入玩家跟随；否则直接传送回记录位置
+    float followX = 0f;
+    bool shouldFollowOrReturn = !isChasingEnemy && (followPlayerWhenNoEnemy && TryUpdatePlayerFollowTarget(out followX));
+    isFollowingPlayer = followPlayerWhenNoEnemy && shouldFollowOrReturn;
+    isReturningHome = false;
+    
+    DebugFollowLog($"[UpdateWalking] isChasingEnemy={isChasingEnemy}, shouldFollowOrReturn={shouldFollowOrReturn}, followX={followX:F2}, facing={(currentFacing > 0 ? 'R' : 'L')}, preventTurningToFaceHero={preventTurningToFaceHero}");
+
+    if (!followPlayerWhenNoEnemy && !isChasingEnemy)
+    {
+        if (TryTeleportToHome())
+        {
+            BeginStopped(StopReasons.Bored);
+            return;
+        }
+    }
 
 	if(turnCooldownRemaining <= 0f)
 	{
@@ -649,7 +730,7 @@ public class Clone_Walker : MonoBehaviour
 	    if (sweep.Check(transform.position, bodyCollider.bounds.extents.x + 0.5f, LayerMask.GetMask("Terrain")))
             {
                 DebugFollowLog($"[Sweep] BlockedAhead following={isFollowingPlayer} action={(isFollowingPlayer ? "Stop" : "Turn")} posX={transform.GetPositionX():F2} facing={(currentFacing > 0 ? "R" : "L")}");
-                if (isFollowingPlayer)
+                if (isFollowingPlayer || isReturningHome)
                 {
                     BeginStopped(StopReasons.PlayerNear);
                 }
@@ -687,7 +768,7 @@ public class Clone_Walker : MonoBehaviour
             }
 	    }
 	    // 优先级3：无敌人时面向玩家（在追击敌人时跳过）
-            if (!isChasingEnemy && hero != null && alwaysFaceHero)
+            if (!isChasingEnemy && hero != null && alwaysFaceHero && !isReturningHome)
             {
                 bool heroOnRight = hero.transform.GetPositionX() > transform.GetPositionX();
                 bool facingRight = currentFacing > 0;
@@ -712,7 +793,18 @@ public class Clone_Walker : MonoBehaviour
                     return;
                 }
             }
-            else if (!isChasingEnemy && hero != null)
+            else if (isReturningHome)
+            {
+                float dxTarget = Mathf.Abs(followX - transform.GetPositionX());
+                if (dxTarget <= homeArriveThreshold)
+                {
+                    DebugFollowLog($"[HomeArrive] dxTarget={dxTarget:F2}, threshold={homeArriveThreshold:F2}");
+                    isReturningHome = false;
+                    BeginStopped(StopReasons.Bored);
+                    return;
+                }
+            }
+            else if (!isChasingEnemy && hero != null && !isReturningHome)
             {
                 float dxHero = Mathf.Abs(hero.transform.GetPositionX() - transform.GetPositionX());
                 if (dxHero <= followStopDistance)
@@ -859,12 +951,21 @@ public class Clone_Walker : MonoBehaviour
         // 基于玩家位置随机左右偏移一个跟随距离
         int side = (UnityEngine.Random.Range(0, 2) == 0) ? -1 : 1;
         float offset = UnityEngine.Random.Range(followOffsetMin, followOffsetMax) * side;
-        float newX = hero.transform.GetPositionX() + offset;
+        float baseX = hero.transform.GetPositionX() + offset;
+        float newX = FindNonOverlappingX(baseX);
         Vector3 pos = transform.position;
-        transform.position = new Vector3(newX, pos.y, pos.z);
+        transform.position = new Vector3(newX, pos.y, pos.z); // use non-overlapping X to avoid stacking with other clones
 
         // 重置速度，避免瞬移后继续沿旧方向移动
         body.velocity = new Vector2(0f, body.velocity.y);
+
+        // 在关闭跟随玩家时，刷新“记录位置”为传送后的当前位置
+        if (!followPlayerWhenNoEnemy)
+        {
+            homePosition = transform.position;
+            hasHomePosition = true;
+            DebugFollowLog($"[Home] Refresh after teleport -> {homePosition.x:F2}");
+        }
 
         // 立即标记为跟随玩家（使行走逻辑优先朝向玩家目标）
         playerFollowSide = side;
@@ -875,4 +976,127 @@ public class Clone_Walker : MonoBehaviour
         teleportCooldownRemaining = teleportCooldown;
         return true;
     }
+
+    // 新增：辅助 - 在目标X附近寻找不与其他分身重叠的可用X
+    private float FindNonOverlappingX(float desiredX)
+    {
+        // 基于自身碰撞体的宽度计算间距
+        float halfWidth = bodyCollider.bounds.extents.x;
+        float spacing = halfWidth * 2f + 0.1f; // 稍微加一点余量，避免边界贴合
+        int[] sequence = new int[] { 0, 1, -1, 2, -2, 3, -3, 4, -4, 5, -5 };
+
+        Vector3 pos = transform.position;
+        Vector2 size = new Vector2(bodyCollider.bounds.size.x, bodyCollider.bounds.size.y);
+
+        for (int i = 0; i < sequence.Length; i++)
+        {
+            float testX = desiredX + sequence[i] * spacing;
+            Vector2 center = new Vector2(testX, pos.y);
+            var hits = Physics2D.OverlapBoxAll(center, size, 0f);
+            bool occupiedByClone = false;
+            foreach (var hit in hits)
+            {
+                if (hit == null) continue;
+                if (hit.transform == transform) continue;
+                // 仅避免与其他分身重叠（而不是所有碰撞体），更稳妥
+                if (hit.GetComponent<Clone_Walker>() != null)
+                {
+                    occupiedByClone = true;
+                    break;
+                }
+            }
+            if (!occupiedByClone)
+            {
+                return testX;
+            }
+        }
+        // 如果找不到空位，退回到期望值（不改变原逻辑）
+        return desiredX;
+    }
+
+// 新增：当没有敌人时，直接传送到记录的Home位置
+private bool TryTeleportToHome()
+{
+    if (followPlayerWhenNoEnemy) return false;
+    if (!hasHomePosition)
+    {
+        homePosition = transform.position;
+        hasHomePosition = true;
+        DebugFollowLog($"[HomeTeleport] No home recorded, auto-record at {homePosition.x:F2}");
+        return false;
+    }
+    float dx = Mathf.Abs(transform.GetPositionX() - homePosition.x);
+    if (dx <= homeArriveThreshold)
+    {
+        isReturningHome = false;
+        return false;
+    }
+    Vector3 target = homePosition;
+        float newX = FindNonOverlappingX(target.x);
+        transform.position = new Vector3(newX, target.y, target.z);
+    body.velocity = new Vector2(0f, body.velocity.y);
+    isReturningHome = false;
+    DebugFollowLog($"[HomeTeleport] Teleported to ({target.x:F2},{target.y:F2})");
+    return true;
+}
+
+// 新增：当跟随玩家关闭时，返回记录的Home位置
+private bool TryUpdateHomeReturnTarget(out float targetX)
+{
+    targetX = 0f;
+    if (followPlayerWhenNoEnemy) return false;
+    if (!hasHomePosition)
+    {
+        homePosition = transform.position;
+        hasHomePosition = true;
+        DebugFollowLog($"[Home] Auto-record home at {homePosition.x:F2}");
+    }
+    float selfX = transform.GetPositionX();
+    float dx = Mathf.Abs(selfX - homePosition.x);
+    if (dx <= homeArriveThreshold)
+    {
+        isReturningHome = false;
+        return false;
+    }
+    isReturningHome = true;
+    targetX = homePosition.x;
+    DebugFollowLog($"[Home] targetX set to {targetX:F2}, dx={dx:F2}");
+    return true;
+}
+
+// FSM桥接：设置“无敌人时跟随玩家”开关
+public void SetFollowPlayerWhenNoEnemy(bool on)
+{
+    followPlayerWhenNoEnemy = on;
+    DebugFollowLog($"[FollowToggle] followPlayerWhenNoEnemy set to {on}");
+    if (!on)
+    {
+        // 关闭跟随时：记录当前位置为新的 Home，并清理相关状态
+        homePosition = transform.position;
+        hasHomePosition = true;
+        isFollowingPlayer = false;
+        isReturningHome = false;
+        DebugFollowLog($"[Home] Toggle off -> record new home at {homePosition.x:F2},{homePosition.y:F2}");
+        DebugFollowLog("[FollowToggle] Disabled -> clear follow/home state");
+    }
+    else
+    {
+        // 开启跟随时：停止“回家”过程，后续根据玩家位置选择跟随
+        isReturningHome = false;
+    }
+}
+
+// FSM桥接：获取当前“无敌人时跟随玩家”开关状态（用于切换）
+public bool GetFollowPlayerWhenNoEnemy()
+{
+    DebugFollowLog($"[FollowToggle] Query state: {followPlayerWhenNoEnemy}");
+    return followPlayerWhenNoEnemy;
+}
+// 新增：显式设置 Home 位置（用于与玩家交换位置后，将 Home 更新为玩家原位置）
+public void SetHomePosition(Vector3 pos)
+{
+    homePosition = pos;
+    hasHomePosition = true;
+    DebugFollowLog($"[Home] Set by swap -> {homePosition.x:F2},{homePosition.y:F2}");
+}
 }

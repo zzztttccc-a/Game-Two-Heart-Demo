@@ -3274,6 +3274,55 @@ public PlayMakerFSM wallSlashFsm;
                     attackQueuing = true;
                 }
 	    }
+            // QuickCast1/2/3 输入处理
+            if (inputHandler.inputActions.quickCast1.WasPressed)
+            {
+                if (CanCast())
+                {
+                    if (spellControl == null)
+                    {
+                        Debug.Log("SpellControl came up null, locating manually");
+                        spellControl = FSMUtility.LocateFSM(gameObject, "Spell Control");
+                    }
+                    if (spellControl != null)
+                    {
+                        spellControl.SendEvent("QUICK_CAST_1");
+                        Debug.Log("[QuickCast] QUICK_CAST_1");
+                    }
+                }
+            }
+            if (inputHandler.inputActions.quickCast2.WasPressed)
+            {
+                if (CanCast())
+                {
+                    if (spellControl == null)
+                    {
+                        Debug.Log("SpellControl came up null, locating manually");
+                        spellControl = FSMUtility.LocateFSM(gameObject, "Spell Control");
+                    }
+                    if (spellControl != null)
+                    {
+                        spellControl.SendEvent("QUICK_CAST_2");
+                        Debug.Log("[QuickCast] QUICK_CAST_2");
+                    }
+                }
+            }
+            if (inputHandler.inputActions.quickCast3.WasPressed)
+            {
+                if (CanCast())
+                {
+                    if (spellControl == null)
+                    {
+                        Debug.Log("SpellControl came up null, locating manually");
+                        spellControl = FSMUtility.LocateFSM(gameObject, "Spell Control");
+                    }
+                    if (spellControl != null)
+                    {
+                        spellControl.SendEvent("QUICK_CAST_3");
+                        Debug.Log("[QuickCast] QUICK_CAST_3");
+                    }
+                }
+            }
 	    if (inputHandler.inputActions.jump.IsPressed)
 	    {
                 if(jumpQueueSteps <= JUMP_QUEUE_STEPS && CanJump() && jumpQueuing)
