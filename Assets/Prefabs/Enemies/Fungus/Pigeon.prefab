@@ -28,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.8200073, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 20032186437215318}
   m_RootOrder: 2
@@ -524,6 +525,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 20032186437215318}
   m_RootOrder: 1
@@ -1602,6 +1604,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 79.2, y: 8.17, z: 0}
   m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 20032186943838969}
   - {fileID: 20032186159054635}
@@ -1620,6 +1623,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -3998,6 +4002,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.752, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 20032186437215318}
   m_RootOrder: 0
@@ -4030,6 +4035,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f836397f851ab4aae8af847a42c6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectPlayers: 1
+  detectEnemies: 0
+  targetFsmName: ZombieSheildControl
+  enemyVariableName: Enemy
+  assignEnemyOnEnter: 1
+  clearEnemyOnExit: 0
+  findHealthManagerUpwards: 1
 --- !u!114 &120171489572935764
 MonoBehaviour:
   m_ObjectHideFlags: 0

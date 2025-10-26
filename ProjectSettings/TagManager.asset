@@ -28,6 +28,7 @@ TagManager:
   - HeroWalkable
   - invisible
   - show
+  - Infected Flag
   layers:
   - Default
   - TransparentFX

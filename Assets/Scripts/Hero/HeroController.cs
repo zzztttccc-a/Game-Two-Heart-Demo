@@ -959,7 +959,58 @@ public PlayMakerFSM wallSlashFsm;
             rb2d.velocity = empoweredThrustDir * thrustSpeedFix;
         }
 
+        // 新增：在斜坡上静止时防止下滑
+        PreventSlopeSlidingIfIdle();
+
         cState.wasOnGround = cState.onGround;
+    }
+
+    // 新增：防止斜坡静止下滑的辅助方法
+    private void PreventSlopeSlidingIfIdle()
+    {
+        // 仅在地面且无输入、非特殊状态时生效
+        if (!cState.onGround) return;
+        if (Mathf.Abs(move_input) > 0.01f) return;
+        if (cState.dashing || cState.recoiling || cState.wallSliding || cState.transitioning || empoweredThrustActive) return;
+
+        // 从三点向下射线，尽量获取稳定的地面法线
+        float distance = col2d.bounds.extents.y + 0.25f;
+        Vector2 originC = col2d.bounds.center;
+        Vector2 originL = new Vector2(col2d.bounds.min.x, col2d.bounds.center.y);
+        Vector2 originR = new Vector2(col2d.bounds.max.x, col2d.bounds.center.y);
+        RaycastHit2D hitC = Physics2D.Raycast(originC, Vector2.down, distance, LayerMask.GetMask("Terrain"));
+        RaycastHit2D hitL = Physics2D.Raycast(originL, Vector2.down, distance, LayerMask.GetMask("Terrain"));
+        RaycastHit2D hitR = Physics2D.Raycast(originR, Vector2.down, distance, LayerMask.GetMask("Terrain"));
+
+        RaycastHit2D hit = hitC;
+        if (hit.collider == null || hit.collider.isTrigger || hit.collider.GetComponent<SteepSlope>() != null)
+        {
+            // 尝试左、右
+            hit = hitL;
+            if (hit.collider == null || hit.collider.isTrigger || hit.collider.GetComponent<SteepSlope>() != null)
+            {
+                hit = hitR;
+            }
+        }
+        if (hit.collider == null) return;
+        if (hit.collider.isTrigger) return;
+        if (hit.collider.GetComponent<SteepSlope>() != null) return;
+
+        // 斜率角度过大则不做静止粘附处理
+        float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+        const float maxStickAngle = 75f;
+        if (slopeAngle > maxStickAngle) return;
+
+        // 计算斜面切线，并去除沿斜面的速度分量（更强的止滑）
+        Vector2 tangent = new Vector2(-hit.normal.y, hit.normal.x);
+        tangent.Normalize();
+        float tangentSpeed = Vector2.Dot(rb2d.velocity, tangent);
+        Vector2 newVel = rb2d.velocity - tangent * tangentSpeed;
+
+        // 避免受到重力导致的轻微下滑（世界坐标向下的小负速度）
+        if (newVel.y < 0f) newVel.y = 0f;
+
+        rb2d.velocity = newVel;
     }
 
     public void SetWalkZone(bool inWalkZone)
@@ -2094,7 +2145,7 @@ public PlayMakerFSM wallSlashFsm;
             return;
         }
         // Successful DownSlash parry — trigger freeze, camera shake, and extend invulnerability
-        StartCoroutine(gm.FreezeMoment(0.01f, 0.1f, 0.05f, 0f));
+            StartCoroutine(gm.FreezeMoment(0.01f, 0f, 0.05f, 0f));
         if (GameCameras.instance != null && GameCameras.instance.cameraShakeFSM != null)
         {
             GameCameras.instance.cameraShakeFSM.SendEvent("AverageShake");
@@ -3210,45 +3261,60 @@ public PlayMakerFSM wallSlashFsm;
 	if (acceptingInput)
 	{
 	    if (inputHandler.inputActions.jump.WasPressed)
-	    {
-		if (CanWallJump())
-		{
-                    DoWallJump();
-		}
-                if (CanJump())
-		{
-                    HeroJump();
-		}
-		else
-		{
-                    // 当在空中再次按下跳跃键时，触发下劈（包括起跳上升和下落阶段）
-                    if (!cState.onGround && !cState.wallSliding)
+            {
+                // 地面情况下按下+跳：不执行跳跃，改为尝试触发单向平台下落
+                if (cState.onGround && (inputHandler.inputActions.down.IsPressed || inputHandler.inputActions.down.WasPressed))
+                {
+                    var dropComp = GetComponent<PlayerDropThroughOneWay>();
+                    if (dropComp != null)
                     {
-                        if (CanAttack())
+                        dropComp.TriggerDropThrough();
+                    }
+                    // 立即将 onGround 置为 false，避免地面逻辑在本帧将 y 速度强制归零，影响下落
+                    cState.onGround = false;
+                    // 不执行 HeroJump；如需排队，可在此设置 jumpQueueSteps/jumpQueuing
+                }
+                else
+                {
+                    if (CanWallJump())
+                    {
+                        DoWallJump();
+                    }
+                    if (CanJump())
+                    {
+                        HeroJump();
+                    }
+                    else
+                    {
+                        // 当在空中再次按下跳跃键时，触发下劈（包括起跳上升和下落阶段）
+                        if (!cState.onGround && !cState.wallSliding)
                         {
-                            // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
-                            if (cState.jumping && rb2d.velocity.y > 0f)
+                            if (CanAttack())
                             {
-                                CancelHeroJump();
+                                // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
+                                if (cState.jumping && rb2d.velocity.y > 0f)
+                                {
+                                    CancelHeroJump();
+                                }
+                                // 标记：本次攻击来自“跳跃键”（而非攻击键）——不触发强化攻击
+                                attackInitiatedByAttackButton = false;
+                                Attack(AttackDirection.downward);
+                                StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
                             }
-                            // 标记：本次攻击来自“跳跃键”（而非攻击键）——不触发强化攻击
-                            attackInitiatedByAttackButton = false;
-                            Attack(AttackDirection.downward);
-                            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+                            else
+                            {
+                                // 当前不能攻击（例如冷却中），保留原有的跳跃排队逻辑
+                                jumpQueueSteps = 0;
+                                jumpQueuing = true;
+                            }
                         }
                         else
                         {
-                            // 当前不能攻击（例如冷却中），保留原有的跳跃排队逻辑
                             jumpQueueSteps = 0;
                             jumpQueuing = true;
                         }
                     }
-                    else
-                    {
-                        jumpQueueSteps = 0;
-                        jumpQueuing = true;
-                    }
-		}
+                }
 	    }
 	    if (inputHandler.inputActions.dash.WasPressed)
 	    {
