@@ -174,18 +174,31 @@ public class NailSlash : MonoBehaviour
                     if (otherCollider.gameObject.GetComponent<BigBouncer>() != null)
                     {
                         heroCtrl.BounceHigh();
-                        if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                        // Block parry while wall sliding or mid wall-jump lock to ensure Space triggers only wall jump
+                        if (!parryTriggered && !heroCtrl.cState.wallSliding && !heroCtrl.wallLocked)
+                        {
+                            heroCtrl.NailParry();
+                            parryTriggered = true;
+                        }
                         return;
                     }
                     if (otherCollider.gameObject.GetComponent<BounceShroom>() != null)
                     {
                         heroCtrl.ShroomBounce();
                         Bounce(otherCollider, true);
-                        if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                        if (!parryTriggered && !heroCtrl.cState.wallSliding && !heroCtrl.wallLocked)
+                        {
+                            heroCtrl.NailParry();
+                            parryTriggered = true;
+                        }
                         return;
                     }
                     heroCtrl.Bounce();
-                    if (!parryTriggered) { heroCtrl.NailParry(); parryTriggered = true; }
+                    if (!parryTriggered && !heroCtrl.cState.wallSliding && !heroCtrl.wallLocked)
+                    {
+                        heroCtrl.NailParry();
+                        parryTriggered = true;
+                    }
                 }
             }
         }

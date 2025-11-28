@@ -19,6 +19,7 @@ public class CheatManager : MonoBehaviour
 	    playerData.nailDamage = 100;
 	    playerData.hasDash = true;
 	    playerData.hasSpell = true;
+	    playerData.hasDoubleJump = true;
 	    playerData.MPCharge = playerData.maxMP;
 	    playerData.fireballLevel = 1;
 	    playerData.AddGeo(500);

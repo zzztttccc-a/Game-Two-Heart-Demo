@@ -129,6 +129,7 @@ public class PlayerData
     public int eyeLevel;//Eye法术等级，0表示没有
 
     public bool hasWalljump;
+    public bool hasDoubleJump;
     public bool canWallJump;
     public bool corn_fungalWastesLeft;
 
@@ -402,7 +403,9 @@ public class PlayerData
     stasisLevel = 1;
     eyeLevel = 1;
 
-	hasWalljump = false;
+    hasWalljump = false;
+    // 二段跳默认开启（新档生效；已保存的旧档按存档状态）
+    hasDoubleJump = true;
 
 	hasLantern = false;
 	hasDreamNail = false;

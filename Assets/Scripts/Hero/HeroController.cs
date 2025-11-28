@@ -136,6 +136,9 @@ public PlayMakerFSM wallSlashFsm;
     private float back_dash_timer; ////���ں󳷳�̼����� (��ע�����д������ô���������)
     private float dashLandingTimer;
     private bool airDashed;//�Ƿ����ڿ��г��
+    // 二段跳：空中可用的额外跳跃次数（仅当解锁了能力时在落地重置为1）
+    private int airJumpsRemaining = 0;
+    private const int EXTRA_JUMPS_MAX = 1;
     public bool dashingDown;//�Ƿ�����ִ�����³��
     public PlayMakerFSM dashBurst;
     public GameObject dashParticlesPrefab;//�������Ч��Ԥ����
@@ -925,21 +928,40 @@ public PlayMakerFSM wallSlashFsm;
 	}
     if (cState.wallSliding && !empoweredThrustActive)
     {
-        if(rb2d.velocity.y > WALLSLIDE_SPEED)
+        // 如果按下的是墙的方向键，则不向下滑：将向下速度限制为不为负数（保持或归零）
+        bool holdTowardWall = (wallSlidingL && inputHandler.inputActions.left.IsPressed)
+                           || (wallSlidingR && inputHandler.inputActions.right.IsPressed);
+
+        if (holdTowardWall)
         {
-            rb2d.velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y - WALLSLIDE_DECEL);
-            if(rb2d.velocity.y < WALLSLIDE_SPEED)
-		{
+            // 完全停止下滑：关闭重力影响，并将向下速度清零
+            AffectedByGravity(false);
+            if (rb2d.velocity.y < 0f)
+            {
+                rb2d.velocity = new Vector3(rb2d.velocity.x, 0f);
+            }
+        }
+        else
+        {
+            // 恢复重力影响，正常墙滑
+            AffectedByGravity(true);
+            // 正常墙滑：根据 WALLSLIDE_SPEED 逐步逼近
+            if (rb2d.velocity.y > WALLSLIDE_SPEED)
+            {
+                rb2d.velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y - WALLSLIDE_DECEL);
+                if (rb2d.velocity.y < WALLSLIDE_SPEED)
+                {
                     rb2d.velocity = new Vector3(rb2d.velocity.x, WALLSLIDE_SPEED);
                 }
-	    }
-            if(rb2d.velocity.y < WALLSLIDE_SPEED)
-	    {
+            }
+            if (rb2d.velocity.y < WALLSLIDE_SPEED)
+            {
                 rb2d.velocity = new Vector3(rb2d.velocity.x, rb2d.velocity.y + WALLSLIDE_DECEL);
                 if (rb2d.velocity.y < WALLSLIDE_SPEED)
                 {
                     rb2d.velocity = new Vector3(rb2d.velocity.x, WALLSLIDE_SPEED);
                 }
+            }
         }
     }
     if (landingBufferSteps > 0)
@@ -1058,6 +1080,11 @@ public PlayMakerFSM wallSlashFsm;
         else
         {
             wallSlashing = false;
+            // 在墙跳执行阶段（wallLocked）禁止下劈，将下劈降级为普通攻击
+            if (attackDir == AttackDirection.downward && wallLocked)
+            {
+                attackDir = AttackDirection.normal;
+            }
             if (attackDir == AttackDirection.normal)
             {
                 if (!cState.altAttack)
@@ -1560,8 +1587,11 @@ public PlayMakerFSM wallSlashFsm;
 
     private void ResetAirMoves()
     {
-        //TODO:
+        // 落地时重置空中动作（冲刺、二段跳等）
         airDashed = false;
+        airJumpsRemaining = (GameManager.instance != null && GameManager.instance.playerData != null && GameManager.instance.playerData.hasDoubleJump)
+            ? EXTRA_JUMPS_MAX
+            : 0;
     }
 
 
@@ -1817,6 +1847,8 @@ public PlayMakerFSM wallSlashFsm;
         wallSlidingR = false;
         touchingWallL = false;
         touchingWallR = false;
+        // 取消墙滑时恢复重力影响，避免保持贴墙止滑状态残留
+        AffectedByGravity(true);
     }
 
 
@@ -2139,6 +2171,11 @@ public PlayMakerFSM wallSlashFsm;
 
     public void NailParry()
     {
+        // Do not execute parry while performing or immediately after a wall jump
+        if (cState.wallSliding || wallLocked || wallJumpedL || wallJumpedR)
+        {
+            return;
+        }
         // Only apply parry success effects if parry window is active (not on cooldown or missed window)
         if (!parryInvulnerabilityActive)
         {
@@ -3286,24 +3323,31 @@ public PlayMakerFSM wallSlashFsm;
                     }
                     else
                     {
-                        // 当在空中再次按下跳跃键时，触发下劈（包括起跳上升和下落阶段）
-                        if (!cState.onGround && !cState.wallSliding)
+                        // 在空中按下跳跃键时：优先判断Parry范围是否有下攻击目标；有则执行下劈，否则尝试二段跳
+                        if (!cState.onGround && !cState.wallSliding && !wallLocked)
                         {
-                            if (CanAttack())
+                            bool parryHasTarget = ParryHasDownAttackTarget();
+                            if (parryHasTarget && CanAttack())
                             {
                                 // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
                                 if (cState.jumping && rb2d.velocity.y > 0f)
                                 {
                                     CancelHeroJump();
                                 }
-                                // 标记：本次攻击来自“跳跃键”（而非攻击键）——不触发强化攻击
-                                attackInitiatedByAttackButton = false;
+                                attackInitiatedByAttackButton = false; // 跳跃键触发下劈，不触发强化攻击
                                 Attack(AttackDirection.downward);
                                 StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
                             }
+                            else if (CanDoubleJump())
+                            {
+                                // 为确保二段跳重新开始跳跃步进，先重置上一段跳跃的计数，但不清零当前上升速度
+                                CancelJump();
+                                HeroJump();
+                                airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
+                            }
                             else
                             {
-                                // 当前不能攻击（例如冷却中），保留原有的跳跃排队逻辑
+                                // 当前不能攻击或没有可攻击目标、也不能二段跳——保留原有的跳跃排队逻辑
                                 jumpQueueSteps = 0;
                                 jumpQueuing = true;
                             }
@@ -3315,7 +3359,7 @@ public PlayMakerFSM wallSlashFsm;
                         }
                     }
                 }
-	    }
+            }
 	    if (inputHandler.inputActions.dash.WasPressed)
 	    {
 		if (CanDash())
@@ -3423,6 +3467,38 @@ public PlayMakerFSM wallSlashFsm;
 	}
         
         return false;
+    }
+
+    /// <summary>
+    /// 空中的额外跳跃（二段跳）判定
+    /// </summary>
+    private bool CanDoubleJump()
+    {
+        if (hero_state == ActorStates.no_input || hero_state == ActorStates.hard_landing || hero_state == ActorStates.dash_landing)
+        {
+            return false;
+        }
+        // 必须在空中，且非墙滑/墙跳锁/冲刺等
+        if (cState.onGround || cState.wallSliding || wallLocked || cState.dashing || cState.backDashing || cState.bouncing || cState.shroomBouncing)
+        {
+            return false;
+        }
+        // 需要解锁能力，且还有剩余次数
+        var pd = (GameManager.instance != null) ? GameManager.instance.playerData : null;
+        if (pd == null || !pd.hasDoubleJump)
+        {
+            return false;
+        }
+        return airJumpsRemaining > 0;
+    }
+
+    /// <summary>
+    /// 查询Parry范围内是否有下攻击目标
+    /// </summary>
+    private bool ParryHasDownAttackTarget()
+    {
+        var detector = GetComponentInChildren<ParryRangeDetector>();
+        return detector != null && detector.HasTarget;
     }
 
     /// <summary>
@@ -3547,6 +3623,10 @@ public PlayMakerFSM wallSlashFsm;
         SetState(ActorStates.grounded);
 	cState.onGround = true;
         airDashed = false;
+        // 落地时重置二段跳次数
+        airJumpsRemaining = (GameManager.instance != null && GameManager.instance.playerData != null && GameManager.instance.playerData.hasDoubleJump)
+            ? EXTRA_JUMPS_MAX
+            : 0;
         // Refresh parry cooldown on landing
         RefreshParryCooldown();
     }
