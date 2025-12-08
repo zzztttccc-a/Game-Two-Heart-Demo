@@ -58,11 +58,13 @@ public class HeroController : MonoBehaviour
     public AudioClip footstepsRunGrass;
     public AudioClip footstepsWalkGrass;
 
-    [SerializeField]private NailSlash slashComponent; //����ʹ�����ֹ�����NailSlash
-    [SerializeField]private PlayMakerFSM slashFsm;//����ʹ�����ֹ�����PlayMakerFSM
+[SerializeField]private NailSlash slashComponent; //����ʹ�����ֹ�����NailSlash
+[SerializeField]private PlayMakerFSM slashFsm;//����ʹ�����ֹ�����PlayMakerFSM
 
-public NailSlash normalSlash;
-public NailSlash altetnateSlash;
+public NailSlash slash1;
+public NailSlash slash2;
+public NailSlash slash3;
+public NailSlash slash4;
 public NailSlash upSlash;
 public NailSlash downSlash;
 public NailSlash wallSlash;
@@ -79,8 +81,10 @@ public NailSlash wallSlash;
     public NailSlash slantDownParrySlash; // 斜下方向
     public PlayMakerFSM slantDownParrySlashFsm;
 
-public PlayMakerFSM normalSlashFsm;
-public PlayMakerFSM altetnateSlashFsm;
+public PlayMakerFSM slash1Fsm;
+public PlayMakerFSM slash2Fsm;
+public PlayMakerFSM slash3Fsm;
+public PlayMakerFSM slash4Fsm;
 public PlayMakerFSM upSlashFsm;
 public PlayMakerFSM downSlashFsm;
 public PlayMakerFSM wallSlashFsm;
@@ -92,10 +96,20 @@ public PlayMakerFSM wallSlashFsm;
     private float attackDuration; //����״̬����ʱ�䣬�������޻���������
     private float attack_cooldown;
     private float altAttackTime; //��ʱ�䳬���ɰ����ι�����ʱ���cstate.altattack�ͻ�Ϊfalse
+    private int comboStep;
 
     public float ATTACK_DURATION; //�޻���ʱ����״̬����ʱ��
     public float ATTACK_COOLDOWN_TIME; //��������ȴʱ��
     public float ATTACK_RECOVERY_TIME; //�����ָ�ʱ�䣬һ���������ʱ����˳�����״̬
+    public float ATTACK_DURATION_1 = 0.75f;
+    public float ATTACK_DURATION_2 = 0.75f;
+    public float ATTACK_DURATION_3 = 0.75f;
+    public float ATTACK_DURATION_4 = 1.4f;
+    public float ATTACK_FREEZE_OUT = 0.12f;
+    public float ATTACK_FREEZE_IN = 0.18f;
+    private bool attackMovementFrozen;
+    private bool attackFreezeOutActive;
+    private float currentMoveSpeedScale = 1f;
     public float ALT_ATTACK_RESET; //���ι�������ʱ��
 
     private int ATTACK_QUEUE_STEPS = 5; //����5�����ɿ�ʼ����
@@ -140,6 +154,7 @@ public PlayMakerFSM wallSlashFsm;
     private int airJumpsRemaining = 0;
     private const int EXTRA_JUMPS_MAX = 1;
     public bool dashingDown;//�Ƿ�����ִ�����³��
+    public bool dashingUp;
     public PlayMakerFSM dashBurst;
     public GameObject dashParticlesPrefab;//�������Ч��Ԥ����
     public GameObject backDashPrefab; //�󳷳����ЧԤ���� ��ע�����д������ô���������
@@ -537,6 +552,28 @@ public PlayMakerFSM wallSlashFsm;
             {
                 cState.recoiling = false;
                 AffectedByGravity(true);
+            }
+            if (attackMovementFrozen)
+            {
+                if (cState.downAttacking)
+                {
+                    attackFreezeOutActive = false;
+                    attackMovementFrozen = false;
+                    currentMoveSpeedScale = 1f;
+                }
+                else if (attackFreezeOutActive)
+                {
+                    currentMoveSpeedScale = Mathf.MoveTowards(currentMoveSpeedScale, 0f, (ATTACK_FREEZE_OUT <= 0f ? 1f : Time.deltaTime / ATTACK_FREEZE_OUT));
+                }
+                else
+                {
+                    currentMoveSpeedScale = Mathf.MoveTowards(currentMoveSpeedScale, 1f, (ATTACK_FREEZE_IN <= 0f ? 1f : Time.deltaTime / ATTACK_FREEZE_IN));
+                    if (Mathf.Approximately(currentMoveSpeedScale, 1f))
+                    {
+                        currentMoveSpeedScale = 1f;
+                        attackMovementFrozen = false;
+                    }
+                }
             }
             if (cState.attacking && !cState.dashing)
             {
@@ -1044,31 +1081,41 @@ public PlayMakerFSM wallSlashFsm;
     /// С��ʿ�ƶ��ĺ���
     /// </summary>
     /// <param name="move_direction"></param>
-    private void Move(float move_direction)
+private void Move(float move_direction)
+{
+    if (cState.onGround)
     {
-        if (cState.onGround)
-        {
-            SetState(ActorStates.grounded);
-        }
-        if(acceptingInput)
+        SetState(ActorStates.grounded);
+    }
+    if(acceptingInput)
 	{
             if (cState.inWalkZone)
             {
-                rb2d.velocity = new Vector2(move_direction * WALK_SPEED, rb2d.velocity.y);
+                float s = WALK_SPEED * currentMoveSpeedScale;
+                rb2d.velocity = new Vector2(move_direction * s, rb2d.velocity.y);
                 return;
             }
-            rb2d.velocity = new Vector2(move_direction * RUN_SPEED, rb2d.velocity.y);
+            {
+                float s = RUN_SPEED * currentMoveSpeedScale;
+                rb2d.velocity = new Vector2(move_direction * s, rb2d.velocity.y);
+            }
 	}
-    }
+}
 
     private void Attack(AttackDirection attackDir)
     {
         if(Time.timeSinceLevelLoad - altAttackTime > ALT_ATTACK_RESET)
-	{
+    {
+            comboStep = 0;
             cState.altAttack = false;
-	}
+    }
         cState.attacking = true;
         attackDuration = ATTACK_DURATION;
+        if (attackDir != AttackDirection.downward)
+        {
+            attackMovementFrozen = true;
+            attackFreezeOutActive = true;
+        }
 
         if (cState.wallSliding)
         {
@@ -1087,17 +1134,40 @@ public PlayMakerFSM wallSlashFsm;
             }
             if (attackDir == AttackDirection.normal)
             {
-                if (!cState.altAttack)
+                switch (comboStep)
                 {
-                    slashComponent = normalSlash;
-                    slashFsm = normalSlashFsm;
-                    cState.altAttack = true;
-                }
-                else
-                {
-                    slashComponent = altetnateSlash;
-                    slashFsm = altetnateSlashFsm;
-                    cState.altAttack = false;
+                    case 0:
+                        slashComponent = slash1;
+                        slashFsm = slash1Fsm;
+                        cState.altAttack = false;
+                        cState.comboIndex = 1;
+                        attackDuration = ATTACK_DURATION_1;
+                        comboStep = 1;
+                        break;
+                    case 1:
+                        slashComponent = slash2;
+                        slashFsm = slash2Fsm;
+                        cState.altAttack = true;
+                        cState.comboIndex = 2;
+                        attackDuration = ATTACK_DURATION_2;
+                        comboStep = 2;
+                        break;
+                    case 2:
+                        slashComponent = slash3;
+                        slashFsm = slash3Fsm;
+                        cState.altAttack = false;
+                        cState.comboIndex = 3;
+                        attackDuration = ATTACK_DURATION_3;
+                        comboStep = 3;
+                        break;
+                    default:
+                        slashComponent = slash4;
+                        slashFsm = slash4Fsm;
+                        cState.altAttack = true;
+                        cState.comboIndex = 4;
+                        attackDuration = ATTACK_DURATION_4;
+                        comboStep = 0;
+                        break;
                 }
             }
             else if (attackDir == AttackDirection.upward)
@@ -1112,30 +1182,30 @@ public PlayMakerFSM wallSlashFsm;
             slashComponent = downSlash;
             slashFsm = downSlashFsm;
             cState.downAttacking = true;
-            // DownSlash as Parry: only start invulnerability window if cooldown is ready
-            if (parryCooldownTimer <= 0f)
-            {
-                downParryBlockTimer = DOWN_PARRY_BLOCK_DURATION;
-                cState.invulnerable = true;
-                playerData.isInvincible = true;
-                parryInvulnerabilityActive = true;
-                if (invPulse != null) invPulse.StartInvulnerablePulse();
-                // start normal cooldown immediately on parry window begin
-                StartParryCooldown();
-            }
+            // DownSlash Parry：已禁用（注释掉格挡无敌与冷却逻辑）
+            // if (parryCooldownTimer <= 0f)
+            // {
+            //     downParryBlockTimer = DOWN_PARRY_BLOCK_DURATION;
+            //     cState.invulnerable = true;
+            //     playerData.isInvincible = true;
+            //     parryInvulnerabilityActive = true;
+            //     if (invPulse != null) invPulse.StartInvulnerablePulse();
+            //     // start normal cooldown immediately on parry window begin
+            //     StartParryCooldown();
+            // }
 
         }
 
-        // 储存了强化攻击时，仅当本次攻击是由“攻击键”发起时才触发八方向突进，并强制使用 Parryslash
-        if (parryStoredEmpowerReady && attackInitiatedByAttackButton)
-        {
-            Vector2 dir = ComputeInputDirection();
-            StartEmpoweredThrust(dir);
-            parryStoredEmpowerReady = false; // 消耗一次强化攻击
-
-            // 按突进方向选择对应的 ParrySlash 资源，并设置斩击角度
-            SelectParrySlashForDirection(dir);
-        }
+        // ParrySlash 强化与资源选择：已禁用（注释掉）
+        // if (parryStoredEmpowerReady && attackInitiatedByAttackButton)
+        // {
+        //     Vector2 dir = ComputeInputDirection();
+        //     StartEmpoweredThrust(dir);
+        //     parryStoredEmpowerReady = false; // 消耗一次强化攻击
+        //
+        //     // 按突进方向选择对应的 ParrySlash 资源，并设置斩击角度
+        //     SelectParrySlashForDirection(dir);
+        // }
         }
 	if (cState.wallSliding)
 	{
@@ -1190,26 +1260,23 @@ public PlayMakerFSM wallSlashFsm;
         attack_cooldown = ATTACK_COOLDOWN_TIME;
         // 标记：本次攻击由“攻击键”发起
         attackInitiatedByAttackButton = true;
-        if(vertical_input > Mathf.Epsilon)
-	{
-            Attack(AttackDirection.upward);
-            StartCoroutine(CheckForTerrainThunk(AttackDirection.upward));
-            return;
-	}
-        if(vertical_input >= -Mathf.Epsilon)
-	{
-            Attack(AttackDirection.normal);
-            StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
-            return;
-        }
-        // 原来的“按下方向 + 攻击触发下劈”逻辑在此处：
-        // if(hero_state != ActorStates.idle && hero_state != ActorStates.running)
+        // 上劈：已禁用（注释掉上方向触发的上劈）
+        // if (vertical_input > Mathf.Epsilon)
         // {
-        //     Attack(AttackDirection.downward);
-        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+        //     Attack(AttackDirection.upward);
+        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.upward));
         //     return;
         // }
-        // 已按需求注释掉，改为由“空中再次按跳跃键”触发下劈
+
+        // 下劈：在空中时按下攻击键即触发下劈（不再需要按下方向）
+        if (!cState.onGround)
+        {
+            Attack(AttackDirection.downward);
+            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+            return;
+        }
+
+        // 其它情况：地面普通攻击
         Attack(AttackDirection.normal);
         StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
     }
@@ -1243,6 +1310,15 @@ public PlayMakerFSM wallSlashFsm;
 	cState.upAttacking = false;
         cState.downAttacking = false;
         attack_time = 0f;
+        if (Time.timeSinceLevelLoad - altAttackTime > ALT_ATTACK_RESET)
+        {
+            comboStep = 0;
+            cState.altAttack = false;
+        }
+        if (attackMovementFrozen)
+        {
+            attackFreezeOutActive = false;
+        }
     }
 
     public void AddMPCharge(int amount)
@@ -1641,13 +1717,17 @@ public PlayMakerFSM wallSlashFsm;
             return;
 	}
         float num;
-	num = DASH_SPEED;
-	if (dashingDown)
-	{
+    	num = DASH_SPEED;
+    	if (dashingDown)
+    	{
             rb2d.velocity = new Vector2(0f, -num);
         }
-	else if (cState.facingRight)
-	{
+        else if (dashingUp)
+        {
+            rb2d.velocity = new Vector2(0f, num);
+        }
+        else if (cState.facingRight)
+        {
 	    if (CheckForBump(CollisionSide.right))
 	    {
                 //rb2d.velocity = new Vector2(num, cState.onGround ? BUMP_VELOCITY : BUMP_VELOCITY_DASH);
@@ -1698,15 +1778,24 @@ public PlayMakerFSM wallSlashFsm;
         HeroActions inputActions = inputHandler.inputActions;
         if(inputActions.down.IsPressed && !cState.onGround && playerData.equippedCharm_31 && !inputActions.left.IsPressed && !inputActions.right.IsPressed)
         {
-            dashBurst.transform.localPosition = new Vector3(-0.07f, 3.74f, 0.01f); //����dashBurst������λ�ú���ת��
+            dashBurst.transform.localPosition = new Vector3(-0.07f, 3.74f, 0.01f);
             dashBurst.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
             dashingDown = true;
+            dashingUp = false;
         }
-	else
-	{
-            dashBurst.transform.localPosition = new Vector3(4.11f, -0.55f, 0.001f); //����dashBurst������λ�ú���ת��
+        else if(inputActions.up.IsPressed && !inputActions.left.IsPressed && !inputActions.right.IsPressed)
+        {
+            dashBurst.transform.localPosition = new Vector3(0.07f, -3.74f, 0.01f);
+            dashBurst.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+            dashingUp = true;
+            dashingDown = false;
+        }
+    	else
+    	{
+            dashBurst.transform.localPosition = new Vector3(4.11f, -0.55f, 0.001f);
             dashBurst.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             dashingDown = false;
+            dashingUp = false;
         }
 
 
@@ -1714,12 +1803,11 @@ public PlayMakerFSM wallSlashFsm;
 
         dashBurst.SendEvent("PLAY"); //����dashBurst��FSM���¼�PLAY
         dashParticlesPrefab.GetComponent<ParticleSystem>().enableEmission = true;
-
-	if (cState.onGround)
-	{
+        if (cState.onGround && !dashingDown && !dashingUp)
+        {
             dashEffect = Instantiate(backDashPrefab, transform.position, Quaternion.identity);
             dashEffect.transform.localScale = new Vector3(transform.localScale.x * -1f, transform.localScale.y, transform.localScale.z);
-	}
+        }
     }
 
     /// <summary>
@@ -1782,6 +1870,8 @@ public PlayMakerFSM wallSlashFsm;
         cState.dashing = false;
         dash_timer = 0f; //���ó��ʱ�ļ�ʱ��
         AffectedByGravity(true); //���������ܵ�������Ӱ��
+        dashingDown = false;
+        dashingUp = false;
 
         if (dashParticlesPrefab.GetComponent<ParticleSystem>().enableEmission)
 	{
@@ -2304,8 +2394,8 @@ public PlayMakerFSM wallSlashFsm;
         if (y == 0 && x != 0)
         {
             // 水平：ParrySlash
-            slashComponent = parrySlash != null ? parrySlash : normalSlash;
-            slashFsm = parrySlashFsm != null ? parrySlashFsm : normalSlashFsm;
+            slashComponent = parrySlash != null ? parrySlash : slash1;
+            slashFsm = parrySlashFsm != null ? parrySlashFsm : slash1Fsm;
             angle = (x > 0) ? 0f : 180f;
         }
         else if (y == 1 && x == 0)
@@ -3340,10 +3430,11 @@ public PlayMakerFSM wallSlashFsm;
                             }
                             else if (CanDoubleJump())
                             {
-                                // 为确保二段跳重新开始跳跃步进，先重置上一段跳跃的计数，但不清零当前上升速度
                                 CancelJump();
                                 HeroJump();
+                                animCtrl.PlayDoubleJump();
                                 airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
+                                Debug.Log("[DoubleJump] Triggered");
                             }
                             else
                             {
@@ -4315,6 +4406,7 @@ public class HeroControllerStates
     public bool isPaused;
     public bool wallJumping;
     public bool touchingNonSlider;
+    public int comboIndex;
 
     public HeroControllerStates()
     {
@@ -4351,7 +4443,8 @@ public class HeroControllerStates
         preventBackDash = false;
 	dashCooldown = false;
         backDashCooldown = false;
-	isPaused = false;
+        isPaused = false;
+        comboIndex = 0;
     }
 
     public void Reset()
@@ -4381,6 +4474,7 @@ public class HeroControllerStates
         preventBackDash = false;
         dashCooldown = false;
         backDashCooldown = false;
+        comboIndex = 0;
     }
 
     /// <summary>

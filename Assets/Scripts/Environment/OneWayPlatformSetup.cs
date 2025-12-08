@@ -12,6 +12,9 @@ public class OneWayPlatformSetup : MonoBehaviour
     [SerializeField, Tooltip("启用单向平台功能")] private bool useOneWay = true;
     [SerializeField, Tooltip("有效表面弧度（建议 180），平台上表面为有效面")] private float surfaceArc = 180f;
     [SerializeField, Tooltip("将所有子碰撞器作为一个整体处理")] private bool useOneWayGrouping = true;
+    [SerializeField, Tooltip("启用侧面摩擦（容易卡边），建议关闭")] private bool useSideFriction = false;
+    [SerializeField, Tooltip("启用侧面弹性，建议关闭")] private bool useSideBounce = false;
+    [SerializeField, Tooltip("侧面判定弧度，数值越小越不易侧面卡住")] private float sideArc = 1f;
 
     [Header("辅助设置（可选）")]
     [SerializeField, Tooltip("在编辑器变更时自动应用设置")] private bool autoApplyOnValidate = true;
@@ -36,17 +39,16 @@ public class OneWayPlatformSetup : MonoBehaviour
     /// </summary>
     public void ApplySettings()
     {
-        // 支持 Tilemap 上的 CompositeCollider2D
         var compCol = GetComponent<CompositeCollider2D>();
-        if (compCol != null)
-        {
-            compCol.usedByEffector = true;
-        }
+        if (compCol != null) compCol.usedByEffector = true;
 
         var col = GetComponent<Collider2D>();
-        if (col != null)
+        if (col != null) col.usedByEffector = true;
+
+        var childCols = GetComponentsInChildren<Collider2D>(true);
+        for (int i = 0; i < childCols.Length; i++)
         {
-            col.usedByEffector = true;
+            if (childCols[i] != null) childCols[i].usedByEffector = true;
         }
 
         var eff = GetComponent<PlatformEffector2D>();
@@ -57,6 +59,9 @@ public class OneWayPlatformSetup : MonoBehaviour
         eff.useOneWay = useOneWay;
         eff.surfaceArc = surfaceArc;
         eff.useOneWayGrouping = useOneWayGrouping;
+        eff.useSideFriction = useSideFriction;
+        eff.useSideBounce = useSideBounce;
+        eff.sideArc = sideArc;
 
         // 额外提示：如果你希望此平台参与 HeroController 的落地事件，
         // 请在 Inspector 手动将 Tag 设置为 "HeroWalkable"（需在 Tags and Layers 中先定义）。

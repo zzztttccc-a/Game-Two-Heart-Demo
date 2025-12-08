@@ -13,9 +13,12 @@ public class HeroAnimationController : MonoBehaviour
     private bool wasFacingRight;
     [HideInInspector]
     public bool playLanding;
-    private bool playRunToIdle;//²¥·Å"Run To Idle"¶¯»­Æ¬¶Î
-    private bool playDashToIdle; //²¥·Å"Dash To Idle"¶¯»­Æ¬¶Î
-    private bool playBackDashToIdleEnd; //²¥·Å"Back Dash To Idle"¶¯»­Æ¬¶Î(ÆäÊµ²¢²»»á²¥·Å)
+    private bool playRunToIdle;//ï¿½ï¿½ï¿½ï¿½"Run To Idle"ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½
+    private bool playDashToIdle; //ï¿½ï¿½ï¿½ï¿½"Dash To Idle"ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½
+    private bool playBackDashToIdleEnd; //ï¿½ï¿½ï¿½ï¿½"Back Dash To Idle"ï¿½ï¿½ï¿½ï¿½Æ¬ï¿½ï¿½(ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½á²¥ï¿½ï¿½)
+    private bool playDoubleJump;
+    private bool doubleJumpActive;
+    private float doubleJumpTimeLeft;
 
     private bool changedClipFromLastFrame;
 
@@ -54,6 +57,14 @@ public class HeroAnimationController : MonoBehaviour
     {
 	if(controlEnabled)
 	{
+	    if (doubleJumpActive)
+	    {
+            doubleJumpTimeLeft -= Time.deltaTime;
+            if (doubleJumpTimeLeft <= 0f || !animator.IsPlaying("DoubleJump"))
+            {
+                doubleJumpActive = false;
+            }
+        }
 	    UpdateAnimation();
 	}
 	else if (cState.facingRight)
@@ -68,33 +79,39 @@ public class HeroAnimationController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-	changedClipFromLastFrame = false;
-	if (playLanding)
-	{
-	    Play("Land");
-	    animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
-	    playLanding = false;
-	}
-	if (playRunToIdle)
-	{
-	    Play("Run To Idle");
-	    animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
-	    playRunToIdle = false;
-	}
-	if (playBackDashToIdleEnd)
-	{
-	    Play("Backdash Land 2");
-	    //´¦Àíanimation²¥·ÅÍê³ÉºóµÄÊÂ¼þ(ÆäÊµ²¢²»»á²¥·Å)
-	    animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
-	    playDashToIdle = false;
-	}
-	if (playDashToIdle)
-	{
-	    Play("Dash To Idle");
-	    //´¦Àíanimation²¥·ÅÍê³ÉºóµÄÊÂ¼þ
-	    animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
-	    playDashToIdle = false;
-	}
+        changedClipFromLastFrame = false;
+        if (playLanding)
+        {
+            Play("Land");
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            playLanding = false;
+        }
+        if (playRunToIdle)
+        {
+            Play("Run To Idle");
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            playRunToIdle = false;
+        }
+        if (playBackDashToIdleEnd)
+        {
+            Play("Backdash Land 2");
+            //ï¿½ï¿½ï¿½ï¿½animationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½ï¿½Â¼ï¿½(ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½á²¥ï¿½ï¿½)
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            playDashToIdle = false;
+        }
+        if (playDashToIdle)
+        {
+            Play("Dash To Idle");
+            //ï¿½ï¿½ï¿½ï¿½animationï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éºï¿½ï¿½ï¿½Â¼ï¿½
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            playDashToIdle = false;
+        }
+        if (playDoubleJump)
+        {
+            Play("DoubleJump");
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            playDoubleJump = false;
+        }
 	if (actorStates == ActorStates.no_input)
 	{
 	    //TODO:
@@ -157,17 +174,23 @@ public class HeroAnimationController : MonoBehaviour
 	{
 	    setEntryAnim = false;
 	}
-	else if (cState.dashing)
-	{
-	    if (heroCtrl.dashingDown)
-	    {
-		Play("Dash Down");
-	    }
-	    else
-	    {
-		Play("Dash"); //Í¨¹ýcState.dashingÅÐ¶ÏÊÇ·ñ²¥·ÅDash¶¯»­Æ¬¶Î
-	    }
-	}
+    else if (cState.dashing)
+    {
+        if (heroCtrl.dashingDown)
+        {
+            Play("Dash Down");
+        }
+        else if (heroCtrl.dashingUp)
+        {
+            var clip = animator.GetClipByName("Dash Up");
+            if (clip != null) { Play("Dash Up"); }
+            else { Play("Dash"); }
+        }
+        else
+        {
+            Play("Dash");
+        }
+    }
 	else if (cState.backDashing)
 	{
 	    Play("Back Dash");
@@ -186,13 +209,14 @@ public class HeroAnimationController : MonoBehaviour
 	    {
 		Play("Wall Slash");
 	    }
-	    else if (!cState.altAttack)
-	    {
-		Play("Slash");
-	    }
 	    else
 	    {
-		Play("SlashAlt");
+	        int idx = heroCtrl.cState.comboIndex;
+	        if (idx == 1) { Play("Slash1"); }
+	        else if (idx == 2) { Play("Slash2"); }
+	        else if (idx == 3) { Play("Slash3"); }
+	        else if (idx == 4) { Play("Slash4"); }
+	        else { Play("Slash1"); }
 	    }
 	}
 	else if (cState.casting)
@@ -228,32 +252,42 @@ public class HeroAnimationController : MonoBehaviour
 		}
 	    }
 	}
-	else if (actorStates == ActorStates.airborne)
-	{
-	    if (heroCtrl.wallLocked)
-	    {
-		Play("Walljump");
-	    }
-	    else if (cState.jumping)
-	    {
-		if (!animator.IsPlaying("Airborne"))
-		{
-		    animator.PlayFromFrame("Airborne", 0);
-		}
-	    }
-	    else if (cState.falling)
-	    {
-		if (!animator.IsPlaying("Airborne"))
-		{
-		    animator.PlayFromFrame("Airborne", 7);
-		}
-	    }
-	    else if (!animator.IsPlaying("Airborne"))
-	    {
-		animator.PlayFromFrame("Airborne", 3);
-	    }
-	}
-	//(ÆäÊµ²¢²»»á²¥·Å)
+    else if (actorStates == ActorStates.airborne)
+    {
+        if (heroCtrl.wallLocked)
+        {
+            Play("Walljump");
+        }
+        else if (cState.jumping)
+        {
+            if (doubleJumpActive)
+            {
+                if (!animator.IsPlaying("DoubleJump"))
+                {
+                    Play("DoubleJump");
+                }
+            }
+            else if (!animator.IsPlaying("Airborne"))
+            {
+                animator.PlayFromFrame("Airborne", 0);
+            }
+        }
+        else if (cState.falling)
+        {
+            if (doubleJumpActive)
+            {
+            }
+            else if (!animator.IsPlaying("Airborne"))
+            {
+                animator.PlayFromFrame("Airborne", 17);
+            }
+        }
+        else if (!animator.IsPlaying("Airborne") && !doubleJumpActive)
+        {
+            animator.PlayFromFrame("Airborne", 3);
+        }
+    }
+	//(ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½á²¥ï¿½ï¿½)
 	else if (actorStates == ActorStates.dash_landing)
 	{
 	    animator.Play("Dash Down Land");
@@ -291,26 +325,31 @@ public class HeroAnimationController : MonoBehaviour
 
     private void AnimationCompleteDelegate(tk2dSpriteAnimator anim, tk2dSpriteAnimationClip clip)
     {
-	if(clip.name == "Land")
-	{
-	    PlayIdle();
-	}
-	if(clip.name == "Run To Idle")
-	{
-	    PlayIdle();
-	}
-	if(clip.name == "Backdash To Idle")//(ÆäÊµ²¢²»»á²¥·Å)
-	{
-	    PlayIdle();
-	}
-	if(clip.name == "Dash To Idle")
-	{
-	    PlayIdle();
-	}
-	if (clip.name == "Exit Door To Idle")
-	{
-	    PlayIdle();
-	}
+        if(clip.name == "Land")
+        {
+            PlayIdle();
+        }
+        if(clip.name == "Run To Idle")
+        {
+            PlayIdle();
+        }
+        if(clip.name == "Backdash To Idle")//(ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½á²¥ï¿½ï¿½)
+        {
+            PlayIdle();
+        }
+        if(clip.name == "Dash To Idle")
+        {
+            PlayIdle();
+        }
+        if (clip.name == "DoubleJump")
+        {
+            PlayFromFrame("Airborne", 0);
+            doubleJumpActive = false;
+        }
+        if (clip.name == "Exit Door To Idle")
+        {
+            PlayIdle();
+        }
     }
 
     private void Play(string clipName)
@@ -359,18 +398,27 @@ public class HeroAnimationController : MonoBehaviour
 
     private void ResetAll()
     {
-	playLanding = false;
-	playRunToIdle = false;
-	playDashToIdle = false;
-	wasFacingRight = false;
-	controlEnabled = true;
+        playLanding = false;
+        playRunToIdle = false;
+        playDashToIdle = false;
+        playDoubleJump = false;
+        doubleJumpActive = false;
+        doubleJumpTimeLeft = 0f;
+        wasFacingRight = false;
+        controlEnabled = true;
     }
 
     private void ResetPlays()
     {
-	playLanding = false;
-	playRunToIdle = false;
-	playDashToIdle = false;
+        playLanding = false;
+        playRunToIdle = false;
+        playDashToIdle = false;
+        playDoubleJump = false;
+        if (!animator.IsPlaying("DoubleJump"))
+        {
+            doubleJumpActive = false;
+            doubleJumpTimeLeft = 0f;
+        }
     }
 
     public void UpdateState(ActorStates newState)
@@ -392,14 +440,27 @@ public class HeroAnimationController : MonoBehaviour
 
     public void PlayClip(string clipName)
     {
-	if (controlEnabled)
-	{
-	    if (clipName == "Exit Door To Idle")
-	    {
-		animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
-	    }
-	    Play(clipName);
-	}
+        if (controlEnabled)
+        {
+            if (clipName == "Exit Door To Idle")
+            {
+                animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+            }
+            Play(clipName);
+        }
+    }
+
+    public void PlayDoubleJump()
+    {
+        var dur = GetClipDuration("DoubleJump");
+        doubleJumpActive = true;
+        doubleJumpTimeLeft = dur > 0f ? dur : 0.2f;
+        playDoubleJump = true;
+        if (controlEnabled)
+        {
+            Play("DoubleJump");
+            animator.AnimationCompleted = new Action<tk2dSpriteAnimator, tk2dSpriteAnimationClip>(AnimationCompleteDelegate);
+        }
     }
 
     public void StartControl()
@@ -415,7 +476,7 @@ public class HeroAnimationController : MonoBehaviour
 	{
             controlEnabled = false;
 	    stateBeforeControl = actorStates;
-            Debug.Log("[StopControl] ½ÇÉ«Ê§È¥¿ØÖÆ£¬×´Ì¬Îª£º" + stateBeforeControl);
+            Debug.Log("[StopControl] ï¿½ï¿½É«Ê§È¥ï¿½ï¿½ï¿½Æ£ï¿½×´Ì¬Îªï¿½ï¿½" + stateBeforeControl);
         }
     }
 
@@ -441,7 +502,7 @@ public class HeroAnimationController : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡¶¯»­µÄ²¥·ÅÊ±¼ä
+    /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     /// </summary>
     /// <param name="clipName"></param>
     /// <returns></returns>
