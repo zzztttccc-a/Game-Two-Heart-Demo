@@ -1268,15 +1268,13 @@ private void Move(float move_direction)
         //     return;
         // }
 
-        // 下劈：在空中时按下攻击键即触发下劈（不再需要按下方向）
-        if (!cState.onGround)
+        if (!cState.onGround && inputHandler.inputActions.down.IsPressed)
         {
             Attack(AttackDirection.downward);
             StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
             return;
         }
 
-        // 其它情况：地面普通攻击
         Attack(AttackDirection.normal);
         StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
     }
@@ -3413,32 +3411,17 @@ private void Move(float move_direction)
                     }
                     else
                     {
-                        // 在空中按下跳跃键时：优先判断Parry范围是否有下攻击目标；有则执行下劈，否则尝试二段跳
                         if (!cState.onGround && !cState.wallSliding && !wallLocked)
                         {
-                            bool parryHasTarget = ParryHasDownAttackTarget();
-                            if (parryHasTarget && CanAttack())
-                            {
-                                // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
-                                if (cState.jumping && rb2d.velocity.y > 0f)
-                                {
-                                    CancelHeroJump();
-                                }
-                                attackInitiatedByAttackButton = false; // 跳跃键触发下劈，不触发强化攻击
-                                Attack(AttackDirection.downward);
-                                StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
-                            }
-                            else if (CanDoubleJump())
+                            if (CanDoubleJump())
                             {
                                 CancelJump();
                                 HeroJump();
                                 animCtrl.PlayDoubleJump();
                                 airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
-                                Debug.Log("[DoubleJump] Triggered");
                             }
                             else
                             {
-                                // 当前不能攻击或没有可攻击目标、也不能二段跳——保留原有的跳跃排队逻辑
                                 jumpQueueSteps = 0;
                                 jumpQueuing = true;
                             }
