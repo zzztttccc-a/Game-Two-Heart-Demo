@@ -9,7 +9,8 @@ public class GeoControl : MonoBehaviour
     {
 	new Size("Small Idle", "Small Air", 1),
 	new Size("Med Idle", "Med Air", 5),
-	new Size("Large Idle", "Large Air", 25)
+	new Size("Large Idle", "Large Air", 25),
+    new Size("Large Idle", "Large Air", 0, true) // æ–°å¢ç±»å‹ï¼šå¼ºåŒ–æ”»å‡»å……èƒ½çƒ
     };
     public int type;
     private Size size;
@@ -74,18 +75,65 @@ public class GeoControl : MonoBehaviour
 	{
 	    return;
 	}
-	if (GameManager.instance.GetPlayerDataBool("equippedCharm_1"))
-	{
-	    getterRoutine = StartCoroutine(Getter());
-	}
+	// if (GameManager.instance.GetPlayerDataBool("equippedCharm_1"))
+	// {
+	//     getterRoutine = StartCoroutine(Getter());
+	// }
+    // é»˜è®¤å¼€å¯Gathering Swarmï¼ˆé‡‡é›†ç¾¤å³°ï¼‰æ•ˆæœï¼šç”Ÿæˆå°è™«å­å°†Geoæ¬è¿ç»™ä¸»è§’
+    getterRoutine = StartCoroutine(FlyToHeroDelayed());
 	pickupStartTime = Time.time + pickupStartDelay;
     }
+
+    private IEnumerator FlyToHeroDelayed()
+    {
+        // geoçˆ†å‡ºæ¥çš„0.8ç§’å
+        yield return new WaitForSeconds(0.8f);
+
+        // æš‚æ—¶æš‚åœä»–ä»¬çš„ä½ç½®
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
+        body.gravityScale = 0f;
+
+        // æ’­æ”¾è™«å­é£å‡ºçš„åŠ¨ç”»ï¼ˆå¦‚æœå­˜åœ¨ï¼‰
+        if (getterBug)
+        {
+            getterBug.SetActive(true);
+            Vector3 destination = new Vector3(-0.06624349f, 0.1932119f, -0.001f);
+            Vector3 source = destination + new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(0.5f, 1.5f), 0f);
+            float easeTime = UnityEngine.Random.Range(0.3f, 0.5f);
+            for (float timer = 0f; timer < easeTime; timer += Time.deltaTime)
+            {
+                float t = Mathf.Sin(timer / easeTime * 1.5707964f);
+                getterBug.transform.localPosition = Vector3.Lerp(source, destination, t);
+                yield return null;
+            }
+            getterBug.transform.localPosition = destination;
+            
+            // å¦‚æœåŠ¨ç”»æ—¶é—´ä¸è¶³1ç§’ï¼Œç»§ç»­ç­‰å¾…å‰©ä½™æ—¶é—´
+            if (easeTime < 1.0f)
+            {
+                yield return new WaitForSeconds(1.0f - easeTime);
+            }
+        }
+        else
+        {
+            // å»¶è¿Ÿä¸€ç§’åï¼ˆæ— è™«å­æƒ…å†µï¼‰
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        // é£å‘ä¸»è§’
+        attracted = true;
+        boxCollider.isTrigger = true;
+    }
+
+    [Space]
+    public Vector2 flyToOffset = new Vector2(0f, -0.5f); // Geoé£å‘ä¸»è§’çš„ç›¸å¯¹ä½ç½®åç§»
 
     private void FixedUpdate()
     {
 	if (attracted)
 	{
-	    Vector2 vector = new Vector2(hero.transform.position.x - transform.position.x, hero.transform.position.y - 0.5f - transform.position.y);
+	    Vector2 vector = new Vector2(hero.transform.position.x + flyToOffset.x - transform.position.x, hero.transform.position.y + flyToOffset.y - transform.position.y);
 	    vector = Vector2.ClampMagnitude(vector, 1f);
 	    vector = new Vector2(vector.x * 150f, vector.y * 150f);
 	    body.AddForce(vector);
@@ -117,7 +165,7 @@ public class GeoControl : MonoBehaviour
 	yield return new WaitForSeconds(UnityEngine.Random.Range(1f, 1.7f));
 	if (getterBug)
 	{
-	    //²åÖµÖ´ĞĞ¼ñÇ®³æ×Ó¿ªÊ¼Ê±µ­Èëµ­³öĞ§¹û
+	    //ï¿½ï¿½ÖµÖ´ï¿½Ğ¼ï¿½Ç®ï¿½ï¿½ï¿½Ó¿ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ëµ­ï¿½ï¿½Ğ§ï¿½ï¿½
 	    getterBug.SetActive(true);
 	    Vector3 destination = new Vector3(-0.06624349f, 0.1932119f, -0.001f);
 	    Vector3 source = destination + new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(0.5f, 1.5f), 0f);
@@ -131,14 +179,14 @@ public class GeoControl : MonoBehaviour
 	    getterBug.transform.localPosition = destination;
 	    boxCollider.isTrigger = true;
 	    body.gravityScale = 0f;
-	    attracted = true; //È»ºó¼¤»îattractedÈÃ³æ×ÓºÍÇ®³¯×ÅÍæ¼ÒµÄ·½ÏòÒÆ¶¯
+	    attracted = true; //È»ï¿½ó¼¤»ï¿½attractedï¿½Ã³ï¿½ï¿½Óºï¿½Ç®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒµÄ·ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½
 	    destination = default(Vector3);
 	    source = default(Vector3);
 	}
     }
 
     /// <summary>
-    /// Åöµ½µØÃæÉÏ
+    /// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     /// </summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
@@ -160,14 +208,23 @@ public class GeoControl : MonoBehaviour
 	}
 	bool flag = false;
 	float num = 0f;
-	if(collision.tag == "HeroBox") //Èç¹ûÅöµ½Íæ¼ÒÁË¾Í¼ÓÇ®
+	if(collision.tag == "HeroBox") //Ë¾Í¼Ç®
 	{
-	    Debug.LogFormat("size.value = " + size.value);
-	    hero.AddGeo(size.value);
+        if (size.givesSuperCharge)
+        {
+            // å¦‚æœæ˜¯å¼ºåŒ–æ”»å‡»å……èƒ½ç±»å‹ï¼Œæ¿€æ´»å¼ºåŒ–æ”»å‡»çŠ¶æ€
+            hero.SetSuperAttackReady(true);
+        }
+        else
+        {
+            // æ™®é€šGeoï¼Œå¢åŠ é‡‘é’±
+    	    Debug.LogFormat("size.value = " + size.value);
+    	    hero.AddGeo(size.value);
+        }
 	    num = Mathf.Max(num, PlayCollectSound());
 	    flag = true;
 	}
-	else if (collision.tag == "Acid") //Èç¹ûµôµ½ËáË®ÀïÁË¾Í²¥·ÅÌØĞ§
+	else if (collision.tag == "Acid") //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë®ï¿½ï¿½ï¿½Ë¾Í²ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
 	{
 	    if (acidEffect)
 	    {
@@ -176,7 +233,7 @@ public class GeoControl : MonoBehaviour
 	    }
 	    flag = true;
 	}
-	if (flag) //ÔİÍ£¼ñÇ®µÄ³æ×ÓµÄroutine£¬Ïú»Ù¸ÃÎïÌå
+	if (flag) //ï¿½ï¿½Í£ï¿½ï¿½Ç®ï¿½Ä³ï¿½ï¿½Óµï¿½routineï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	{
 	    if (getterRoutine != null)
 	    {
@@ -187,7 +244,7 @@ public class GeoControl : MonoBehaviour
     }
 
     /// <summary>
-    /// »ñÈ¡Ëæ»úÒ»¸öÒôÆµµÄ²¥·ÅÊ±¼ä
+    /// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä²ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
     /// </summary>
     /// <returns></returns>
     private float PlayCollectSound()
@@ -239,11 +296,14 @@ public class GeoControl : MonoBehaviour
 	public string idleAnim;
 	public string airAnim;
 	public int value;
-	public Size(string idleAnim, string airAnim, int value)
+    public bool givesSuperCharge;
+
+	public Size(string idleAnim, string airAnim, int value, bool givesSuperCharge = false)
 	{
 	    this.idleAnim = idleAnim;
 	    this.airAnim = airAnim;
 	    this.value = value;
+        this.givesSuperCharge = givesSuperCharge;
 	}
     }
 }

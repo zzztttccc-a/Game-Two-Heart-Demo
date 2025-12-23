@@ -146,7 +146,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -290,18 +290,22 @@ MonoBehaviour:
   - idleAnim: Small Idle
     airAnim: Small Air
     value: 1
+    givesSuperCharge: 0
   - idleAnim: Med Idle
     airAnim: Med Air
     value: 5
+    givesSuperCharge: 0
   - idleAnim: Large Idle
     airAnim: Large Air
     value: 25
+    givesSuperCharge: 0
   type: 0
   pickupSounds:
   - {fileID: 8300000, guid: 24f75e38fee13d24188fa1a1108a87f4, type: 3}
   - {fileID: 8300000, guid: acdd30338c36efc42b72d860c2857302, type: 3}
   acidEffect: {fileID: 3115758869174330315}
   getterBug: {fileID: 7425270938263101624}
+  flyToOffset: {x: 0, y: 1}
 --- !u!114 &3709883192816681699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +337,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2955016895473134467
 Transform:
   m_ObjectHideFlags: 0

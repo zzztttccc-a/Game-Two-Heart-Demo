@@ -47,6 +47,10 @@ public class HealthManager : MonoBehaviour, IHitResponder
     [SerializeField] private GameObject mediumGeoPrefab;
     [SerializeField] private GameObject largeGeoPrefab;
 
+    [Header("Super Attack")]
+    [SerializeField] private GameObject superAttackPointsPrefab;
+    [SerializeField] public int superAttackPoints = 0; // 1: Enable Super Attack Effect/Spawn, 0: Normal Geo
+
     [Header("Hit")]
     [SerializeField] private bool hasAlternateHitAnimation;
     [SerializeField] private string alternateHitAnimation;
@@ -382,63 +386,85 @@ public class HealthManager : MonoBehaviour, IHitResponder
 	}
 	if(attackType != AttackTypes.RuinsWater)
 	{
-	    float angleMin = megaFlingGeo ? 65 : 80;
-	    float angleMax = megaFlingGeo ? 115 : 100;
-	    float speedMin = megaFlingGeo ? 30 : 15;
-	    float speedMax = megaFlingGeo ? 45 : 30;
-	    int num = smallGeoDrops;
-	    int num2 = mediumGeoDrops;
-	    int num3 = largeGeoDrops;
-	    bool flag = false;
-	    if(GameManager.instance.playerData.equippedCharm_24 && !GameManager.instance.playerData.brokenCharm_24)
-	    {
-		num += Mathf.CeilToInt(num * 0.2f);
-		num2 += Mathf.CeilToInt(num2 * 0.2f);
-		num3 += Mathf.CeilToInt(num3 * 0.2f);
-		flag = true;
-	    }
-	    GameObject[] gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
-	    {
-		Prefab = smallGeoPrefab,
-		AmountMin = num,
-		AmountMax = num,
-		SpeedMin = speedMin,
-		SpeedMax = speedMax,
-		AngleMin = angleMin,
-		AngleMax = angleMax
-	    }, transform, effectOrigin);
-	    if (flag)
-	    {
-		SetGeoFlashing(gameObjects, smallGeoDrops);
-	    }
-	    gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
-	    {
-		Prefab = mediumGeoPrefab,
-		AmountMin = num2,
-		AmountMax = num2,
-		SpeedMin = speedMin,
-		SpeedMax = speedMax,
-		AngleMin = angleMin,
-		AngleMax = angleMax
-	    }, transform, effectOrigin);
-	    if (flag)
-	    {
-		SetGeoFlashing(gameObjects, mediumGeoDrops);
-	    }
-	    gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
-	    {
-		Prefab = largeGeoPrefab,
-		AmountMin = num3,
-		AmountMax = num3,
-		SpeedMin = speedMin,
-		SpeedMax = speedMax,
-		AngleMin = angleMin,
-		AngleMax = angleMax
-	    }, transform, effectOrigin);
-	    if (flag)
-	    {
-		SetGeoFlashing(gameObjects, largeGeoDrops);
-	    }
+        // 新增逻辑：如果 superAttackPoints 为 1，则生成 Super Attack Point 并跳过普通 Geo 掉落
+        if (superAttackPoints == 1 && superAttackPointsPrefab != null)
+        {
+            float angleMin = megaFlingGeo ? 65 : 80;
+            float angleMax = megaFlingGeo ? 115 : 100;
+            float speedMin = megaFlingGeo ? 30 : 15;
+            float speedMax = megaFlingGeo ? 45 : 30;
+
+            FlingUtils.SpawnAndFling(new FlingUtils.Config
+            {
+                Prefab = superAttackPointsPrefab,
+                AmountMin = 1,
+                AmountMax = 1,
+                SpeedMin = speedMin,
+                SpeedMax = speedMax,
+                AngleMin = angleMin,
+                AngleMax = angleMax
+            }, transform, effectOrigin);
+        }
+        else
+        {
+            float angleMin = megaFlingGeo ? 65 : 80;
+            float angleMax = megaFlingGeo ? 115 : 100;
+            float speedMin = megaFlingGeo ? 30 : 15;
+            float speedMax = megaFlingGeo ? 45 : 30;
+            int num = smallGeoDrops;
+            int num2 = mediumGeoDrops;
+            int num3 = largeGeoDrops;
+            bool flag = false;
+            if(GameManager.instance.playerData.equippedCharm_24 && !GameManager.instance.playerData.brokenCharm_24)
+            {
+            num += Mathf.CeilToInt(num * 0.2f);
+            num2 += Mathf.CeilToInt(num2 * 0.2f);
+            num3 += Mathf.CeilToInt(num3 * 0.2f);
+            flag = true;
+            }
+            GameObject[] gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
+            {
+            Prefab = smallGeoPrefab,
+            AmountMin = num,
+            AmountMax = num,
+            SpeedMin = speedMin,
+            SpeedMax = speedMax,
+            AngleMin = angleMin,
+            AngleMax = angleMax
+            }, transform, effectOrigin);
+            if (flag)
+            {
+            SetGeoFlashing(gameObjects, smallGeoDrops);
+            }
+            gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
+            {
+            Prefab = mediumGeoPrefab,
+            AmountMin = num2,
+            AmountMax = num2,
+            SpeedMin = speedMin,
+            SpeedMax = speedMax,
+            AngleMin = angleMin,
+            AngleMax = angleMax
+            }, transform, effectOrigin);
+            if (flag)
+            {
+            SetGeoFlashing(gameObjects, mediumGeoDrops);
+            }
+            gameObjects = FlingUtils.SpawnAndFling(new FlingUtils.Config
+            {
+            Prefab = largeGeoPrefab,
+            AmountMin = num3,
+            AmountMax = num3,
+            SpeedMin = speedMin,
+            SpeedMax = speedMax,
+            AngleMin = angleMin,
+            AngleMax = angleMax
+            }, transform, effectOrigin);
+            if (flag)
+            {
+            SetGeoFlashing(gameObjects, largeGeoDrops);
+            }
+        }
 	}
 	if (enemyDeathEffects != null)
 	{

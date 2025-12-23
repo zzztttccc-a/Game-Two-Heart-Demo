@@ -290,18 +290,22 @@ MonoBehaviour:
   - idleAnim: Small Idle
     airAnim: Small Air
     value: 1
+    givesSuperCharge: 0
   - idleAnim: Med Idle
     airAnim: Med Air
     value: 5
+    givesSuperCharge: 0
   - idleAnim: Large Idle
     airAnim: Large Air
     value: 25
+    givesSuperCharge: 0
   type: 1
   pickupSounds:
   - {fileID: 8300000, guid: 24f75e38fee13d24188fa1a1108a87f4, type: 3}
   - {fileID: 8300000, guid: acdd30338c36efc42b72d860c2857302, type: 3}
   acidEffect: {fileID: 3115758869174330315}
   getterBug: {fileID: 7425270938263101624}
+  flyToOffset: {x: 0, y: -0.5}
 --- !u!114 &3709883192816681699
 MonoBehaviour:
   m_ObjectHideFlags: 0

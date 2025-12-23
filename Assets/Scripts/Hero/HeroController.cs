@@ -483,6 +483,9 @@ public PlayMakerFSM wallSlashFsm;
 
     private void Update()
     {
+        // 检查蓄力
+        CheckSuperAttackCharge();
+
         current_velocity = rb2d.velocity;
         FallCheck();
         FailSafeCheck();
@@ -1102,6 +1105,81 @@ private void Move(float move_direction)
 	}
 }
 
+    [Header("Super Attack Settings")]
+    public GameObject superAttackReadyEffectPrefab;
+    private GameObject superAttackReadyEffectInstance;
+    public bool isSuperAttackReady;
+    private float attackButtonHeldTime; // 攻击键按住时间
+    public float superAttackChargeTime = 0.8f; // 蓄力所需时间
+    public int superAttackMPCost = 1; // 消耗MP
+    private bool chargeSoundPlayed; // 防止蓄力完成音效重复播放
+
+    public void SetSuperAttackReady(bool ready)
+    {
+        isSuperAttackReady = ready;
+        if (isSuperAttackReady)
+        {
+            if (superAttackReadyEffectPrefab != null && superAttackReadyEffectInstance == null)
+            {
+                superAttackReadyEffectInstance = Instantiate(superAttackReadyEffectPrefab, transform);
+                superAttackReadyEffectInstance.transform.localPosition = Vector3.zero;
+                // 确保粒子播放
+                var ps = superAttackReadyEffectInstance.GetComponent<ParticleSystem>();
+                if (ps != null) ps.Play();
+            }
+        }
+        else
+        {
+            if (superAttackReadyEffectInstance != null)
+            {
+                Destroy(superAttackReadyEffectInstance);
+                superAttackReadyEffectInstance = null;
+            }
+        }
+    }
+
+    private void CheckSuperAttackCharge()
+    {
+        // 如果攻击键被按住，且未处于强化状态，且不在攻击/冲刺/受伤等状态
+        if (inputHandler.inputActions.attack.IsPressed && !isSuperAttackReady && CanAttack())
+        {
+            attackButtonHeldTime += Time.deltaTime;
+
+            if (attackButtonHeldTime >= superAttackChargeTime)
+            {
+                // 检查MP是否足够
+                if (playerData.GetInt("MPCharge") >= superAttackMPCost)
+                {
+                    playerData.TakeMP(superAttackMPCost);
+                    
+                    // 手动触发 UI 更新
+                    if (GameCameras.instance != null && GameCameras.instance.soulOrbFSM != null)
+                    {
+                        GameCameras.instance.soulOrbFSM.SendEvent("MP DRAIN");
+                    }
+                    else if (gm != null && gm.soulOrb_fsm != null)
+                    {
+                        gm.soulOrb_fsm.SendEvent("MP DRAIN");
+                    }
+
+                    SetSuperAttackReady(true);
+                    attackButtonHeldTime = 0f;
+                    // TODO: 播放蓄力完成音效
+                }
+                else
+                {
+                    // MP不足，重置计时（或者维持在临界点提示）
+                    attackButtonHeldTime = 0f;
+                }
+            }
+        }
+        else if (!inputHandler.inputActions.attack.IsPressed) // 只要松开就重置，不依赖WasReleased帧事件，更保险
+        {
+            attackButtonHeldTime = 0f;
+            chargeSoundPlayed = false;
+        }
+    }
+
     private void Attack(AttackDirection attackDir)
     {
         if(Time.timeSinceLevelLoad - altAttackTime > ALT_ATTACK_RESET)
@@ -1113,8 +1191,10 @@ private void Move(float move_direction)
         attackDuration = ATTACK_DURATION;
         if (attackDir != AttackDirection.downward)
         {
-            attackMovementFrozen = true;
-            attackFreezeOutActive = true;
+            // attackMovementFrozen = true;
+            // attackFreezeOutActive = true;
+            // 攻击时暂停角色位置（速度归零）
+            // rb2d.velocity = Vector2.zero;
         }
 
         if (cState.wallSliding)
@@ -1132,7 +1212,21 @@ private void Move(float move_direction)
             {
                 attackDir = AttackDirection.normal;
             }
-            if (attackDir == AttackDirection.normal)
+            
+            // 强化攻击逻辑：如果处于强化攻击状态，优先释放强化攻击（Slash4）
+            if (isSuperAttackReady && attackDir == AttackDirection.normal)
+            {
+                slashComponent = slash4;
+                slashFsm = slash4Fsm;
+                cState.altAttack = false; // 强化攻击通常独立于连击
+                cState.comboIndex = 4; // 沿用Index 4
+                attackDuration = ATTACK_DURATION_4;
+                comboStep = 0; // 重置连击
+                
+                // 消耗强化状态
+                SetSuperAttackReady(false);
+            }
+            else if (attackDir == AttackDirection.normal)
             {
                 switch (comboStep)
                 {
@@ -1150,24 +1244,25 @@ private void Move(float move_direction)
                         cState.altAttack = true;
                         cState.comboIndex = 2;
                         attackDuration = ATTACK_DURATION_2;
-                        comboStep = 2;
+                        comboStep = 0; // 恢复为两连击循环
                         break;
-                    case 2:
-                        slashComponent = slash3;
-                        slashFsm = slash3Fsm;
-                        cState.altAttack = false;
-                        cState.comboIndex = 3;
-                        attackDuration = ATTACK_DURATION_3;
-                        comboStep = 3;
-                        break;
-                    default:
-                        slashComponent = slash4;
-                        slashFsm = slash4Fsm;
-                        cState.altAttack = true;
-                        cState.comboIndex = 4;
-                        attackDuration = ATTACK_DURATION_4;
-                        comboStep = 0;
-                        break;
+                    // 注释掉 slash3 和 slash4 的逻辑，恢复之前的攻击间隔
+                    // case 2:
+                    //     slashComponent = slash3;
+                    //     slashFsm = slash3Fsm;
+                    //     cState.altAttack = false;
+                    //     cState.comboIndex = 3;
+                    //     attackDuration = ATTACK_DURATION_3;
+                    //     comboStep = 3;
+                    //     break;
+                    // default:
+                    //     slashComponent = slash4;
+                    //     slashFsm = slash4Fsm;
+                    //     cState.altAttack = true;
+                    //     cState.comboIndex = 4;
+                    //     attackDuration = ATTACK_DURATION_4;
+                    //     comboStep = 0;
+                    //     break;
                 }
             }
             else if (attackDir == AttackDirection.upward)
@@ -1268,13 +1363,15 @@ private void Move(float move_direction)
         //     return;
         // }
 
-        if (!cState.onGround && inputHandler.inputActions.down.IsPressed)
-        {
-            Attack(AttackDirection.downward);
-            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
-            return;
-        }
+        // 下劈：在空中时按下攻击键不再自动触发下劈，改为由跳跃键+下方向触发
+        // if (!cState.onGround)
+        // {
+        //     Attack(AttackDirection.downward);
+        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+        //     return;
+        // }
 
+        // 其它情况：地面普通攻击（或空中普通攻击）
         Attack(AttackDirection.normal);
         StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
     }
@@ -3411,17 +3508,33 @@ private void Move(float move_direction)
                     }
                     else
                     {
+                        // 在空中按下跳跃键时：优先执行下劈（无论是否按住下方向），暂时屏蔽二段跳
                         if (!cState.onGround && !cState.wallSliding && !wallLocked)
                         {
-                            if (CanDoubleJump())
+                            // 修改：空中按跳跃键直接触发下劈（不需要按住下方向）
+                            if (CanAttack())
                             {
-                                CancelJump();
-                                HeroJump();
-                                animCtrl.PlayDoubleJump();
-                                airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
+                                // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
+                                if (cState.jumping && rb2d.velocity.y > 0f)
+                                {
+                                    CancelHeroJump();
+                                }
+                                attackInitiatedByAttackButton = false; // 跳跃键触发下劈，不触发强化攻击
+                                Attack(AttackDirection.downward);
+                                StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
                             }
+                            // 暂时注释掉二段跳
+                            // else if (CanDoubleJump())
+                            // {
+                            //     CancelJump();
+                            //     HeroJump();
+                            //     animCtrl.PlayDoubleJump();
+                            //     airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
+                            //     Debug.Log("[DoubleJump] Triggered");
+                            // }
                             else
                             {
+                                // 当前不能攻击或没有可攻击目标、也不能二段跳——保留原有的跳跃排队逻辑
                                 jumpQueueSteps = 0;
                                 jumpQueuing = true;
                             }

@@ -13172,6 +13172,8 @@ MonoBehaviour:
   smallGeoPrefab: {fileID: 3041178361285957278, guid: 3ed1932750fc94644a7f5099628d1937, type: 3}
   mediumGeoPrefab: {fileID: 3041178361285957278, guid: 7960323f95e61a34cb16e490f5860583, type: 3}
   largeGeoPrefab: {fileID: 3041178361285957278, guid: 6e612c6e19ce3f44ab4b191e920a5516, type: 3}
+  superAttackPointsPrefab: {fileID: 0}
+  superAttackPoints: 0
   hasAlternateHitAnimation: 0
   alternateHitAnimation: 
   deathAudioSnapshot: {fileID: 24500014, guid: 8398b8aed03036d4199e6e5a82adad32, type: 2}
