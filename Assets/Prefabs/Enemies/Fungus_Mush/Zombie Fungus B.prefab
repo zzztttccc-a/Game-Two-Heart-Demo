@@ -5386,6 +5386,7 @@ MonoBehaviour:
   hp: 35
   enemyType: 0
   effectOrigin: {x: 0, y: 0, z: 0}
+  isBoss: 0
   invincible: 0
   invincibleFromDirection: 0
   preventInvincibleEffect: 0

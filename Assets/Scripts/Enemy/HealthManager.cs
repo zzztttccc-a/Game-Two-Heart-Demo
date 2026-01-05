@@ -31,6 +31,9 @@ public class HealthManager : MonoBehaviour, IHitResponder
     [SerializeField] public int hp; //Ѫ��
     [SerializeField] public int enemyType; //��������
     [SerializeField] private Vector3 effectOrigin; //��Чƫ����
+    
+    [Header("Boss Settings")]
+    [SerializeField] public bool isBoss;
 
     [Header("Invincible")]
     [SerializeField] private bool invincible;
@@ -163,12 +166,12 @@ public class HealthManager : MonoBehaviour, IHitResponder
 	}
 	FSMUtility.SendEventToGameObject(hitInstance.Source, "DEALT DAMAGE", false);
 	int cardinalDirection = DirectionUtils.GetCardinalDirection(hitInstance.GetActualDirection(transform));
-	if (IsBlockingByDirection(cardinalDirection, hitInstance.AttackType))
-	{
-	    Invincible(hitInstance);
-	    return;
-	}
-	TakeDamage(hitInstance);
+        if (hitInstance.SpecialType != SpecialTypes.SuperAttack && IsBlockingByDirection(cardinalDirection, hitInstance.AttackType))
+        {
+            Invincible(hitInstance);
+            return;
+        }
+        TakeDamage(hitInstance);
     }
 
     public void Invincible(HitInstance hitInstance)
@@ -254,50 +257,64 @@ public class HealthManager : MonoBehaviour, IHitResponder
 
     public void TakeDamage(HitInstance hitInstance)
     {
-	int cardinalDirection = DirectionUtils.GetCardinalDirection(hitInstance.GetActualDirection(transform));
-	directionOfLastAttack = cardinalDirection;
-	FSMUtility.SendEventToGameObject(gameObject, "HIT", false);
-	FSMUtility.SendEventToGameObject(hitInstance.Source, "HIT LANDED", false);
-	FSMUtility.SendEventToGameObject(gameObject, "TOOK DAMAGE", false);
-	if(recoil != null)
-	{
-	    recoil.RecoilByDirection(cardinalDirection,hitInstance.MagnitudeMultiplier);
-	}
-	switch (hitInstance.AttackType)
-	{
-	    case AttackTypes.Nail:
-		if(hitInstance.AttackType == AttackTypes.Nail && enemyType !=3 && enemyType != 6)
-		{
-		    HeroController.instance.SoulGain();
-		}
-		Vector3 position = (hitInstance.Source.transform.position + transform.position) * 0.5f + effectOrigin;
-		break;
-	    case AttackTypes.Generic:
-		break;
-	    case AttackTypes.Spell:
-		break;
-	}
-	if(hitEffectReceiver != null)
-	{
-	    hitEffectReceiver.RecieveHitEffect(hitInstance.GetActualDirection(transform));
-	}
-    // 计算最终伤害倍率，若目标处于定身并且是玩家攻击的首次命中，则额外提升 1.5 倍并在命中瞬间触发短暂时缓
-    float finalMultiplier = hitInstance.Multiplier;
-    if (hitInstance.AttackType == AttackTypes.Nail || hitInstance.AttackType == AttackTypes.Spell || hitInstance.AttackType == AttackTypes.NailBeam)
-    {
-        var stasisTarget = GetComponent<StasisTarget>();
-        if (stasisTarget != null && stasisTarget.TryConsumeFirstHitBonus())
+        int cardinalDirection = DirectionUtils.GetCardinalDirection(hitInstance.GetActualDirection(transform));
+        directionOfLastAttack = cardinalDirection;
+        FSMUtility.SendEventToGameObject(gameObject, "HIT", false);
+        FSMUtility.SendEventToGameObject(hitInstance.Source, "HIT LANDED", false);
+        FSMUtility.SendEventToGameObject(gameObject, "TOOK DAMAGE", false);
+        if(recoil != null)
         {
-            finalMultiplier *= 1.5f;
-            // 命中瞬间进入 0.1 秒的 0.5 倍时缓（平滑下降 0.01s，上升 0.05s）
-            StartCoroutine(GameManager.instance.FreezeMoment(0.01f, 0.1f, 0.05f, 0.5f));
+            recoil.RecoilByDirection(cardinalDirection,hitInstance.MagnitudeMultiplier);
         }
-    }
-    int num = Mathf.RoundToInt(hitInstance.DamageDealt * finalMultiplier);
+        switch (hitInstance.AttackType)
+        {
+            case AttackTypes.Nail:
+                if(hitInstance.AttackType == AttackTypes.Nail && enemyType !=3 && enemyType != 6)
+                {
+                    HeroController.instance.SoulGain();
+                }
+                Vector3 position = (hitInstance.Source.transform.position + transform.position) * 0.5f + effectOrigin;
+                break;
+            case AttackTypes.Generic:
+                break;
+            case AttackTypes.Spell:
+                break;
+        }
+        if(hitEffectReceiver != null)
+        {
+            hitEffectReceiver.RecieveHitEffect(hitInstance.GetActualDirection(transform));
+        }
+        // Super Attack 特判：非 Boss 直接击杀；Boss 承受三倍伤害
+        if (hitInstance.SpecialType == SpecialTypes.SuperAttack)
+        {
+            if (!isBoss)
+            {
+                hp = 0;
+                Die(new float?(hitInstance.GetActualDirection(transform)), hitInstance.AttackType, hitInstance.IgnoreInvulnerable);
+                return;
+            }
+        }
+        // 计算最终伤害倍率，若目标处于定身并且是玩家攻击的首次命中，则额外提升 1.5 倍并在命中瞬间触发短暂时缓
+        float finalMultiplier = hitInstance.Multiplier;
+        if (hitInstance.AttackType == AttackTypes.Nail || hitInstance.AttackType == AttackTypes.Spell || hitInstance.AttackType == AttackTypes.NailBeam)
+        {
+            var stasisTarget = GetComponent<StasisTarget>();
+            if (stasisTarget != null && stasisTarget.TryConsumeFirstHitBonus())
+            {
+                finalMultiplier *= 1.5f;
+                // 命中瞬间进入 0.1 秒的 0.5 倍时缓（平滑下降 0.01s，上升 0.05s）
+                StartCoroutine(GameManager.instance.FreezeMoment(0.01f, 0.1f, 0.05f, 0.5f));
+            }
+        }
+        if (hitInstance.SpecialType == SpecialTypes.SuperAttack && isBoss)
+        {
+            finalMultiplier *= 3f;
+        }
+        int num = Mathf.RoundToInt(hitInstance.DamageDealt * finalMultiplier);
 
-	hp = Mathf.Max(hp - num, -50);
-	if(hp > 0)
-	{
+        hp = Mathf.Max(hp - num, -50);
+        if(hp > 0)
+        {
 	    NonFatalHit(hitInstance.IgnoreInvulnerable);
 	    if (stunControlFSM)
 	    {

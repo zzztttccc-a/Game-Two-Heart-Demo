@@ -18,6 +18,12 @@ public class OneWayPlatformUnlocker : MonoBehaviour
     public float flashDuration = 0.15f;
     // 指定目标：踩到本平台时要解锁的其它平台；为空则回退到同组解锁
     public OneWayPlatformUnlocker[] targetsToUnlock;
+    
+    [Header("Animation")]
+    public string tk2dChildName = "tk2d";
+    public string lockedClipName;
+    public string unlockedClipName;
+    private tk2dSpriteAnimator tkAnimator;
 
     private Collider2D col;
     private SpriteRenderer sr;
@@ -37,6 +43,17 @@ public class OneWayPlatformUnlocker : MonoBehaviour
     private bool triggeredUnlock;
     private Color originalColor;
 
+    private void Start()
+    {
+        if (startLocked)
+        {
+            if (tkAnimator != null && !string.IsNullOrEmpty(lockedClipName))
+            {
+                tkAnimator.Play(lockedClipName);
+            }
+        }
+    }
+
     private void Awake()
     {
         // 初始化渲染与碰撞组件；根据 startLocked 设置初始可见性与碰撞
@@ -44,6 +61,23 @@ public class OneWayPlatformUnlocker : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         tk = GetComponent<tk2dSprite>();
         uiImage = GetComponent<Image>();
+        
+        var tk2dTr = transform.Find(tk2dChildName);
+        if(tk2dTr != null)
+        {
+            tkAnimator = tk2dTr.GetComponent<tk2dSpriteAnimator>();
+            if (tkAnimator == null) Debug.LogWarning($"OneWayPlatformUnlocker: Child '{tk2dChildName}' found but no tk2dSpriteAnimator component on it.");
+        }
+        else if (!string.IsNullOrEmpty(lockedClipName) || !string.IsNullOrEmpty(unlockedClipName))
+        {
+             // Try to find in children recursively if not found by direct name
+             tkAnimator = GetComponentInChildren<tk2dSpriteAnimator>();
+             if (tkAnimator != null) 
+                 Debug.Log($"OneWayPlatformUnlocker: Child '{tk2dChildName}' not found, but found tk2dSpriteAnimator on '{tkAnimator.name}'. Using it.");
+             else
+                 Debug.LogWarning($"OneWayPlatformUnlocker: Animation clips defined but no child named '{tk2dChildName}' found and no tk2dSpriteAnimator in children.");
+        }
+
         var imageTr = transform.Find(imageChildName);
         if (imageTr != null)
         {
@@ -105,7 +139,16 @@ public class OneWayPlatformUnlocker : MonoBehaviour
                 for (int i = 0; i < childColliders.Length; i++) childColliders[i].enabled = false;
             }
             else if (childCollider != null) childCollider.enabled = false; else if (col != null) col.enabled = false;
-            SetColor(new Color(originalColor.r, originalColor.g, originalColor.b, 0f));
+
+            if (tkAnimator != null && !string.IsNullOrEmpty(lockedClipName))
+            {
+                // Animation will be played in Start() to override any default animation
+                SetColor(new Color(originalColor.r, originalColor.g, originalColor.b, 1f));
+            }
+            else
+            {
+                SetColor(new Color(originalColor.r, originalColor.g, originalColor.b, 0f));
+            }
         }
     }
 
@@ -180,18 +223,32 @@ public class OneWayPlatformUnlocker : MonoBehaviour
             for (int i = 0; i < childColliders.Length; i++) childColliders[i].enabled = true;
         }
         else if (childCollider != null) childCollider.enabled = true; else if (col != null) col.enabled = true;
-        Color start = GetColor();
-        Color baseColor = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
-        float t = 0f;
-        while (t < unlockFadeDuration)
+
+        if (tkAnimator != null && !string.IsNullOrEmpty(unlockedClipName))
         {
-            t += Time.deltaTime;
-            float a = Mathf.Clamp01(t / Mathf.Max(0.0001f, unlockFadeDuration));
-            Color c = Color.Lerp(start, baseColor, a);
-            SetColor(c);
-            yield return null;
+            tkAnimator.Play(unlockedClipName);
+            SetColor(new Color(originalColor.r, originalColor.g, originalColor.b, 1f));
         }
-        SetColor(baseColor);
+        else
+        {
+            if (tkAnimator == null && (!string.IsNullOrEmpty(unlockedClipName) || !string.IsNullOrEmpty(lockedClipName)))
+            {
+                Debug.LogWarning("OneWayPlatformUnlocker: Trying to play unlock animation but tkAnimator is null.");
+            }
+            Color start = GetColor();
+            Color baseColor = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+            float t = 0f;
+            while (t < unlockFadeDuration)
+            {
+                t += Time.deltaTime;
+                float a = Mathf.Clamp01(t / Mathf.Max(0.0001f, unlockFadeDuration));
+                Color c = Color.Lerp(start, baseColor, a);
+                SetColor(c);
+                yield return null;
+            }
+            SetColor(baseColor);
+        }
+        
         Color prev = GetColor();
         SetColor(flashColor);
         yield return new WaitForSeconds(flashDuration);

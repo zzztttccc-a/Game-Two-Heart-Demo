@@ -1109,6 +1109,7 @@ private void Move(float move_direction)
     public GameObject superAttackReadyEffectPrefab;
     private GameObject superAttackReadyEffectInstance;
     public bool isSuperAttackReady;
+    private bool superAttackThisSwing;
     private float attackButtonHeldTime; // 攻击键按住时间
     public float superAttackChargeTime = 0.8f; // 蓄力所需时间
     public int superAttackMPCost = 1; // 消耗MP
@@ -1218,6 +1219,7 @@ private void Move(float move_direction)
             {
                 slashComponent = slash4;
                 slashFsm = slash4Fsm;
+                superAttackThisSwing = true;
                 cState.altAttack = false; // 强化攻击通常独立于连击
                 cState.comboIndex = 4; // 沿用Index 4
                 attackDuration = ATTACK_DURATION_4;
@@ -1228,6 +1230,7 @@ private void Move(float move_direction)
             }
             else if (attackDir == AttackDirection.normal)
             {
+                superAttackThisSwing = false;
                 switch (comboStep)
                 {
                     case 0:
@@ -1341,6 +1344,18 @@ private void Move(float move_direction)
             }
         }
         altAttackTime = Time.timeSinceLevelLoad;
+        if (slashComponent != null)
+        {
+            var dmgs = slashComponent.GetComponentsInChildren<DamageEnemies>(true);
+            for (int i = 0; i < dmgs.Length; i++)
+            {
+                dmgs[i].specialType = superAttackThisSwing ? SpecialTypes.SuperAttack : SpecialTypes.None;
+                if (superAttackThisSwing)
+                {
+                    dmgs[i].attackType = AttackTypes.Spell;
+                }
+            }
+        }
         slashComponent.StartSlash();
 
         // 重置来源标记，防止后续非攻击键路径误触发强化
@@ -1353,25 +1368,13 @@ private void Move(float move_direction)
 
         cState.recoiling = false;
         attack_cooldown = ATTACK_COOLDOWN_TIME;
-        // 标记：本次攻击由“攻击键”发起
         attackInitiatedByAttackButton = true;
-        // 上劈：已禁用（注释掉上方向触发的上劈）
-        // if (vertical_input > Mathf.Epsilon)
-        // {
-        //     Attack(AttackDirection.upward);
-        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.upward));
-        //     return;
-        // }
-
-        // 下劈：在空中时按下攻击键不再自动触发下劈，改为由跳跃键+下方向触发
-        // if (!cState.onGround)
-        // {
-        //     Attack(AttackDirection.downward);
-        //     StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
-        //     return;
-        // }
-
-        // 其它情况：地面普通攻击（或空中普通攻击）
+        if (!cState.onGround && inputHandler != null && inputHandler.inputActions != null && inputHandler.inputActions.down.IsPressed)
+        {
+            Attack(AttackDirection.downward);
+            StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+            return;
+        }
         Attack(AttackDirection.normal);
         StartCoroutine(CheckForTerrainThunk(AttackDirection.normal));
     }
@@ -3482,9 +3485,8 @@ private void Move(float move_direction)
     {
 	if (acceptingInput)
 	{
-	    if (inputHandler.inputActions.jump.WasPressed)
+        if (inputHandler.inputActions.jump.WasPressed)
             {
-                // 地面情况下按下+跳：不执行跳跃，改为尝试触发单向平台下落
                 if (cState.onGround && (inputHandler.inputActions.down.IsPressed || inputHandler.inputActions.down.WasPressed))
                 {
                     var dropComp = GetComponent<PlayerDropThroughOneWay>();
@@ -3492,9 +3494,7 @@ private void Move(float move_direction)
                     {
                         dropComp.TriggerDropThrough();
                     }
-                    // 立即将 onGround 置为 false，避免地面逻辑在本帧将 y 速度强制归零，影响下落
                     cState.onGround = false;
-                    // 不执行 HeroJump；如需排队，可在此设置 jumpQueueSteps/jumpQueuing
                 }
                 else
                 {
@@ -3508,33 +3508,17 @@ private void Move(float move_direction)
                     }
                     else
                     {
-                        // 在空中按下跳跃键时：优先执行下劈（无论是否按住下方向），暂时屏蔽二段跳
                         if (!cState.onGround && !cState.wallSliding && !wallLocked)
                         {
-                            // 修改：空中按跳跃键直接触发下劈（不需要按住下方向）
-                            if (CanAttack())
+                            if (CanDoubleJump())
                             {
-                                // 如果当前处于起跳上升阶段，为了立即释放下劈，先取消上升速度
-                                if (cState.jumping && rb2d.velocity.y > 0f)
-                                {
-                                    CancelHeroJump();
-                                }
-                                attackInitiatedByAttackButton = false; // 跳跃键触发下劈，不触发强化攻击
-                                Attack(AttackDirection.downward);
-                                StartCoroutine(CheckForTerrainThunk(AttackDirection.downward));
+                                CancelJump();
+                                HeroJump();
+                                animCtrl.PlayDoubleJump();
+                                airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
                             }
-                            // 暂时注释掉二段跳
-                            // else if (CanDoubleJump())
-                            // {
-                            //     CancelJump();
-                            //     HeroJump();
-                            //     animCtrl.PlayDoubleJump();
-                            //     airJumpsRemaining = Mathf.Max(0, airJumpsRemaining - 1);
-                            //     Debug.Log("[DoubleJump] Triggered");
-                            // }
                             else
                             {
-                                // 当前不能攻击或没有可攻击目标、也不能二段跳——保留原有的跳跃排队逻辑
                                 jumpQueueSteps = 0;
                                 jumpQueuing = true;
                             }

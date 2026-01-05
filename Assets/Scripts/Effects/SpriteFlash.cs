@@ -31,15 +31,25 @@ public class SpriteFlash : MonoBehaviour
 
     private void Start()
     {
-	if(rend == null)
-	{
-	    rend = GetComponent<Renderer>();
-	    prevColor = rend.material.color;
-	}
-	if (block == null)
-	{
-	    block = new MaterialPropertyBlock();
-	}
+        if(rend == null)
+        {
+            rend = GetComponent<Renderer>();
+            if (rend != null)
+            {
+                if (rend.sharedMaterial != null && rend.sharedMaterial.HasProperty("_Color"))
+                {
+                    prevColor = rend.material.color;
+                }
+                else
+                {
+                    prevColor = Color.white;
+                }
+            }
+        }
+        if (block == null)
+        {
+            block = new MaterialPropertyBlock();
+        }
     }
 
     private void OnDisable()

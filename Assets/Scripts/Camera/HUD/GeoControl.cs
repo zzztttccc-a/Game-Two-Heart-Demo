@@ -27,6 +27,7 @@ public class GeoControl : MonoBehaviour
     private const float pickupStartDelay = 0.25f;
     private float pickupStartTime;
     private float defaultGravity;
+    private float speedMultiplier = 1f;
 
     private tk2dSpriteAnimator anim;
     private AudioSource audioSource;
@@ -79,51 +80,35 @@ public class GeoControl : MonoBehaviour
 	// {
 	//     getterRoutine = StartCoroutine(Getter());
 	// }
-    // 默认开启Gathering Swarm（采集群峰）效果：生成小虫子将Geo搬运给主角
-    getterRoutine = StartCoroutine(FlyToHeroDelayed());
-	pickupStartTime = Time.time + pickupStartDelay;
-    }
-
-    private IEnumerator FlyToHeroDelayed()
-    {
-        // geo爆出来的0.8秒后
-        yield return new WaitForSeconds(0.8f);
-
-        // 暂时暂停他们的位置
-        body.velocity = Vector2.zero;
-        body.angularVelocity = 0f;
-        body.gravityScale = 0f;
-
-        // 播放虫子飞出的动画（如果存在）
-        if (getterBug)
+        if (size.givesSuperCharge)
         {
-            getterBug.SetActive(true);
-            Vector3 destination = new Vector3(-0.06624349f, 0.1932119f, -0.001f);
-            Vector3 source = destination + new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(0.5f, 1.5f), 0f);
-            float easeTime = UnityEngine.Random.Range(0.3f, 0.5f);
-            for (float timer = 0f; timer < easeTime; timer += Time.deltaTime)
-            {
-                float t = Mathf.Sin(timer / easeTime * 1.5707964f);
-                getterBug.transform.localPosition = Vector3.Lerp(source, destination, t);
-                yield return null;
-            }
-            getterBug.transform.localPosition = destination;
-            
-            // 如果动画时间不足1秒，继续等待剩余时间
-            if (easeTime < 1.0f)
-            {
-                yield return new WaitForSeconds(1.0f - easeTime);
-            }
+            getterRoutine = StartCoroutine(ImmediateAttract());
         }
         else
         {
-            // 延迟一秒后（无虫子情况）
-            yield return new WaitForSeconds(1.0f);
+            getterRoutine = StartCoroutine(AttractWithPause());
         }
+        pickupStartTime = Time.time + pickupStartDelay;
+    }
 
-        // 飞向主角
+    private IEnumerator AttractWithPause()
+    {
+        yield return new WaitForSeconds(0.2f);
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
+        body.gravityScale = 0f;
+        yield return new WaitForSeconds(0.1f);
         attracted = true;
         boxCollider.isTrigger = true;
+    }
+
+    private IEnumerator ImmediateAttract()
+    {
+        body.gravityScale = 0f;
+        speedMultiplier = 2f;
+        attracted = true;
+        boxCollider.isTrigger = true;
+        yield break;
     }
 
     [Space]
@@ -133,14 +118,14 @@ public class GeoControl : MonoBehaviour
     {
 	if (attracted)
 	{
-	    Vector2 vector = new Vector2(hero.transform.position.x + flyToOffset.x - transform.position.x, hero.transform.position.y + flyToOffset.y - transform.position.y);
-	    vector = Vector2.ClampMagnitude(vector, 1f);
-	    vector = new Vector2(vector.x * 150f, vector.y * 150f);
-	    body.AddForce(vector);
-	    Vector2 vector2 = body.velocity;
-	    vector2 = Vector2.ClampMagnitude(vector2, 20f);
-	    body.velocity = vector2;
-	}
+	    Vector2 target = new Vector2(hero.transform.position.x + flyToOffset.x, hero.transform.position.y + flyToOffset.y);
+        Vector2 toTarget = target - (Vector2)transform.position;
+        float dist = toTarget.magnitude;
+        Vector2 dir = dist > 0.0001f ? (toTarget / dist) : Vector2.zero;
+        float speed = 20f * speedMultiplier;
+        body.angularVelocity = 0f;
+        body.velocity = dir * speed;
+    }
     }
 
     private void SetSize(int index)

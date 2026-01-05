@@ -10,7 +10,7 @@ public struct HitInstance
     public int DamageDealt;
     public float Direction;
     public bool IgnoreInvulnerable;
-    public float MagnitudeMultiplier; //ÊÜµ½µÄºó×øÁ¦³ËÒÔ±¶Êý
+    public float MagnitudeMultiplier; //ï¿½Üµï¿½ï¿½Äºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½
     public float MoveAngle;
     public bool MoveDirection;
     public float Multiplier;
@@ -44,5 +44,6 @@ public enum AttackTypes
 public enum SpecialTypes
 {
     None,
-    Acid
+    Acid,
+    SuperAttack
 }

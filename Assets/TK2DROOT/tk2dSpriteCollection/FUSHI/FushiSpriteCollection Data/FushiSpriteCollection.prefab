@@ -1,0 +1,2329 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7255275827653881744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2148727240507312409}
+  - component: {fileID: 169061196403088413}
+  m_Layer: 0
+  m_Name: FushiSpriteCollection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2148727240507312409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255275827653881744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &169061196403088413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255275827653881744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d546f34a90531a14eaba82a43b05b86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 3
+  materialIdsValid: 1
+  needMaterialInstance: 0
+  spriteDefinitions:
+  - name: Fushi_1_001
+    boundsData:
+    - {x: -0.09500003, y: 0.034999967, z: 0}
+    - {x: 2.9699998, y: 4.05, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.5799999, y: -1.99, z: 0}
+    - {x: 1.3899999, y: -1.99, z: 0}
+    - {x: -1.5799999, y: 2.06, z: 0}
+    - {x: 1.3899999, y: 2.06, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.45019555, y: 0.76562524}
+    - {x: 0.45019555, y: 0.8381345}
+    - {x: 0.549072, y: 0.76562524}
+    - {x: 0.549072, y: 0.8381345}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: c17fb37e371080049860677cdfd146fa
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_002
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.32202172, y: 0.17358422}
+    - {x: 0.41259742, y: 0.17358422}
+    - {x: 0.32202172, y: 0.29565406}
+    - {x: 0.41259742, y: 0.29565406}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: dd5067eee58141c42bb8323da06834bd
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_003
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3464358, y: 0.07470728}
+    - {x: 0.3464358, y: 0.16528296}
+    - {x: 0.46850562, y: 0.07470728}
+    - {x: 0.46850562, y: 0.16528296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: aa6da43ee52c4ad4cabf1c13a122d159
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_004
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.41357446, y: 0.16626}
+    - {x: 0.50415015, y: 0.16626}
+    - {x: 0.41357446, y: 0.28832984}
+    - {x: 0.50415015, y: 0.28832984}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: e72899705b67e2248a774b0232a05b00
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_005
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.46948266, y: 0.07470728}
+    - {x: 0.46948266, y: 0.16528296}
+    - {x: 0.5915525, y: 0.07470728}
+    - {x: 0.5915525, y: 0.16528296}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 0d8b9c8a6d80b2c4f84be34bf26846c3
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_006
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.14013696, y: 0.6643069}
+    - {x: 0.23071265, y: 0.6643069}
+    - {x: 0.14013696, y: 0.7863767}
+    - {x: 0.23071265, y: 0.7863767}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 0936e1e7f61a209448bf56fd2e9a85fa
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_007
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.23168969, y: 0.6643069}
+    - {x: 0.3222654, y: 0.6643069}
+    - {x: 0.23168969, y: 0.7863767}
+    - {x: 0.3222654, y: 0.7863767}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: ca0b01fda7431d04ab65f03dc1c7450c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_008
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3134768, y: 0.5195315}
+    - {x: 0.4040525, y: 0.5195315}
+    - {x: 0.3134768, y: 0.6416013}
+    - {x: 0.4040525, y: 0.6416013}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 2432d0cde90d3bd4baab322b455fa047
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_009
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.32324243, y: 0.64257836}
+    - {x: 0.41381812, y: 0.64257836}
+    - {x: 0.32324243, y: 0.7646482}
+    - {x: 0.41381812, y: 0.7646482}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: f8b56e48468ef4645b0c74cab145cdc6
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_010
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.32714868, y: 0.76562524}
+    - {x: 0.32714868, y: 0.85620093}
+    - {x: 0.4492185, y: 0.76562524}
+    - {x: 0.4492185, y: 0.85620093}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: c0280e498563cfc45bb7d0f8cd399f29
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_011
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.40502954, y: 0.5195315}
+    - {x: 0.49560523, y: 0.5195315}
+    - {x: 0.40502954, y: 0.6416013}
+    - {x: 0.49560523, y: 0.6416013}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: e794a8951c5d8b84f8fb402153e8e905
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: Fushi_1_012
+    boundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999995, y: 0, z: 0}
+    - {x: 3.7099998, y: 5, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -1.8499999, y: -2.5, z: 0}
+    - {x: 1.8599999, y: -2.5, z: 0}
+    - {x: -1.8499999, y: 2.5, z: 0}
+    - {x: 1.8599999, y: 2.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.41479516, y: 0.64257836}
+    - {x: 0.50537086, y: 0.64257836}
+    - {x: 0.41479516, y: 0.7646482}
+    - {x: 0.50537086, y: 0.7646482}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: e30f4094e1aabfd4e97046d8492c138b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00000
+    boundsData:
+    - {x: 0.15499985, y: -0.02000001, z: 0}
+    - {x: 6.25, y: 1.96, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.97, y: -1, z: 0}
+    - {x: 3.2799997, y: -1, z: 0}
+    - {x: -2.97, y: 0.96, z: 0}
+    - {x: 3.2799997, y: 0.96, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.32202172, y: 0.2966311}
+    - {x: 0.47460914, y: 0.2966311}
+    - {x: 0.32202172, y: 0.34448218}
+    - {x: 0.47460914, y: 0.34448218}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: de3875c58c7c8824889b484e40904afb
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00001
+    boundsData:
+    - {x: 0.004999876, y: 0.120000005, z: 0}
+    - {x: 7.0499997, y: 2.72, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.24, z: 0}
+    - {x: 3.5299997, y: -1.24, z: 0}
+    - {x: -3.52, y: 1.48, z: 0}
+    - {x: 3.5299997, y: 1.48, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17358422, y: 0.49121118}
+    - {x: 0.17358422, y: 0.66332984}
+    - {x: 0.23999, y: 0.49121118}
+    - {x: 0.23999, y: 0.66332984}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: cf10c769b206d9348ad8831a1e2e4702
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00002
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.0004885254}
+    - {x: 0.17260718, y: 0.0004885254}
+    - {x: 0.0004885254, y: 0.07373022}
+    - {x: 0.17260718, y: 0.07373022}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 7ca31bd7c82286a4bbc31b79a2ba9a7c
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00003
+    boundsData:
+    - {x: 0.009999871, y: 0.055000007, z: 0}
+    - {x: 7.04, y: 2.8899999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.51, y: -1.39, z: 0}
+    - {x: 3.5299997, y: -1.39, z: 0}
+    - {x: -3.51, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.24780297, y: 0.31787133}
+    - {x: 0.24780297, y: 0.48974586}
+    - {x: 0.31835914, y: 0.31787133}
+    - {x: 0.31835914, y: 0.48974586}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: fc13e9dbfc14a874e8d6d4bb7679ce51
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00004
+    boundsData:
+    - {x: 0.004999876, y: 0.01999998, z: 0}
+    - {x: 7.0499997, y: 2.96, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.46, z: 0}
+    - {x: 3.5299997, y: -1.46, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.8620608}
+    - {x: 0.17260718, y: 0.8620608}
+    - {x: 0.0004885254, y: 0.93432593}
+    - {x: 0.17260718, y: 0.93432593}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 6c5c4b926bd323d4089b0ffc3169b0c4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00005
+    boundsData:
+    - {x: 0.004999876, y: 0.01999998, z: 0}
+    - {x: 7.0499997, y: 2.96, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.46, z: 0}
+    - {x: 3.5299997, y: -1.46, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.33886743, y: 0.3464358}
+    - {x: 0.33886743, y: 0.51855445}
+    - {x: 0.41113257, y: 0.3464358}
+    - {x: 0.41113257, y: 0.51855445}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 031aded91dfd1b64a9b17765f1ccbf9b
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00006
+    boundsData:
+    - {x: 0.004999876, y: 0.014999986, z: 0}
+    - {x: 7.0499997, y: 2.97, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.47, z: 0}
+    - {x: 3.5299997, y: -1.47, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.24780297}
+    - {x: 0.17260718, y: 0.24780297}
+    - {x: 0.0004885254, y: 0.32031226}
+    - {x: 0.17260718, y: 0.32031226}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 298ba5ee51b9cb041a6ab08d7d146a44
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00007
+    boundsData:
+    - {x: 0.009999871, y: -0.004999995, z: 0}
+    - {x: 7.04, y: 2.99, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.51, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.51, y: 1.49, z: 0}
+    - {x: 3.5299997, y: 1.49, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.07470728}
+    - {x: 0.17236304, y: 0.07470728}
+    - {x: 0.0004885254, y: 0.14770484}
+    - {x: 0.17236304, y: 0.14770484}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 0c8758faf9d44de45867f346b1dee2be
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00008
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17358422, y: 0.0004885254}
+    - {x: 0.3457029, y: 0.0004885254}
+    - {x: 0.17358422, y: 0.07373022}
+    - {x: 0.3457029, y: 0.07373022}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 2153c26e26d116a42b5881a3d888f061
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00009
+    boundsData:
+    - {x: 0.004999876, y: -0.00999999, z: 0}
+    - {x: 7.0499997, y: 2.98, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.48, z: 0}
+    - {x: 3.5299997, y: 1.48, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17334008, y: 0.07470728}
+    - {x: 0.34545875, y: 0.07470728}
+    - {x: 0.17334008, y: 0.1474607}
+    - {x: 0.34545875, y: 0.1474607}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 69ec9c73368c04149a2ceebd478d8f05
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00010
+    boundsData:
+    - {x: 0.044999838, y: -0.17000002, z: 0}
+    - {x: 6.97, y: 2.6, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.44, y: -1.47, z: 0}
+    - {x: 3.5299997, y: -1.47, z: 0}
+    - {x: -3.44, y: 1.13, z: 0}
+    - {x: 3.5299997, y: 1.13, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.935303}
+    - {x: 0.17065406, y: 0.935303}
+    - {x: 0.0004885254, y: 0.99877906}
+    - {x: 0.17065406, y: 0.99877906}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: d62327919422d50438242aecb6c38231
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_2_00011
+    boundsData:
+    - {x: -0.015000105, y: 0.025000036, z: 0}
+    - {x: 6.95, y: 2.83, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.49, y: -1.39, z: 0}
+    - {x: 3.4599998, y: -1.39, z: 0}
+    - {x: -3.49, y: 1.44, z: 0}
+    - {x: 3.4599998, y: 1.44, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.24340844, y: 0.4907229}
+    - {x: 0.24340844, y: 0.66040015}
+    - {x: 0.31249976, y: 0.4907229}
+    - {x: 0.31249976, y: 0.66040015}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 43b658eb028e4d0429a054474b0990cc
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_001
+    boundsData:
+    - {x: -0.17500007, y: 0.030000031, z: 0}
+    - {x: 6.0299997, y: 2.1599998, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.19, y: -1.05, z: 0}
+    - {x: 2.84, y: -1.05, z: 0}
+    - {x: -3.19, y: 1.11, z: 0}
+    - {x: 2.84, y: 1.11, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17895532, y: 0.78735375}
+    - {x: 0.32617164, y: 0.78735375}
+    - {x: 0.17895532, y: 0.84008765}
+    - {x: 0.32617164, y: 0.84008765}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: b581881a31aec1a47977fa760d3b7552
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_002
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.34667993, y: 0.0004885254}
+    - {x: 0.5187986, y: 0.0004885254}
+    - {x: 0.34667993, y: 0.07373022}
+    - {x: 0.5187986, y: 0.07373022}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: a233a217423b7334097fa78526f13ead
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_003
+    boundsData:
+    - {x: 0.004999876, y: 0.18, z: 0}
+    - {x: 7.0499997, y: 2.6399999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.14, z: 0}
+    - {x: 3.5299997, y: -1.14, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.07470728, y: 0.6481936}
+    - {x: 0.07470728, y: 0.82031226}
+    - {x: 0.13915992, y: 0.6481936}
+    - {x: 0.13915992, y: 0.82031226}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 5611ef034e5b04246be79fd59711fd04
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_004
+    boundsData:
+    - {x: 0.004999876, y: 0.43, z: 0}
+    - {x: 7.0499997, y: 2.1399999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -0.64, z: 0}
+    - {x: 3.5299997, y: -0.64, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.9401858, y: 0.17334008}
+    - {x: 0.9401858, y: 0.34545875}
+    - {x: 0.9924314, y: 0.17334008}
+    - {x: 0.9924314, y: 0.34545875}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 7659d708937df4e40836e2be9c7b60dc
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_005
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.5197756, y: 0.0004885254}
+    - {x: 0.6918943, y: 0.0004885254}
+    - {x: 0.5197756, y: 0.07373022}
+    - {x: 0.6918943, y: 0.07373022}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 03793573d97a0a043b39ed16b3bcba4d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_006
+    boundsData:
+    - {x: 0.009999871, y: 0.37, z: 0}
+    - {x: 7.04, y: 2.26, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.51, y: -0.76, z: 0}
+    - {x: 3.5299997, y: -0.76, z: 0}
+    - {x: -3.51, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.9401858, y: 0.0004885254}
+    - {x: 0.9401858, y: 0.17236304}
+    - {x: 0.9953611, y: 0.0004885254}
+    - {x: 0.9953611, y: 0.17236304}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0.99999994}
+    - {x: 1, y: 0}
+    - {x: 1, y: 0.99999994}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 21349721ca522504899090effb483eaf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_007
+    boundsData:
+    - {x: 0.119999886, y: 0.13999999, z: 0}
+    - {x: 6.8199997, y: 2.72, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.29, y: -1.22, z: 0}
+    - {x: 3.5299997, y: -1.22, z: 0}
+    - {x: -3.29, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17358422, y: 0.8615725}
+    - {x: 0.34008765, y: 0.8615725}
+    - {x: 0.17358422, y: 0.9279783}
+    - {x: 0.34008765, y: 0.9279783}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 04e670e75a17a2642a4662bc542b1bbd
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_008
+    boundsData:
+    - {x: 0.54999983, y: 0.33499998, z: 0}
+    - {x: 5.96, y: 2.33, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.43, y: -0.83000004, z: 0}
+    - {x: 3.5299997, y: -0.83000004, z: 0}
+    - {x: -2.43, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.33886743, y: 0.9289553}
+    - {x: 0.48437476, y: 0.9289553}
+    - {x: 0.33886743, y: 0.9858396}
+    - {x: 0.48437476, y: 0.9858396}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 4d15d941ab9764842a7f37bb5441c67d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_009
+    boundsData:
+    - {x: 0.24499989, y: 0.42000002, z: 0}
+    - {x: 5.37, y: 2.1599998, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.44, y: -0.65999997, z: 0}
+    - {x: 2.9299998, y: -0.65999997, z: 0}
+    - {x: -2.44, y: 1.5, z: 0}
+    - {x: 2.9299998, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.3410647, y: 0.857178}
+    - {x: 0.47216773, y: 0.857178}
+    - {x: 0.3410647, y: 0.9099119}
+    - {x: 0.47216773, y: 0.9099119}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 39ff3e5d853ff534db4ff0d9a3626955
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_010
+    boundsData:
+    - {x: -0.3300001, y: 0.019999951, z: 0}
+    - {x: 4.22, y: 1.5999999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.44, y: -0.78000003, z: 0}
+    - {x: 1.7799999, y: -0.78000003, z: 0}
+    - {x: -2.44, y: 0.81999993, z: 0}
+    - {x: 1.7799999, y: 0.81999993, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.4853518, y: 0.8945315}
+    - {x: 0.4853518, y: 0.99755836}
+    - {x: 0.5244138, y: 0.8945315}
+    - {x: 0.5244138, y: 0.99755836}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 328c68be83484bd44962c9198b3b4ecc
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_011
+    boundsData:
+    - {x: -0.31500006, y: 0.014999956, z: 0}
+    - {x: 4.23, y: 1.6099999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.43, y: -0.79, z: 0}
+    - {x: 1.8, y: -0.79, z: 0}
+    - {x: -2.43, y: 0.81999993, z: 0}
+    - {x: 1.8, y: 0.81999993, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.07470728, y: 0.8212893}
+    - {x: 0.17797828, y: 0.8212893}
+    - {x: 0.07470728, y: 0.86059546}
+    - {x: 0.17797828, y: 0.86059546}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 8f39407bce887d040b10761a3b3885f4
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_3_012
+    boundsData:
+    - {x: -0.11500001, y: 0.245, z: 0}
+    - {x: 6.81, y: 2.51, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.01, z: 0}
+    - {x: 3.29, y: -1.01, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.29, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.1716311, y: 0.935303}
+    - {x: 0.3378904, y: 0.935303}
+    - {x: 0.1716311, y: 0.9965818}
+    - {x: 0.3378904, y: 0.9965818}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 53736c7866851ec4b8b19f4416234f88
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00000
+    boundsData:
+    - {x: -0.36500007, y: 0.11500001, z: 0}
+    - {x: 4.25, y: 2.23, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -2.49, y: -1, z: 0}
+    - {x: 1.7599999, y: -1, z: 0}
+    - {x: -2.49, y: 1.23, z: 0}
+    - {x: 1.7599999, y: 1.23, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.47314477, y: 0.83911157}
+    - {x: 0.57690406, y: 0.83911157}
+    - {x: 0.47314477, y: 0.89355445}
+    - {x: 0.57690406, y: 0.89355445}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 751c68c6e48bffd4a966b6ab7b8c4650
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00001
+    boundsData:
+    - {x: 0.004999876, y: -0.09000003, z: 0}
+    - {x: 7.0499997, y: 2.82, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.3199999, z: 0}
+    - {x: 3.5299997, y: 1.3199999, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17358422, y: 0.31811547}
+    - {x: 0.17358422, y: 0.49023414}
+    - {x: 0.2424314, y: 0.31811547}
+    - {x: 0.2424314, y: 0.49023414}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 4082b4661c40db147a92f6eaaf8dddec
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00002
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.69287133, y: 0.0004885254}
+    - {x: 0.86499, y: 0.0004885254}
+    - {x: 0.69287133, y: 0.07373022}
+    - {x: 0.86499, y: 0.07373022}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 4c12e8362c0909b44b48b7b192d3ccdf
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00003
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.86596704, y: 0.0004885254}
+    - {x: 0.86596704, y: 0.17260718}
+    - {x: 0.93920875, y: 0.0004885254}
+    - {x: 0.93920875, y: 0.17260718}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0.99999994}
+    - {x: 1, y: 0}
+    - {x: 1, y: 0.99999994}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: f96967bf2249b86448af7dcefe6788ae
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00004
+    boundsData:
+    - {x: -0.07000005, y: 0, z: 0}
+    - {x: 6.8999996, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.3799999, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.3799999, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.24780297, y: 0.14843774}
+    - {x: 0.24780297, y: 0.3168943}
+    - {x: 0.32104468, y: 0.14843774}
+    - {x: 0.32104468, y: 0.3168943}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 46e74232bf6fe0e4cbd519a943877910
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00005
+    boundsData:
+    - {x: -0.035000205, y: 0, z: 0}
+    - {x: 6.9699993, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.4499996, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.4499996, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.6909182}
+    - {x: 0.0004885254, y: 0.86108375}
+    - {x: 0.07373022, y: 0.6909182}
+    - {x: 0.07373022, y: 0.86108375}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 5615b723c30be554da272410ca98d941
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00006
+    boundsData:
+    - {x: -0.03000009, y: 0, z: 0}
+    - {x: 6.9799995, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.4599998, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.4599998, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.5195315}
+    - {x: 0.0004885254, y: 0.68994117}
+    - {x: 0.07373022, y: 0.5195315}
+    - {x: 0.07373022, y: 0.68994117}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 6c2c78a4ed712d24a9f0911a46d2d52d
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00007
+    boundsData:
+    - {x: -0.06500018, y: 0, z: 0}
+    - {x: 6.91, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.3899996, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.3899996, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.17358422, y: 0.14843774}
+    - {x: 0.17358422, y: 0.31713843}
+    - {x: 0.24682593, y: 0.14843774}
+    - {x: 0.24682593, y: 0.31713843}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: f8aa8f333e8f0e543bbc837bf42d1654
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00008
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.3464358}
+    - {x: 0.0004885254, y: 0.51855445}
+    - {x: 0.07373022, y: 0.3464358}
+    - {x: 0.07373022, y: 0.51855445}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: a4bf285ffce079a419dbf7ed01e1d8d8
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00009
+    boundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.5299997, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.5, z: 0}
+    - {x: 3.5299997, y: 1.5, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.0004885254, y: 0.17358422}
+    - {x: 0.17260718, y: 0.17358422}
+    - {x: 0.0004885254, y: 0.24682593}
+    - {x: 0.17260718, y: 0.24682593}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0.99999994, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0.99999994, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 2e2ec51aed1026f4f88d6c27fbd3d0f1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00010
+    boundsData:
+    - {x: -0.18500018, y: -0.055000067, z: 0}
+    - {x: 6.6699996, y: 2.8899999, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.5, z: 0}
+    - {x: 3.1499996, y: -1.5, z: 0}
+    - {x: -3.52, y: 1.3899999, z: 0}
+    - {x: 3.1499996, y: 1.3899999, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.07470728, y: 0.3212893}
+    - {x: 0.07470728, y: 0.48413062}
+    - {x: 0.14526343, y: 0.3212893}
+    - {x: 0.14526343, y: 0.48413062}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: ba04e7b817f4d4f40bca749c985fb16e
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  - name: fushi_4_00011
+    boundsData:
+    - {x: -0.20000005, y: -0.045000076, z: 0}
+    - {x: 6.64, y: 2.83, z: 0}
+    untrimmedBoundsData:
+    - {x: 0.004999876, y: 0, z: 0}
+    - {x: 7.0499997, y: 3, z: 0}
+    texelSize: {x: 0.01, y: 0.01}
+    positions:
+    - {x: -3.52, y: -1.46, z: 0}
+    - {x: 3.12, y: -1.46, z: 0}
+    - {x: -3.52, y: 1.3699999, z: 0}
+    - {x: 3.12, y: 1.3699999, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: 0.07470728, y: 0.48510766}
+    - {x: 0.07470728, y: 0.64721656}
+    - {x: 0.14379859, y: 0.48510766}
+    - {x: 0.14379859, y: 0.64721656}
+    normalizedUvs:
+    - {x: 0, y: 0}
+    - {x: 0, y: 1}
+    - {x: 1, y: 0}
+    - {x: 1, y: 1}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+    materialId: 0
+    sourceTextureGUID: 16834117f9c83fb41866478b70e5719f
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 1
+    complexGeometry: 0
+    physicsEngine: 1
+    colliderType: 0
+    customColliders: []
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+    polygonCollider2D: []
+    edgeCollider2D: []
+    attachPoints: []
+  premultipliedAlpha: 0
+  material: {fileID: 0}
+  materials:
+  - {fileID: 2100000, guid: ecd94bc2bb3ee6345bb8fa9140fc3c25, type: 2}
+  textures:
+  - {fileID: 2800000, guid: ceb9b58b588523543846b425a0ca2120, type: 3}
+  pngTextures: []
+  materialPngTextureId: 00000000
+  textureFilterMode: 1
+  textureMipMaps: 0
+  allowMultipleAtlases: 0
+  spriteCollectionGUID: 6454dc386aed6f34ab7efcaad78e3db1
+  spriteCollectionName: FushiSpriteCollection
+  assetName: 
+  loadable: 0
+  invOrthoSize: 2
+  halfTargetHeight: 50
+  buildKey: 460934551
+  dataGuid: 1ad99d0751aba8c4b8a427e263ed677d
+  managedSpriteCollection: 0
+  hasPlatformData: 0
+  spriteCollectionPlatforms: []
+  spriteCollectionPlatformGUIDs: []

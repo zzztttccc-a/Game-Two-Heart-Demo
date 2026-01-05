@@ -67,7 +67,7 @@ public class DamageEnemies : MonoBehaviour
 	    return;
 	}
 	int layer = collider2D.gameObject.layer;
-	if (layer == 20 || layer == 9 || layer == 26 || layer == 31) //Èç¹ûlayerÊÇplayerºÍherobox¾Í·µ»Ø
+	if (layer == 20 || layer == 9 || layer == 26 || layer == 31) //ï¿½ï¿½ï¿½layerï¿½ï¿½playerï¿½ï¿½heroboxï¿½Í·ï¿½ï¿½ï¿½
 	{
 	    return;
 	}
@@ -110,6 +110,6 @@ public class DamageEnemies : MonoBehaviour
 	    Multiplier = 1f,
 	    SpecialType = specialType,
 	    IsExtraDamage = false
-	}, 3);
+	}, 10);
     }
 }

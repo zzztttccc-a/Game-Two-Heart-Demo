@@ -362,6 +362,10 @@ MonoBehaviour:
     dataGUID: 
     managed: 0
     loadable: 0
+  - assetGUID: bca62daad3d6aa04392f35542d425d16
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex: []
   spriteCollectionIndex:
   - name: KnightSpriteCollection
@@ -17550,6 +17554,160 @@ MonoBehaviour:
     - 1765558402.97139
     - 1765558403.20386
     - 1765558403.29414
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: FushiSpriteCollection
+    spriteCollectionGUID: 6454dc386aed6f34ab7efcaad78e3db1
+    spriteCollectionDataGUID: 1ad99d0751aba8c4b8a427e263ed677d
+    spriteNames:
+    - Fushi_1_001
+    - Fushi_1_002
+    - Fushi_1_003
+    - Fushi_1_004
+    - Fushi_1_005
+    - Fushi_1_006
+    - Fushi_1_007
+    - Fushi_1_008
+    - Fushi_1_009
+    - Fushi_1_010
+    - Fushi_1_011
+    - Fushi_1_012
+    - fushi_2_00000
+    - fushi_2_00001
+    - fushi_2_00002
+    - fushi_2_00003
+    - fushi_2_00004
+    - fushi_2_00005
+    - fushi_2_00006
+    - fushi_2_00007
+    - fushi_2_00008
+    - fushi_2_00009
+    - fushi_2_00010
+    - fushi_2_00011
+    - fushi_3_001
+    - fushi_3_002
+    - fushi_3_003
+    - fushi_3_004
+    - fushi_3_005
+    - fushi_3_006
+    - fushi_3_007
+    - fushi_3_008
+    - fushi_3_009
+    - fushi_3_010
+    - fushi_3_011
+    - fushi_3_012
+    - fushi_4_00000
+    - fushi_4_00001
+    - fushi_4_00002
+    - fushi_4_00003
+    - fushi_4_00004
+    - fushi_4_00005
+    - fushi_4_00006
+    - fushi_4_00007
+    - fushi_4_00008
+    - fushi_4_00009
+    - fushi_4_00010
+    - fushi_4_00011
+    spriteTextureGUIDs:
+    - c17fb37e371080049860677cdfd146fa
+    - dd5067eee58141c42bb8323da06834bd
+    - aa6da43ee52c4ad4cabf1c13a122d159
+    - e72899705b67e2248a774b0232a05b00
+    - 0d8b9c8a6d80b2c4f84be34bf26846c3
+    - 0936e1e7f61a209448bf56fd2e9a85fa
+    - ca0b01fda7431d04ab65f03dc1c7450c
+    - 2432d0cde90d3bd4baab322b455fa047
+    - f8b56e48468ef4645b0c74cab145cdc6
+    - c0280e498563cfc45bb7d0f8cd399f29
+    - e794a8951c5d8b84f8fb402153e8e905
+    - e30f4094e1aabfd4e97046d8492c138b
+    - de3875c58c7c8824889b484e40904afb
+    - cf10c769b206d9348ad8831a1e2e4702
+    - 7ca31bd7c82286a4bbc31b79a2ba9a7c
+    - fc13e9dbfc14a874e8d6d4bb7679ce51
+    - 6c5c4b926bd323d4089b0ffc3169b0c4
+    - 031aded91dfd1b64a9b17765f1ccbf9b
+    - 298ba5ee51b9cb041a6ab08d7d146a44
+    - 0c8758faf9d44de45867f346b1dee2be
+    - 2153c26e26d116a42b5881a3d888f061
+    - 69ec9c73368c04149a2ceebd478d8f05
+    - d62327919422d50438242aecb6c38231
+    - 43b658eb028e4d0429a054474b0990cc
+    - b581881a31aec1a47977fa760d3b7552
+    - a233a217423b7334097fa78526f13ead
+    - 5611ef034e5b04246be79fd59711fd04
+    - 7659d708937df4e40836e2be9c7b60dc
+    - 03793573d97a0a043b39ed16b3bcba4d
+    - 21349721ca522504899090effb483eaf
+    - 04e670e75a17a2642a4662bc542b1bbd
+    - 4d15d941ab9764842a7f37bb5441c67d
+    - 39ff3e5d853ff534db4ff0d9a3626955
+    - 328c68be83484bd44962c9198b3b4ecc
+    - 8f39407bce887d040b10761a3b3885f4
+    - 53736c7866851ec4b8b19f4416234f88
+    - 751c68c6e48bffd4a966b6ab7b8c4650
+    - 4082b4661c40db147a92f6eaaf8dddec
+    - 4c12e8362c0909b44b48b7b192d3ccdf
+    - f96967bf2249b86448af7dcefe6788ae
+    - 46e74232bf6fe0e4cbd519a943877910
+    - 5615b723c30be554da272410ca98d941
+    - 6c2c78a4ed712d24a9f0911a46d2d52d
+    - f8aa8f333e8f0e543bbc837bf42d1654
+    - a4bf285ffce079a419dbf7ed01e1d8d8
+    - 2e2ec51aed1026f4f88d6c27fbd3d0f1
+    - ba04e7b817f4d4f40bca749c985fb16e
+    - 16834117f9c83fb41866478b70e5719f
+    spriteTextureTimeStamps:
+    - 1766988244.46493
+    - 1766988244.52666
+    - 1766988244.60039
+    - 1766988244.67456
+    - 1766988244.75139
+    - 1766988244.8229
+    - 1766988244.90139
+    - 1766988244.97272
+    - 1766988245.04389
+    - 1766988245.11286
+    - 1766988245.18244
+    - 1766988245.2685
+    - 1766988878.11494
+    - 1766988878.17106
+    - 1766988878.33676
+    - 1766988878.40326
+    - 1766988878.46391
+    - 1766988878.53699
+    - 1766988878.71117
+    - 1766988878.77049
+    - 1766988878.83024
+    - 1766988878.88582
+    - 1766988878.94142
+    - 1766988878.99626
+    - 1766989397.36322
+    - 1766989397.42432
+    - 1766989397.50221
+    - 1766989397.53937
+    - 1766989397.57672
+    - 1766989397.6157
+    - 1766989397.65684
+    - 1766989397.69571
+    - 1766989397.73524
+    - 1766989397.77524
+    - 1766989397.81473
+    - 1766989397.85425
+    - 1766989021.77488
+    - 1766989021.83288
+    - 1766989021.92117
+    - 1766989021.99482
+    - 1766989022.05742
+    - 1766989022.10431
+    - 1766989022.17312
+    - 1766989022.21586
+    - 1766989022.26206
+    - 1766989022.30744
+    - 1766989022.35145
+    - 1766989022.39495
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

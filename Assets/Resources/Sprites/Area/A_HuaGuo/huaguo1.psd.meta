@@ -131,12 +131,12 @@ TextureImporter:
       name: huaguo1_0
       rect:
         serializedVersion: 2
-        x: 45
-        y: 899
-        width: 757
-        height: 330
+        x: 0
+        y: 759
+        width: 301
+        height: 574
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,12 +152,12 @@ TextureImporter:
       name: huaguo1_1
       rect:
         serializedVersion: 2
-        x: 845
-        y: 858
-        width: 529
-        height: 332
+        x: 326
+        y: 481
+        width: 315
+        height: 849
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,12 +173,12 @@ TextureImporter:
       name: huaguo1_4
       rect:
         serializedVersion: 2
-        x: 2598
-        y: 929
-        width: 459
-        height: 238
+        x: 2825
+        y: 0
+        width: 343
+        height: 132
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,12 +194,12 @@ TextureImporter:
       name: huaguo1_5
       rect:
         serializedVersion: 2
-        x: 1436
-        y: 954
-        width: 480
-        height: 183
+        x: 1075
+        y: 735
+        width: 575
+        height: 592
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,12 +215,12 @@ TextureImporter:
       name: huaguo1_8
       rect:
         serializedVersion: 2
-        x: 1998
-        y: 824
-        width: 541
-        height: 303
+        x: 1713
+        y: 694
+        width: 657
+        height: 637
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,12 +236,12 @@ TextureImporter:
       name: huaguo1_9
       rect:
         serializedVersion: 2
-        x: 125
-        y: 544
-        width: 563
+        x: 0
+        y: 505
+        width: 299
         height: 250
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,12 +257,12 @@ TextureImporter:
       name: huaguo1_10
       rect:
         serializedVersion: 2
-        x: 879
-        y: 434
-        width: 968
-        height: 345
+        x: 689
+        y: 486
+        width: 340
+        height: 833
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,12 +278,12 @@ TextureImporter:
       name: huaguo1_11
       rect:
         serializedVersion: 2
-        x: 2072
-        y: 402
-        width: 677
-        height: 333
+        x: 2381
+        y: 827
+        width: 787
+        height: 508
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,12 +299,12 @@ TextureImporter:
       name: huaguo1_16
       rect:
         serializedVersion: 2
-        x: 166
-        y: 56
-        width: 706
-        height: 277
+        x: 18
+        y: 7
+        width: 405
+        height: 473
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -320,12 +320,12 @@ TextureImporter:
       name: huaguo1_17
       rect:
         serializedVersion: 2
-        x: 1016
-        y: 89
-        width: 594
-        height: 269
+        x: 457
+        y: 30
+        width: 494
+        height: 297
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -341,12 +341,12 @@ TextureImporter:
       name: huaguo1_18
       rect:
         serializedVersion: 2
-        x: 1803
-        y: 104
-        width: 482
-        height: 186
+        x: 1430
+        y: 21
+        width: 645
+        height: 472
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -362,12 +362,12 @@ TextureImporter:
       name: huaguo1_21
       rect:
         serializedVersion: 2
-        x: 2450
-        y: 69
-        width: 576
-        height: 252
+        x: 2105
+        y: 4
+        width: 592
+        height: 590
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -375,6 +375,216 @@ TextureImporter:
       bones: []
       spriteID: dae89a3ed7d35244182db1140484e88a
       internalID: -1256301023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_2
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 20
+        width: 437
+        height: 468
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd6d7f1e1f6617e428ada5b884d92e8f
+      internalID: -93926260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_3
+      rect:
+        serializedVersion: 2
+        x: 2746
+        y: 143
+        width: 230
+        height: 152
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 283012ca9839cd949ac66131f38ae9d7
+      internalID: -400441337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_6
+      rect:
+        serializedVersion: 2
+        x: 2978
+        y: 141
+        width: 176
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 582fba2f3fa802146b34846d8d85e160
+      internalID: -717979104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_7
+      rect:
+        serializedVersion: 2
+        x: 2818
+        y: 305
+        width: 317
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53c1b0a6bc7d7749a084e699c435d95
+      internalID: 1182322153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_12
+      rect:
+        serializedVersion: 2
+        x: 2784
+        y: 388
+        width: 359
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f87689deb04ee049a19af1cde1df33a
+      internalID: 665163260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_13
+      rect:
+        serializedVersion: 2
+        x: 2817
+        y: 474
+        width: 282
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ff453a10bdf2804b9edd7a6b70204fb
+      internalID: -1541376334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_14
+      rect:
+        serializedVersion: 2
+        x: 2779
+        y: 558
+        width: 334
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 395631fd40e134046ba4f2572fca06fb
+      internalID: -436266141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_15
+      rect:
+        serializedVersion: 2
+        x: 2440
+        y: 630
+        width: 331
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8a59a7197fa15b459483f31b45bc92d
+      internalID: 1786844125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_19
+      rect:
+        serializedVersion: 2
+        x: 2611
+        y: 719
+        width: 438
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2143ebceb545d747ae15919b24355d1
+      internalID: -671137336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo1_20
+      rect:
+        serializedVersion: 2
+        x: 1916
+        y: 597
+        width: 446
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b61f1240ca56e2647af9b12a394242e3
+      internalID: -1212319318
       vertices: []
       indices: 
       edges: []

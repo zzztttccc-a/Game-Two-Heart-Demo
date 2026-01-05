@@ -2,14 +2,16 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: NoiseBlur_Vertical
-  m_Shader: {fileID: 4800000, guid: d9ac1283fa606574a93d25eb171714a2, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
+  m_Shader: {fileID: 4800000, guid: c648834c94de01d4682911dfc23d9925, type: 3}
+  m_ValidKeywords:
+  - ETC1_EXTERNAL_ALPHA
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -19,6 +21,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -63,6 +69,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - AnimatedInfiniteZoomUV_AnimatedInfiniteZoomUV_Intensity_1: 0.84
     - AnimatedInfiniteZoomUV_AnimatedInfiniteZoomUV_PosX_1: 0
@@ -81,7 +88,7 @@ Material:
     - Desintegration_Value: 0
     - Disolve_Seed: 0.5
     - Disolve_Value: 0.57083243
-    - Displacement_Value: -2
+    - Displacement_Value: -0.046
     - DistortionUV_DistanceX_1: 0.507
     - DistortionUV_DistanceY_1: 0.598
     - DistortionUV_Speed_1: 0.71
@@ -115,8 +122,9 @@ Material:
     - Pixel_Size: 19
     - Seed: 0.6
     - _AutomaticLerp_Speed_1: 0.487
-    - _BlurHQPlus_Intensity_1: 32.6
-    - _Blur_Intensity_1: -0.2695522
+    - _BlurHQPlus_Intensity_1: 1
+    - _BlurHQ_Intensity_1: 2.79
+    - _Blur_Intensity_1: 1.04
     - _Brightness_Fade_1: 0.2868607
     - _BumpScale: 1
     - _CircleFade_Dist_1: 0.2
@@ -148,6 +156,7 @@ Material:
     - _Emboss_Intensity_1: 0.18
     - _Emboss_grayfade_1: 1.28
     - _Emboss_original_1: 1
+    - _EnableExternalAlpha: 0
     - _GhostFX_ClipDown_1: 15.942461
     - _GhostFX_ClipLeft_1: 0.566
     - _GhostFX_ClipRight_1: 0.433
@@ -170,8 +179,8 @@ Material:
     - _Lerp_Fade_1: 0.9150102
     - _Metallic: 0
     - _Mode: 0
-    - _MotionBlurFast_Angle_1: -0.24
-    - _MotionBlurFast_Distance_1: 3.6327844
+    - _MotionBlurFast_Angle_1: -0.866
+    - _MotionBlurFast_Distance_1: 0.26
     - _OcclusionStrength: 1
     - _OperationBlend_Fade_1: 1
     - _OperationBlend_Fade_2: 1
@@ -200,7 +209,10 @@ Material:
     - _ColorRGBA_Color_1: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FillColor_Color_1: {r: 0.3814879, g: 1, b: 0.1911765, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _InnerGlowHQ_Color_1: {r: 1, g: 0.08088237, b: 0, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowLight_Color_1: {r: 0, g: 0.7, b: 1, a: 1}
     - _TintColor: {r: 0, g: 0.647059, b: 1, a: 1}
     - _TintRGBA_Color_1: {r: 1, g: 0.7941177, b: 0, a: 1}
+  m_BuildTextureStacks: []

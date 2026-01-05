@@ -1,0 +1,1000 @@
+fileFormatVersion: 2
+guid: 5fbc6afb47cb94b489385788befce82c
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 1
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: huaguo3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 535
+        width: 529
+        height: 794
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a020c93da0c59cc49b69151d3a79f93e
+      internalID: 1621383486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_1
+      rect:
+        serializedVersion: 2
+        x: 1993
+        y: 1082
+        width: 190
+        height: 183
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a39701d3ec4bd04f8086c30db12032c
+      internalID: 1897973961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_2
+      rect:
+        serializedVersion: 2
+        x: 2204
+        y: 1223
+        width: 183
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289b61e13f020a34ab7bfeb0a35cb9c1
+      internalID: -964359655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_3
+      rect:
+        serializedVersion: 2
+        x: 2544
+        y: 1221
+        width: 127
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25e0ae08527c9a54b83ddcbe2d960ac5
+      internalID: 440019450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_5
+      rect:
+        serializedVersion: 2
+        x: 2754
+        y: 1213
+        width: 86
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c3008b299769da4ab91f6fb0e4e43df
+      internalID: 1724263543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_6
+      rect:
+        serializedVersion: 2
+        x: 3003
+        y: 1245
+        width: 78
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77636d9540b23414884cbe90fd4b5bac
+      internalID: -233657712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_7
+      rect:
+        serializedVersion: 2
+        x: 2423
+        y: 1237
+        width: 90
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a631388a6d2c241914b09b2656d53e
+      internalID: 740974803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_9
+      rect:
+        serializedVersion: 2
+        x: 2832
+        y: 1049
+        width: 297
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89d0b36b9c56b42468f30751cbce3b5c
+      internalID: -1323191229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_12
+      rect:
+        serializedVersion: 2
+        x: 2237
+        y: 1024
+        width: 317
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da7246a01485d434280c6114f2d9d1a2
+      internalID: -193601331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_14
+      rect:
+        serializedVersion: 2
+        x: 2590
+        y: 1084
+        width: 142
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b0482df27e9f8439db55e4c1506a66
+      internalID: -2040669988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_15
+      rect:
+        serializedVersion: 2
+        x: 2759
+        y: 1082
+        width: 50
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3667599747c70fd4b91cd27fe3082188
+      internalID: 1133634530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_23
+      rect:
+        serializedVersion: 2
+        x: 2444
+        y: 893
+        width: 153
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 238e4fc9405111142abbcabddc676f97
+      internalID: -842541495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_24
+      rect:
+        serializedVersion: 2
+        x: 2607
+        y: 898
+        width: 145
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b416d51336d8434398cc3b0832c47d9
+      internalID: -1018169252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_25
+      rect:
+        serializedVersion: 2
+        x: 2760
+        y: 901
+        width: 134
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17c17a2d022415c48954ac98d7264411
+      internalID: 558503952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_27
+      rect:
+        serializedVersion: 2
+        x: 2898
+        y: 893
+        width: 186
+        height: 101
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02778146a9e725041b17517af58d1f56
+      internalID: -1698621000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_28
+      rect:
+        serializedVersion: 2
+        x: 2454
+        y: 780
+        width: 122
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6832d52665680b54c905360af1aaab5b
+      internalID: 1840745675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_30
+      rect:
+        serializedVersion: 2
+        x: 2604
+        y: 797
+        width: 59
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc1b87f0eed44754ab3f23e33160213a
+      internalID: 1990067716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_31
+      rect:
+        serializedVersion: 2
+        x: 2700
+        y: 797
+        width: 73
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5694afe29b579f4e9fd24e0c5851d4a
+      internalID: 401960782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_32
+      rect:
+        serializedVersion: 2
+        x: 2788
+        y: 798
+        width: 83
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fe772091cd41944f8e2dff2da4d47e1
+      internalID: 1946550128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_33
+      rect:
+        serializedVersion: 2
+        x: 2892
+        y: 800
+        width: 78
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d46a494e6440145abf77d9764bb72b
+      internalID: 227215871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_34
+      rect:
+        serializedVersion: 2
+        x: 2999
+        y: 800
+        width: 48
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17b19004660d7604aadd580e9965ab47
+      internalID: -310765528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_35
+      rect:
+        serializedVersion: 2
+        x: 2497
+        y: 555
+        width: 87
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f703e95b7e47f447bde7a9b29726e9b
+      internalID: -1061406685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_36
+      rect:
+        serializedVersion: 2
+        x: 2852
+        y: 510
+        width: 111
+        height: 180
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 913b7a7f1f96f8342bf0eb41dc66c916
+      internalID: 1387816915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_39
+      rect:
+        serializedVersion: 2
+        x: 2625
+        y: 542
+        width: 80
+        height: 108
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 689dcd75e2d21154c9b6f49d99676261
+      internalID: 1854079829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_40
+      rect:
+        serializedVersion: 2
+        x: 2727
+        y: 561
+        width: 93
+        height: 92
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3369b29c63da6b488e1cbb5ca29621a
+      internalID: 153431519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_41
+      rect:
+        serializedVersion: 2
+        x: 2990
+        y: 490
+        width: 96
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36e07f8ea92a33640bf9defdf46a8b14
+      internalID: -908249734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_45
+      rect:
+        serializedVersion: 2
+        x: 2468
+        y: 232
+        width: 84
+        height: 274
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40887f6c5fa8b454e81185a42693e9ed
+      internalID: 1776073989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_46
+      rect:
+        serializedVersion: 2
+        x: 2593
+        y: 338
+        width: 54
+        height: 162
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c139210df9f643b478dffcb1a9bbedb4
+      internalID: -57519222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_48
+      rect:
+        serializedVersion: 2
+        x: 2858
+        y: 391
+        width: 128
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b3689b9123910848844b80835599ba7
+      internalID: 609075302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_52
+      rect:
+        serializedVersion: 2
+        x: 2670
+        y: 244
+        width: 113
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acbea90157986d4498f43cbb04c37b46
+      internalID: -2026296934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_55
+      rect:
+        serializedVersion: 2
+        x: 2861
+        y: 207
+        width: 281
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f7293746e3d684f8333a4a3e6671f5
+      internalID: 1762868894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_4
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 548
+        width: 788
+        height: 791
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df50a544261c119498844d044f7cc19a
+      internalID: -823296033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_8
+      rect:
+        serializedVersion: 2
+        x: 1361
+        y: 572
+        width: 349
+        height: 711
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e09c6ee6bed7c67438f574cd5dedd296
+      internalID: 1317249012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_10
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 91
+        width: 451
+        height: 294
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c9ce9e96311a384ebafe359b6f7ada2
+      internalID: -1265445739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_11
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 35
+        width: 425
+        height: 483
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1683fb155434a488920f686527255e
+      internalID: 1156959680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_13
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 36
+        width: 414
+        height: 477
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4165b834004f9a14da139018ff6a863d
+      internalID: -2071643014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_16
+      rect:
+        serializedVersion: 2
+        x: 1707
+        y: 297
+        width: 311
+        height: 1020
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca49749b1be742947a549d55ea2e28e2
+      internalID: 413528454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: huaguo3_17
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 316
+        width: 357
+        height: 655
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c23dcadb2f4e8c84b9eb843af96951fc
+      internalID: -749626688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      huaguo3_21: -1829144195
+      huaguo3_37: -714456831
+      huaguo3_23: -842541495
+      huaguo3_26: -566929997
+      huaguo3_27: -1698621000
+      huaguo3_40: 153431519
+      huaguo3_4: -823296033
+      huaguo3_48: 609075302
+      huaguo3_45: 1776073989
+      huaguo3_15: 1133634530
+      huaguo3_54: -1144237537
+      huaguo3_7: 740974803
+      huaguo3_3: 440019450
+      huaguo3_14: -2040669988
+      huaguo3_33: 227215871
+      huaguo3_42: 992576977
+      huaguo3_49: -1815177139
+      huaguo3_38: 1267978118
+      huaguo3_44: -306373241
+      huaguo3_30: 1990067716
+      huaguo3_8: 1317249012
+      huaguo3_5: 1724263543
+      huaguo3_28: 1840745675
+      huaguo3_2: -964359655
+      huaguo3_25: 558503952
+      huaguo3_18: 288384712
+      huaguo3_52: -2026296934
+      huaguo3_50: -2126433867
+      huaguo3_13: -2071643014
+      huaguo3_36: 1387816915
+      huaguo3_46: -57519222
+      huaguo3_32: 1946550128
+      huaguo3_43: -1515275779
+      huaguo3_34: -310765528
+      huaguo3_31: 401960782
+      huaguo3_12: -193601331
+      huaguo3_35: -1061406685
+      huaguo3_17: -749626688
+      huaguo3_10: -1265445739
+      huaguo3_1: 1897973961
+      huaguo3_47: 1555109878
+      huaguo3_53: 1702718252
+      huaguo3_19: 740947644
+      huaguo3_20: -44483202
+      huaguo3_41: -908249734
+      huaguo3_55: 1762868894
+      huaguo3_51: -1664211798
+      huaguo3_9: -1323191229
+      huaguo3_6: -233657712
+      huaguo3_24: -1018169252
+      huaguo3_29: 1116335023
+      huaguo3_11: 1156959680
+      huaguo3_0: 1621383486
+      huaguo3_39: 1854079829
+      huaguo3_22: -455788307
+      huaguo3_16: 413528454
+  spritePackingTag: 
+  pSDRemoveMatte: 1
+  pSDShowRemoveMatteOption: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

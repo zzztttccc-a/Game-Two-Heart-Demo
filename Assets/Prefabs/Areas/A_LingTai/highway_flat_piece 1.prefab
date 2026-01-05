@@ -55,6 +55,9 @@ MonoBehaviour:
   flashColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.15
   targetsToUnlock: []
+  tk2dChildName: tk2d
+  lockedClipName: 
+  unlockedClipName: 
   imageChildName: image
   colliderChildName: collider
 --- !u!68 &5185302028841115401
