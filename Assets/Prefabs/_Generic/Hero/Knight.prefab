@@ -16963,7 +16963,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 0.3
       minScalar: 0.4
       maxCurve:
         serializedVersion: 2
@@ -99564,6 +99564,7 @@ MonoBehaviour:
   RECOIL_HOR_STEPS: 2
   RECOIL_DURATION: 0.09
   RECOIL_VELOCITY: 17.9
+  enableAttackRecoil: 0
   wallPuffPrefab: {fileID: 2415541932286511180}
   wallLocked: 0
   WJ_KICKOFF_SPEED: 7.5

@@ -199,6 +199,7 @@ public PlayMakerFSM wallSlashFsm;
     public float RECOIL_HOR_STEPS; //������X��Ĳ�
     public float RECOIL_DURATION; //����������ʱ��
     public float RECOIL_VELOCITY; //������ʱ���ٶ�(���������϶����õ�)
+    public bool enableAttackRecoil = false;
 
     public GameObject wallPuffPrefab;
     private bool wallJumpedR;
@@ -2251,6 +2252,10 @@ private void Move(float move_direction)
 
     public void RecoilLeft()
     {
+        if (!enableAttackRecoil && cState.attacking && !cState.downAttacking)
+	{
+	    return;
+	}
         if(!cState.recoilingLeft && !cState.recoilingRight && !controlReqlinquished)
 	{
             CancelDash();
@@ -2264,6 +2269,10 @@ private void Move(float move_direction)
 
     public void RecoilRight()
     {
+        if (!enableAttackRecoil && cState.attacking && !cState.downAttacking)
+	{
+	    return;
+	}
         if (!cState.recoilingLeft && !cState.recoilingRight && !controlReqlinquished)
         {
             CancelDash();
@@ -2277,6 +2286,10 @@ private void Move(float move_direction)
 
     public void RecoilLeftLong()
     {
+        if (!enableAttackRecoil && cState.attacking && !cState.downAttacking)
+	{
+	    return;
+	}
         if (!cState.recoilingLeft && !cState.recoilingRight && !controlReqlinquished)
         {
             CancelDash();
@@ -2291,6 +2304,10 @@ private void Move(float move_direction)
 
     public void RecoilRightLong()
     {
+        if (!enableAttackRecoil && cState.attacking && !cState.downAttacking)
+	{
+	    return;
+	}
         if (!cState.recoilingLeft && !cState.recoilingRight && !controlReqlinquished)
         {
             CancelDash();
