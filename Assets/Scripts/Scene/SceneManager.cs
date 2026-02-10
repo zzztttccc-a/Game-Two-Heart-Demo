@@ -42,6 +42,8 @@ public class SceneManager : MonoBehaviour
     public float defaultIntensity;
 
     [Header("Hero Light")]
+    [Tooltip("If true, the scene will override the hero's light color.")]
+    public bool overrideHeroLightColor = true;
     [Tooltip("Color of the hero's light gradient (not point lights)")]
     [Space(6f)]
     public Color heroLightColor;
@@ -113,11 +115,14 @@ public class SceneManager : MonoBehaviour
 	gc.sceneColorManager.AmbientIntensityA = defaultIntensity;
 	if (isGameplayScene)
 	{
-	    if (heroCtrl != null)
+	    if (overrideHeroLightColor)
 	    {
-		heroCtrl.heroLight.color = heroLightColor;
+		    if (heroCtrl != null)
+		    {
+			    heroCtrl.heroLight.color = heroLightColor;
+		    }
+		    gc.sceneColorManager.HeroLightColorA = heroLightColor;
 	    }
-	    gc.sceneColorManager.HeroLightColorA = heroLightColor;
 	}
 	pd.environmentType = environmentType;
 	pd.environmentTypeDefault = environmentType;

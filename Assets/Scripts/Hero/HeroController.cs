@@ -40,6 +40,7 @@ public class HeroController : MonoBehaviour
 
     public delegate void HeroInPosition(bool forceDirect);
     public event HeroInPosition heroInPosition;
+    public event Action OnJumpEvent;
 
     private Vector2 lastInputState;
     public float move_input;
@@ -2043,10 +2044,10 @@ private void Move(float move_direction)
 
 
     /// <summary>
-    /// �����Ƿ��ܵ�������Ӱ��
+    /// ǷܵӰ
     /// </summary>
     /// <param name="gravityApplies"></param>
-    private void AffectedByGravity(bool gravityApplies)
+    public void AffectedByGravity(bool gravityApplies)
     {
         float gravityScale = rb2d.gravityScale;
         if(rb2d.gravityScale > Mathf.Epsilon && !gravityApplies)
@@ -2204,7 +2205,7 @@ private void Move(float move_direction)
     }
 
 
-    private void ResetInput()
+    public void ResetInput()
     {
         move_input = 0f;
         vertical_input = 0f;
@@ -3694,7 +3695,7 @@ private void Move(float move_direction)
     /// </summary>
     private void HeroJump()
     {
-
+        if (cState.onGround && OnJumpEvent != null) OnJumpEvent();
         audioCtrl.PlaySound(HeroSounds.JUMP);
 
         cState.recoiling = false;
@@ -4401,6 +4402,14 @@ private void Move(float move_direction)
     public void StopAnimationControl()
     {
         animCtrl.StopControl();
+    }
+
+    public void PlayClip(string clipName, bool force = false)
+    {
+        if (animCtrl != null)
+        {
+            animCtrl.PlayClip(clipName, force);
+        }
     }
 
     public void SetDamageMode(DamageMode newDamageMode)

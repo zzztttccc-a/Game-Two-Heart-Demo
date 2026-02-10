@@ -438,9 +438,9 @@ public class HeroAnimationController : MonoBehaviour
 	}
     }
 
-    public void PlayClip(string clipName)
+    public void PlayClip(string clipName, bool force = false)
     {
-        if (controlEnabled)
+        if (controlEnabled || force)
         {
             if (clipName == "Exit Door To Idle")
             {

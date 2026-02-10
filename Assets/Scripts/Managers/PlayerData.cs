@@ -404,7 +404,6 @@ public class PlayerData
     eyeLevel = 1;
 
     hasWalljump = false;
-    // 二段跳默认开启（新档生效；已保存的旧档按存档状态）
     hasDoubleJump = true;
 
 	hasLantern = false;
